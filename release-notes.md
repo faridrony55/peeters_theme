@@ -1,1 +1,0 @@
-Dawn 15.4.1 introduces improvements for performance monitoring.
