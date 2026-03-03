@@ -1,0 +1,29 @@
+{% if media %} 
+  
+                       
+
+    {% comment %} <img src="{{ media | img_url: '500x' }}" width="100%" height="auto" alt="{{ media.alt }}"> {% endcomment %}
+
+    {% comment %} <img src="{{ media | image_url: width: '500px' }}" alt="{{ media.alt }}"  width="100%" height="auto" /> {% endcomment %}
+
+    {%  capture media_style %}
+        border-radius:{{radius}}px;  
+        aspect-ratio: {{ aspect_ratio }};
+        object-fit: {{ media_style }};
+        height:auto;
+    {% endcapture %} 
+     
+    {{ 
+        media 
+        |  image_url: width: '500px' 
+        |  image_tag: 
+        class: 'image_style',
+        fetchpriority: 'high',
+        loading: 'lazy',
+        style: media_style  
+         
+    }}
+
+{% else %}
+    {{ 'blog-apparel-1' | placeholder_svg_tag: 'icon' }}
+{% endif %}

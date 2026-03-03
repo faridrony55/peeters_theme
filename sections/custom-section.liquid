@@ -1,0 +1,333 @@
+
+{% liquid 
+    assign title = section.settings.title
+    assign title_size = section.settings.title_size
+    assign title_color = section.settings.title_color
+     
+%}
+
+<div class="container">
+    
+    <h2>{{ title }}</h2>
+
+ 
+{% if section.blocks.size > 0 %}
+<ul class="features">
+
+    {% for block in section.blocks %}
+        {% liquid 
+            assign icon  = block.settings.icon
+            assign title = block.settings.title
+
+
+            assign aspect_ratio = block.settings.size
+            assign media_style = block.settings.style
+            assign radius = block.settings.radius
+
+            
+        %}
+        {%  case block.type %} 
+
+            {% when 'media' %}
+
+                <li>
+                    {% 
+                        render 'media', 
+                        media: icon, 
+                        aspect_ratio : aspect_ratio , 
+                        media_style : media_style ,
+                        radius: radius
+                    %}
+                </li>
+
+            {% when 'icon' %}
+
+                <li class="iconBox">
+                {% comment %} {% if icon != blank%}  {% endcomment %}
+                {% if icon %} 
+                    <img src="{{ icon | img_url: '500x' }}" width="100%" height="auto" alt="{{ icon.alt }}">
+                {% else %}
+                    {{ 'blog-apparel-1' | placeholder_svg_tag: 'icon' }}
+                {% endif %}
+                {% if title != blank %}
+                    <p>{{ title }}</p>
+                {% endif %}
+            </li>
+
+        {% endcase %}  
+
+
+        {%  comment  %} 
+        {% if block.type == 'media' %}
+
+            <li>
+                    {% if icon %} 
+
+                        <img src="{{ icon | img_url: '500x' }}" width="100%" height="auto" alt="{{ icon.alt }}">
+
+                    {% else %}
+                        {{ 'blog-apparel-1' | placeholder_svg_tag: 'icon' }}
+                    {% endif %}
+                </li>
+            
+        {%  elsif block.type == 'icon' %}
+            <li class="iconBox">
+                  {% if icon != blank%}   
+                {% if icon %} 
+                    <img src="{{ icon | img_url: '500x' }}" width="100%" height="auto" alt="{{ icon.alt }}">
+                {% else %}
+                    {{ 'blog-apparel-1' | placeholder_svg_tag: 'icon' }}
+                {% endif %}
+                {% if title != blank %}
+                    <p>{{ title }}</p>
+                {% endif %}
+            </li>
+        {% endif %}
+
+     {% endcomment %}  
+        
+    {% endfor %}
+
+</ul>
+{% endif %}
+
+</div>
+
+
+ 
+
+{% schema %}
+{
+    "name": "Section",
+    "class": "custom_section",
+    "tag": "section",
+    "disabled_on": {
+        "groups": ["header","footer"]
+    },
+    "blocks": [
+        {
+            "type": "media",
+            "name":"media",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "icon",
+                    "label": "Image"
+                },
+                {
+                    "type": "header",
+                    "content": "Media Style"
+                },
+                {
+                    "type": "select",
+                    "id": "size",
+                    "label": "Media Size",
+                    "default": "auto",
+                    "options": [
+                        {"label": "Adapt the default size","value": "auto"},
+                        {"label": "Portrait","value": "2/3"},
+                        {"label": "Horizontal","value": "3/2"},
+                        {"label": "Square","value": "1/1"}
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "style",
+                    "label": "Media Style",
+                    "default":"none",
+                    "options": [
+                        {"label": "Cover","value": "cover"},
+                        {"label": "Contain","value": "contain"},
+                        {"label": "Scale Down","value": "scale-down"},
+                        {"label": "Fill","value": "fill"} ,
+                        {"label": "Auto","value": "none"} 
+                    ]
+                },
+                {
+                    "type": "range",
+                    "id": "radius",
+                    "label": "Radius",
+                    "min": 0,
+                    "max": 300,
+                    "step": 5,
+                    "unit": "px",
+                    "default": 10 
+                }
+            ]
+        },
+        {
+            "type": "icon",
+            "name": "Icon",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "icon",
+                    "label": "Icon"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default":"De beste service voor jou en je fiets"
+                }
+            ]
+        }
+    ],
+    "settings": [
+         
+        {
+            "type": "select",
+            "id": "container",
+            "default":"1200px",
+            "label": "Layout",
+            "options": [
+                {
+                    "label": "Full Width",
+                    "value": "100%"
+                },
+                {
+                    "label": "Container",
+                    "value": "1200px"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "label": "Padding Top",
+            "min": 0,
+            "max": 200,
+            "step": 2,
+            "default": 20,
+            "unit": "px"
+            
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "label": "Padding Bottom",
+            "min": 0,
+            "max": 200,
+            "step": 5,
+            "default": 50,
+            "unit": "px"
+            
+        },
+        {
+            "type": "select",
+            "options": [
+                {"label": "Color","value": "color"},
+                {"label": "Image","value": "image"}
+            ],
+            "id": "select_bg",
+            "default":"color",
+            "label": "Select Background"
+        },
+        {
+            "type": "color_background",
+            "id": "section_bg",
+            "label": "Section Background",
+            "default":"white",
+            "visible_if": "{{ section.settings.select_bg == 'color' }}"
+        },
+        {
+            "type": "image_picker",
+            "id": "section_bg_image",
+            "label": "Background Image",
+            "visible_if": "{{ section.settings.select_bg == 'image' }}"
+        },
+        {
+            "type": "inline_richtext",
+            "id": "title",
+            "label": "Title",
+            "default":"This is Title"
+        },
+        {
+            "type": "select",
+            "id": "title_size",
+            "label": "Title Size",
+            "options": [
+                {"label": "Large","value": "50px"},
+                {"label": "Medium","value": "40px"},
+                {"label": "Small","value": "30px"},
+                {"label": "Extra Small","value": "20px"}
+            ],
+            "default":"40px",
+            "visible_if": "{{ section.settings.title != blank }}"
+        },
+        {
+            "type": "color",
+            "default":"#000",
+            "id": "title_color",
+            "label": "Title Color",
+            "visible_if": "{{ section.settings.title != blank }}"
+        }
+    ],
+    "presets": [
+        {"name": "Section"}
+    ]
+}
+{% endschema %}
+
+
+
+
+
+{%  style  %} 
+ 
+#shopify-section-{{ section.id }}{
+ 
+
+        {% if section.settings.select_bg == 'color' %}
+            background:{{ section.settings.section_bg }};
+        {%  elsif section.settings.select_bg == 'image' %}
+            background: url('{{ section.settings.section_bg_image |   img_url: '2000x' }}') ;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        {% endif %}
+        
+}
+ 
+
+#shopify-section-{{ section.id }} .container{
+        max-width:{{ section.settings.container }};
+        margin:0 auto;
+        padding: {{  section.settings.padding_top }}px 20px {{  section.settings.padding_bottom }}px;
+    }
+
+  #shopify-section-{{ section.id }} h2{
+        font-size:{{ title_size }};
+        color:{{ title_color }};
+    }
+ 
+#shopify-section-{{ section.id }} ul{
+    display:flex;
+    gap:20px;
+    list-style:none;
+    flex-wrap:wrap;
+    align-items:center;
+}
+#shopify-section-{{ section.id }} ul li.iconBox{
+    display:flex;
+    background:#000;
+    gap:10px;
+    padding:4px 12px;
+    border-radius:8px;
+    
+}
+#shopify-section-{{ section.id }} ul li.iconBox img{
+    width:30px
+}
+
+#shopify-section-{{ section.id }} ul li.iconBox  p{
+   color:#fff;
+   margin:0;
+}
+
+.features li.iconBox .icon{
+    width:30px;
+    height:30px;
+}
+
+{% endstyle %}  

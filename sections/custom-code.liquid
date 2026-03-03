@@ -1,0 +1,115 @@
+<div class="codeStyle"> 
+ 
+    {%  liquid 
+        assign title = section.settings.title | upcase |  append: ' 34'
+        assign sub =  section.settings.subtitle
+        assign content =  section.settings.content
+
+        capture allcontent
+            
+           echo '<h2>' | append: title | append: '</h2>'  
+           echo '<h3>' | append: sub | append: '</h3>'    
+           echo '<div>' | append: content | append: '</div>'   
+               
+        endcapture
+    %} 
+    
+ 
+    {{ allcontent }}
+
+ 
+     <h2> {{section.settings.title |  upcase }}  </h2>  
+     <h3> {{sub}}  </h3>  
+     <div> {{content}}  </div>   
+
+    {% comment %} 
+    {%  assign count =  34 %} 
+    {% for i in (1..5) %}
+
+        {{ count | plus: 3 |  times: 2 }} 
+         
+    {% endfor %} 
+    {% endcomment %}
+
+    <ul>
+	    {% for block in section.blocks %}
+	
+	        <li>{{ block.settings.title }} ({{ forloop.index }}) </li>
+	    {% endfor %} 
+		</ul>
+ 
+</div>
+
+ 
+
+{%  style  %} 
+    .codeStyle{
+        max-width: 1000px;
+        margin: 100px auto;
+    }
+{% endstyle %} 
+
+
+
+{% schema %}
+{
+    "name": "Custom Code",
+    "disabled_on": {
+        "groups": ["header","footer" ]
+    },
+    "tag": "section",
+    "class": "custom_code", 
+    "settings": [
+
+        {
+            "type": "text",
+            "id":"title",
+            "label": "Title",
+            "default": "Hello This title" 
+        },
+        {
+            "type": "inline_richtext",
+            "id": "subtitle",
+            "label": "Sub Title"
+        },
+        {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content",
+            "default":"<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime laborum optio corrupti quo. Fugiat quidem, eum velit reprehenderit sit adipisci quibusdam beatae ullam pariatur quos dolorem atque quasi, earum tempora!</p>"
+        },
+        {
+            "type": "html",
+            "id": "html",
+            "label": "HTML CODE"
+        },
+        {
+            "type": "liquid",
+            "id": "liquid",
+            "label": "Liquid"
+        }
+
+    ],
+    "blocks": [
+        {
+            "type": "text",
+            "name":"block",
+            "limit": 6, 
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default":" This is new blocks"
+                }
+            ]
+        }
+    ],
+    
+    "presets": [
+        {
+            "name": "code"
+        }
+    ]
+}
+{% endschema %}
