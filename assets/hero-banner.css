@@ -1,0 +1,40 @@
+.hero_banner{
+    position: relative;
+}
+
+.heroSliderLayout{
+     
+}
+
+.slide {}
+.slide .slide_image{
+    width: 100%; 
+    border-top-right-radius: var(--slide_radius);
+    border-bottom-right-radius: var(--slide_radius);
+    aspect-ratio: 1/var(--slide_ratio);
+    display: block;
+    object-fit: cover;
+}
+
+.hero-banner-content{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.hero-banner-content .hero_content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.hero-banner-content .hero_content .hero_title{
+
+}
+.hero-banner-content .hero_content .hero_search{
+
+}

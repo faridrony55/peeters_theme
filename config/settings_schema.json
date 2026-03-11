@@ -33,6 +33,7 @@
       }
     ]
   },
+  
   {
     "name": "t:settings_schema.colors.name",
     "settings": [

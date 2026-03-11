@@ -1,0 +1,266 @@
+{{ 'hero-banner.css' | asset_url | stylesheet_tag }}  
+
+{% liquid 
+    assign title = section.settings.title
+    assign content = section.settings.content
+
+    assign size = section.settings.size
+
+    assign icon_01 = section.settings.icon_01
+    assign feature_01 = section.settings.feature_01
+    assign icon_02 = section.settings.icon_02
+    assign feature_02 = section.settings.feature_02
+
+    assign search_btn = section.settings.search_btn
+
+    assign placeholder = section.settings.placeholder
+
+
+    assign slider_width = section.settings.slider_width
+    assign slide_radius = section.settings.slide_radius
+    assign slide_hight = section.settings.slide_hight
+
+  
+    
+%}
+{% style  %} 
+    :root{
+        --slide_radius: {{slide_radius}}px;
+        --slide_ratio: {{slide_hight}};
+    }
+{% endstyle %} 
+<section class="color-{{ section.settings.color_scheme }} gradient">
+
+
+        <div class="heroSliderLayout" style="max-width: {{slider_width}};">
+
+        <div class="swiper heroSlider">
+    <div class="swiper-wrapper">
+       
+                {% for block in section.blocks  %}
+                    {% liquid 
+                        assign media = block.settings.media
+                     %}
+
+                        <div class="swiper-slide slide">
+                        {% if media %} 
+                            {{ 
+                                media 
+                                | image_url: width: '1200px'
+                                | image_tag:
+                                fetchpriority: 'high',
+                                loading: 'lazy',
+                                class: 'slide_image'
+                            }}
+
+                        {% else %}
+                            {{ 'blog-apparel-1' | placeholder_svg_tag: 'slide_image' }}
+                        {% endif %}  
+                    </div> 
+                {% endfor %}
+
+    </div>
+  </div>
+
+
+                
+        </div>
+
+
+
+        <div class="hero-banner-content">
+
+            <div class="page-width hero_content">
+                <div class="hero_title">
+                     <h2 class="title_{{size}}">{{title}}</h2>
+                    <p>{{content}}</p> 
+                </div>
+                 
+                 <div class="hero_search">
+                    <ul>
+                        {% if feature_01 != blank %}
+                        <li>
+                            <div>
+                                {% if icon_01 %}{{ icon_01 |  image_url: width: '100px' |  image_tag  }}{% endif %}
+                                {{ feature_01 }}
+                            </div>
+                        </li>
+                        {% endif %}
+
+                        {% if feature_02 != blank %}
+                        <li>
+                            <div>
+                                {% if icon_02 %}{{ icon_02 |  image_url: width: '100px' |  image_tag  }}{% endif %}
+                                {{ feature_02 }}
+                            </div>
+                        </li>
+                        {% endif %}
+                    </ul>
+
+                    <div>
+                        {{ placeholder }}
+                        {{ search_btn }}
+                    </div>
+                 </div>
+            </div>
+
+        </div>
+
+
+
+
+</section>
+
+{% comment %} 
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}"  ></script> {% endcomment %}
+  <!-- Swiper JS -->
+ <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"  ></script> 
+
+<script>
+    var swiper = new Swiper(".heroSlider", {
+        speed: 2000,
+        effect: "fade",
+        autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+    });
+  </script>
+
+{%  schema  %}
+{
+    "name": "Hero Banner",
+    "class": "hero_banner", 
+    "tag": "section",
+    "settings": [
+        {
+            "type": "inline_richtext",
+            "id": "title",
+            "label": "Title",
+            "default": "Wij houden van fietsen"
+        },
+        {
+            "type": "select",
+            "id": "size",
+            "label": "Title Size",
+            "default":"large",
+            "options": [
+                {"label": "Small","value": "small"},
+                {"label": "Medium","value": "medium"},
+                {"label": "Large","value": "large"},
+                {"label": "Extra Large","value": "extralarge"} ,
+                {"label": "Extra Extra Large","value": "extraextralarge"} 
+            ]
+        },
+        {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content",
+            "default": "Ultiem fietsplezier door middel van optimale service, kwaliteit en vakmanschap. Dat staat bij ons voorop!"
+        },
+        {
+            "type": "header",
+            "content": "Feature Box"
+        },
+        {
+            "type": "image_picker",
+            "id": "icon_01",
+            "label": "Icon"
+        },
+        {
+            "type": "text",
+            "id": "feature_01",
+            "label": "Feature",
+            "default": "Plan een advies gesprek"
+        },
+        {
+            "type": "image_picker",
+            "id": "icon_02",
+            "label": "Icon"
+        },
+        {
+            "type": "text",
+            "id": "feature_02",
+            "label": "Feature",
+            "default": "Plan een service gesprek"
+        },
+        {
+            "type": "header",
+            "content": "Search Content"
+        },
+        {
+            "type": "text",
+            "id": "placeholder",
+            "label": "Search Placeholder",
+            "default": "Waar ben je naar op zoek?"
+        },
+        {
+            "type": "text",
+            "id": "search_btn",
+            "label": "Search Button Text",
+            "default": "ZOEKEN"
+        },
+        {
+            "type": "header",
+            "content": "Section Style"
+        },
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Section Color",
+            "default": "scheme-5"
+        },
+        {
+            "type": "text",
+            "default": "1200px",
+            "id": "slider_width",
+            "label": "Slider Width"
+        },
+        {
+            "type": "range",
+            "id": "slide_radius",
+            "label": "Slide Radius",
+            "min": 0,
+            "max": 400,
+            "unit": "px",
+            "step": 5,
+            "default": 100
+        },
+        {
+            "type": "range",
+            "min": 0,
+            "max": 1,
+            "id": "slide_hight",
+            "label": "Slide Hight",
+            "step": 0.1,
+            "default": 0.5
+        }
+
+
+    ],
+    "blocks": [
+        {
+            "type": "slide",
+            "name":"Slide",
+            "settings": [
+
+                {
+                    "type": "image_picker",
+                    "id": "media",
+                    "label": "Media"
+                }
+
+            ]
+        }
+    ],
+
+    "disabled_on": {
+        "groups": ["header","footer","aside"]
+    },
+    "presets": [
+        {
+            "name": "Hero Banner"
+        }
+    ]
+}
+{% endschema %}

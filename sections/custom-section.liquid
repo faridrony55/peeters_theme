@@ -1,4 +1,6 @@
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
 {% liquid 
     assign title = section.settings.title
     assign title_size = section.settings.title_size
@@ -6,31 +8,121 @@
      
 %}
 
+
+
+
+  
+
+
 <div class="container">
     
     <h2>{{ title }}</h2>
 
  
 {% if section.blocks.size > 0 %}
-<ul class="features">
+
+    <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        
+    
+ 
 
     {% for block in section.blocks %}
         {% liquid 
             assign icon  = block.settings.icon
             assign title = block.settings.title
+ 
 
+            assign product = block.settings.product 
+            assign price = product.price |  money_without_trailing_zeros
+            assign compare_at_price = product.compare_at_price |  money_without_trailing_zeros
+            assign save  =  product.compare_at_price | minus: product.price |  money_without_trailing_zeros 
+            assign media = product.featured_media 
 
-            assign aspect_ratio = block.settings.size
-            assign media_style = block.settings.style
-            assign radius = block.settings.radius
-
-            
+            assign products = block.settings.list
         %}
+ 
         {%  case block.type %} 
+
+            {% when 'productlist' %}
+               
+                 {% for product  in products %}
+
+                     
+                        
+                    <div class="swiper-slide">  
+                         
+
+                        {% 
+                            render 'media', 
+                            media: product.featured_media , 
+                            aspect_ratio : aspect_ratio , 
+                            media_style : media_style ,
+                            radius: radius
+                        %}
+                        
+                        <div class="price">
+
+                            <span>{{ price }}</span>
+                            <del>{{ compare_at_price }}</del>
+
+                            <span >
+                                 save {{ save  }}
+                            </span>
+                            {% comment %} <span>{{ product.compare_at_price |  money_with_currency }}</span>
+                            <span>{{ product.compare_at_price |  money_without_currency }}</span>
+                            <span>{{ product.compare_at_price |  money_without_trailing_zeros }}</span> {% endcomment %}
+                        </div>
+ 
+                        <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+                </div> 
+
+                 {% endfor  %}
+
+            {% when 'blockstyle' %}
+
+                {% liquid 
+                     assign aspect_ratio = block.settings.size
+                assign media_style = block.settings.style
+                assign radius = block.settings.radius
+                %}
+
+
+
+
+            {% when 'product' %}
+
+
+            <div class="swiper-slide">  
+                         
+
+                        {% 
+                            render 'media', 
+                            media: media, 
+                            aspect_ratio : aspect_ratio , 
+                            media_style : media_style ,
+                            radius: radius
+                        %}
+                        
+                        <div class="price">
+
+                            <span>{{ price }}</span>
+                            <del>{{ compare_at_price }}</del>
+
+                            <span >
+                                 save {{ save  }}
+                            </span>
+                            {% comment %} <span>{{ product.compare_at_price |  money_with_currency }}</span>
+                            <span>{{ product.compare_at_price |  money_without_currency }}</span>
+                            <span>{{ product.compare_at_price |  money_without_trailing_zeros }}</span> {% endcomment %}
+                        </div>
+ 
+                        <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+                </div> 
 
             {% when 'media' %}
 
-                <li>
+                <div class="swiper-slide">  
                     {% 
                         render 'media', 
                         media: icon, 
@@ -38,11 +130,11 @@
                         media_style : media_style ,
                         radius: radius
                     %}
-                </li>
+                </div>
 
             {% when 'icon' %}
 
-                <li class="iconBox">
+                <div class="swiper-slide">  
                 {% comment %} {% if icon != blank%}  {% endcomment %}
                 {% if icon %} 
                     <img src="{{ icon | img_url: '500x' }}" width="100%" height="auto" alt="{{ icon.alt }}">
@@ -52,49 +144,79 @@
                 {% if title != blank %}
                     <p>{{ title }}</p>
                 {% endif %}
-            </li>
+            </div> 
+
+
+            {% when 'slider' %}
+                {% liquid 
+                    assign autoplay = block.settings.autoplay
+                    assign speed = block.settings.speed
+                    assign pagination = block.settings.pagination
+                    assign navigation = block.settings.navigation
+                    assign slideperview = block.settings.slideperview
+                    assign slideperviewphone = block.settings.slideperviewphone
+                        
+                %}
 
         {% endcase %}  
 
 
-        {%  comment  %} 
-        {% if block.type == 'media' %}
-
-            <li>
-                    {% if icon %} 
-
-                        <img src="{{ icon | img_url: '500x' }}" width="100%" height="auto" alt="{{ icon.alt }}">
-
-                    {% else %}
-                        {{ 'blog-apparel-1' | placeholder_svg_tag: 'icon' }}
-                    {% endif %}
-                </li>
-            
-        {%  elsif block.type == 'icon' %}
-            <li class="iconBox">
-                  {% if icon != blank%}   
-                {% if icon %} 
-                    <img src="{{ icon | img_url: '500x' }}" width="100%" height="auto" alt="{{ icon.alt }}">
-                {% else %}
-                    {{ 'blog-apparel-1' | placeholder_svg_tag: 'icon' }}
-                {% endif %}
-                {% if title != blank %}
-                    <p>{{ title }}</p>
-                {% endif %}
-            </li>
-        {% endif %}
-
-     {% endcomment %}  
+         
         
     {% endfor %}
 
-</ul>
+ </div>
+    {% if navigation == true %}
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    {% endif %}
+    {% if pagination == true %}
+    <div class="swiper-pagination"></div>
+    {% endif %}
+  </div>
 {% endif %}
 
 </div>
 
 
- 
+    <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: {{slideperviewphone |  default: 2 }},
+      spaceBetween: 30,
+      loop: true,
+      {% if autoplay == true %}
+        speed: {{speed}},
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+      {% endif %}
+      {% if pagination == true %}
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      }, 
+      {% endif %}
+      {% if navigation == true %}
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      } ,
+      {% endif %}
+
+      breakpoints: { 
+        1024: {
+          slidesPerView: {{slideperview |  default: 5 }},
+          spaceBetween: 50,
+        } 
+      } 
+
+    });
+  </script>
 
 {% schema %}
 {
@@ -106,6 +228,29 @@
     },
     "blocks": [
         {
+            "type": "productlist",
+            "name":"Product List",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "product_list",
+                    "id": "list",
+                    "label": "Select Products"
+                }
+            ]
+        },
+        {
+            "type": "product",
+            "name": "product",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Select Product"
+                }
+            ]
+        },
+        {
             "type": "media",
             "name":"media",
             "settings": [
@@ -113,7 +258,86 @@
                     "type": "image_picker",
                     "id": "icon",
                     "label": "Image"
+                }  
+            ]
+        },
+        {
+            "type": "icon",
+            "name": "Icon",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "icon",
+                    "label": "Icon"
                 },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default":"De beste service voor jou en je fiets"
+                }
+            ]
+        },
+        {
+            "type": "slider",
+            "name":"slider",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "autoplay",
+                    "label": "Auto Play Slider",
+                    "default": true
+                },
+                {
+                    "type": "range",
+                    "id": "speed",
+                    "label": "Slide Speed",
+                    "min": 100,
+                    "max": 9000,
+                    "step": 100,
+                    "unit": "ms",
+                    "default": 5000
+                },
+                {
+                    "type": "checkbox",
+                    "label": "Pagination",
+                    "id": "pagination",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "label": "Navigation",
+                    "id": "navigation",
+                    "default": true
+                },
+                {
+                    "type": "range",
+                    "id": "slideperview",
+                    "label": "Slide Per View",
+                    "min": 1,
+                    "max": 10,
+                    "step": 1, 
+                    "default": 3
+                },
+                {
+                    "type": "range",
+                    "id": "slideperviewphone",
+                    "label": "Slide Per View in Phone",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1, 
+                    "default": 1
+                }
+                 
+            ]
+
+        },
+        {
+            "type": "blockstyle",
+            "name":"Block Style",
+            "limit": 1,
+            "settings": [ 
                 {
                     "type": "header",
                     "content": "Media Style"
@@ -152,23 +376,6 @@
                     "step": 5,
                     "unit": "px",
                     "default": 10 
-                }
-            ]
-        },
-        {
-            "type": "icon",
-            "name": "Icon",
-            "settings": [
-                {
-                    "type": "image_picker",
-                    "id": "icon",
-                    "label": "Icon"
-                },
-                {
-                    "type": "text",
-                    "id": "title",
-                    "label": "Title",
-                    "default":"De beste service voor jou en je fiets"
                 }
             ]
         }
@@ -316,18 +523,22 @@
     border-radius:8px;
     
 }
-#shopify-section-{{ section.id }} ul li.iconBox img{
-    width:30px
+#shopify-section-{{ section.id }} .swiper-slide img{
+    width:100%;
 }
 
-#shopify-section-{{ section.id }} ul li.iconBox  p{
+#shopify-section-{{ section.id }} .swiper-slide  p{
    color:#fff;
    margin:0;
 }
 
-.features li.iconBox .icon{
+.features .swiper-slide .icon{
     width:30px;
     height:30px;
 }
+.price{
+    display:flex;
 
+}
+.price span{}
 {% endstyle %}  
