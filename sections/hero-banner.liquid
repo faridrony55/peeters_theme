@@ -5,6 +5,7 @@
     assign content = section.settings.content
 
     assign size = section.settings.size
+    assign header_max_width = section.settings.header_max_width 
 
     assign icon_01 = section.settings.icon_01
     assign feature_01 = section.settings.feature_01
@@ -27,6 +28,7 @@
     :root{
         --slide_radius: {{slide_radius}}px;
         --slide_ratio: {{slide_hight}};
+        --header_max_width: {{header_max_width}};
     }
 {% endstyle %} 
 <section class="color-{{ section.settings.color_scheme }} gradient">
@@ -71,7 +73,7 @@
         <div class="hero-banner-content">
 
             <div class="page-width hero_content">
-                <div class="hero_title">
+                <div class="hero_title"  >
                      <h2 class="title_{{size}}">{{title}}</h2>
                     <p>{{content}}</p> 
                 </div>
@@ -82,7 +84,7 @@
                         <li>
                             <div>
                                 {% if icon_01 %}{{ icon_01 |  image_url: width: '100px' |  image_tag  }}{% endif %}
-                                {{ feature_01 }}
+                                <span>{{ feature_01 }}</span>
                             </div>
                         </li>
                         {% endif %}
@@ -91,16 +93,15 @@
                         <li>
                             <div>
                                 {% if icon_02 %}{{ icon_02 |  image_url: width: '100px' |  image_tag  }}{% endif %}
-                                {{ feature_02 }}
+                                <span>{{ feature_02 }}</span>
                             </div>
                         </li>
                         {% endif %}
                     </ul>
 
-                    <div>
-                        {{ placeholder }}
-                        {{ search_btn }}
-                    </div>
+
+                    {% render 'hero-banner-search', placeholder: placeholder, search_btn_text: search_btn %}
+                   
                  </div>
             </div>
 
@@ -151,6 +152,13 @@
                 {"label": "Extra Large","value": "extralarge"} ,
                 {"label": "Extra Extra Large","value": "extraextralarge"} 
             ]
+        },
+        {
+            "type": "text",
+            "id": "header_max_width",
+            "label": "Header Max Width",
+            "default":"455px"
+
         },
         {
             "type": "textarea",

@@ -1,0 +1,114 @@
+
+
+@font-face {
+    font-family: 'Nohemi';
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Thin-BF6438cc577ef3b.otf?v=1773506361');
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Thin-BF6438cc577ef3b.otf?v=1773506361?#iefix') format('embedded-opentype'), 
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Thin-BF6438cc57e2011.woff?v=1773506361') format('woff'),
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Thin-BF6438cc5896c67.ttf?v=1773506361') format('truetype') ;
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nohemi';
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Light-BF6438cc583f70b.otf?v=1773506361');
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Light-BF6438cc583f70b.otf?v=1773506361?#iefix') format('embedded-opentype'), 
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Light-BF6438cc5702321.woff?v=1773506361') format('woff'),
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Light-BF6438cc5899919.ttf?v=1773506361') format('truetype') ;
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nohemi';
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-ExtraLight-BF6438cc57e06d5.otf?v=1773506361');
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-ExtraLight-BF6438cc57e06d5.otf?v=1773506361?#iefix') format('embedded-opentype'), 
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-ExtraLight-BF6438cc581502c.woff?v=1773506361') format('woff'),
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-ExtraLight-BF6438cc58a2634.ttf?v=1773506361') format('truetype') ;
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'Nohemi';
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Regular-BF6438cc58b98fc.otf?v=1773506361');
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Regular-BF6438cc58b98fc.otf?v=1773506361?#iefix') format('embedded-opentype'), 
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Regular-BF6438cc579d934.woff?v=1773506361') format('woff'),
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Regular-BF6438cc4d0e493.ttf?v=1773506361') format('truetype') ;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'Nohemi';
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Medium-BF6438cc581a509.otf?v=1773506361');
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Medium-BF6438cc581a509.otf?v=1773506361?#iefix') format('embedded-opentype'), 
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Medium-BF6438cc57ddecd.woff?v=1773506361') format('woff'),
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-Medium-BF6438cc5883899.ttf?v=1773506362') format('truetype') ;
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@font-face {
+    font-family: 'Nohemi';
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-SemiBold-BF6438cc588b5e5.otf?v=1773506361');
+    src: url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-SemiBold-BF6438cc588b5e5.otf?v=1773506361?#iefix') format('embedded-opentype'), 
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-SemiBold-BF6438cc57db2ff.woff?v=1773506361') format('woff'),
+        url('https://cdn.shopify.com/s/files/1/0993/6247/2068/files/Nohemi-SemiBold-BF6438cc588a48a.ttf?v=1773506361') format('truetype') ;
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/*
+@font-face {
+    font-family: 'Nohemi';
+    src: url('');
+    src: url('?#iefix') format('embedded-opentype'), 
+        url('') format('woff'),
+        url('') format('truetype') ;
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@font-face {
+    font-family: 'Nohemi';
+    src: url('');
+    src: url('?#iefix') format('embedded-opentype'), 
+        url('') format('woff'),
+        url('') format('truetype') ;
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@font-face {
+    font-family: 'Nohemi';
+    src: url('');
+    src: url('?#iefix') format('embedded-opentype'), 
+        url('') format('woff'),
+        url('') format('truetype') ;
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+*/

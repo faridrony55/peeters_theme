@@ -1,7 +1,9 @@
 .hero_banner{
     position: relative;
 }
-
+.hero_title{
+    max-width: var(--header_max_width);
+}
 .heroSliderLayout{
      
 }
@@ -36,5 +38,91 @@
 
 }
 .hero-banner-content .hero_content .hero_search{
+
+}
+
+.hero_search{}
+.hero_search ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    margin-bottom: 16px;
+}
+.hero_search ul li{}
+.hero_search ul li div{
+
+    background-color:rgba(var(--color-button), var(--alpha-button-background));
+        display: flex;
+    align-items: center;
+    padding: 13px 22px;
+    border-radius: 100px;
+    gap: 8px;
+
+}
+.hero_search ul li div img {
+    width: 18px;
+    height: auto;
+}
+.hero_search ul li div span{ 
+font-weight: 500; 
+font-size: 17px; 
+line-height: 90%;
+letter-spacing: 0%;
+text-align: center;
+
+}
+
+
+
+
+/*
+Hero search Option 
+*/
+.hero-banner-search{
+
+}
+.hero-banner-search form{
+    display: flex;
+    background-color: #fff;
+    max-width: 1246px;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 100px;
+    padding: 25px 35px;
+}
+
+.hero-banner-search form .searchIcon{
+    width: 50px;
+}
+.hero-banner-search form input{ 
+font-weight: 600; 
+font-size: 25px; 
+line-height: 90%;
+letter-spacing: 0%;
+color: rgb(var(--color-background));
+    width: 100%;
+    border: 0;
+
+}
+.hero-banner-search form input::placeholder{
+
+color: rgb(var(--color-background));
+}
+.hero-banner-search form button{
+
+    background: rgb(var(--color-background));
+    background: var(--gradient-background);
+    color: rgb(var(--color-foreground)); 
+font-weight: 500; 
+font-size: 20px; 
+line-height: 90%;
+letter-spacing: 10%;
+padding: 17px 35px;
+border-radius: 100px;
+    flex-shrink: 0;
+    border: 0;
 
 }
