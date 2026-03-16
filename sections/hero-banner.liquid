@@ -33,17 +33,13 @@
 {% endstyle %} 
 <section class="color-{{ section.settings.color_scheme }} gradient">
 
-
-        <div class="heroSliderLayout" style="max-width: {{slider_width}};">
-
+    <div class="heroSliderLayout" style="max-width: {{slider_width}};">
         <div class="swiper heroSlider">
-    <div class="swiper-wrapper">
-       
+    <div class="swiper-wrapper"> 
                 {% for block in section.blocks  %}
                     {% liquid 
                         assign media = block.settings.media
-                     %}
-
+                     %} 
                         <div class="swiper-slide slide">
                         {% if media %} 
                             {{ 
@@ -62,11 +58,8 @@
                 {% endfor %}
 
     </div>
+    </div>
   </div>
-
-
-                
-        </div>
 
 
 
@@ -108,6 +101,10 @@
         </div>
 
 
+        <div class="appointment_btn">
+            {% if icon_01 %}{{ icon_01 |  image_url: width: '100px' |  image_tag  }}{% endif %}
+            <span>{{ feature_01 }} Make an appointment!</span>
+        </div>
 
 
 </section>

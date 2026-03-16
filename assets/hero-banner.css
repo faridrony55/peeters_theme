@@ -74,8 +74,28 @@ text-align: center;
 
 }
 
+.appointment_btn{
 
+    background-color:rgba(var(--color-button), var(--alpha-button-background));
+        display: flex;
+    align-items: center;
+    padding: 13px 22px;
+    border-radius: 100px;
+    gap: 8px;
+}
 
+.appointment_btn img {
+    width: 18px;
+    height: auto;
+}
+.appointment_btn span{ 
+font-weight: 500; 
+font-size: 17px; 
+line-height: 90%;
+letter-spacing: 0%;
+text-align: center;
+
+}
 
 /*
 Hero search Option 

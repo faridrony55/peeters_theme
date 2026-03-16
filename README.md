@@ -8,6 +8,12 @@ Hero Banner
 
 
 
+git add .
+git commit -m "hero banner"
+git push
+
+
+
 
 
 
