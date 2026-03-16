@@ -7,14 +7,14 @@ Hero Banner
 
 
 
-
+git init
 git add .
 git commit -m "hero banner"
-git push
+git push -u origin main
 
 
 
-
+ 
 
 
 

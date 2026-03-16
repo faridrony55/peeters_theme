@@ -1,11 +1,50 @@
 .hero_banner{
     position: relative;
 }
+.hero_banner::after {
+    content: "";
+    background: var(--bottom_bg_color);
+    height: 140px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}
+ 
 .hero_title{
     max-width: var(--header_max_width);
 }
 .heroSliderLayout{
-     
+     position: relative;
+     max-width: var(--slider-max-width);
+}
+
+.heroSliderLayout::after {
+    content: "";
+    background: linear-gradient(133.41deg, #000000 -67.71%, rgba(0, 0, 0, 0) 61%);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 80%;
+    z-index: 1;
+}
+
+.heroSliderLayout::before {
+    /* background: #52B099; */
+    /* backdrop-filter: blur(150px); */
+    box-shadow: 114px 0 150px #52b0991c;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    max-width: var(--slider-max-width);
+    z-index: 1;
+    border-top-right-radius: 400px;
+    border-bottom-right-radius: 400px;
 }
 
 .slide {}
@@ -16,6 +55,7 @@
     aspect-ratio: 1/var(--slide_ratio);
     display: block;
     object-fit: cover;
+    height: 100%;
 }
 
 .hero-banner-content{
@@ -74,17 +114,29 @@ text-align: center;
 
 }
 
+.appointment {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 60px;
+    z-index: 1;
+    position: relative;
+    padding-bottom: 10px;
+}
 .appointment_btn{
 
-    background-color:rgba(var(--color-button), var(--alpha-button-background));
+    background-color:rgba(var(--color-foreground), 1);
         display: flex;
     align-items: center;
     padding: 13px 22px;
-    border-radius: 100px;
+    border-radius: 10px;
     gap: 8px;
+    color: rgb(var(--color-background));
+    box-shadow: 2px 2px 15px 0px #00000026;
+    text-decoration: none;
+
 }
 
-.appointment_btn img {
+.appointment_btn svg {
     width: 18px;
     height: auto;
 }

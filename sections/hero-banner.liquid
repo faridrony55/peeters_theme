@@ -22,18 +22,25 @@
     assign slide_hight = section.settings.slide_hight
 
   
+    assign appointment_link = section.settings.appointment_link
+    assign appointment_text = section.settings.appointment_text
+
+
+    assign bottom_bg_color = section.settings.bottom_bg_color
     
 %}
 {% style  %} 
-    :root{
+    .hero_banner{
         --slide_radius: {{slide_radius}}px;
         --slide_ratio: {{slide_hight}};
         --header_max_width: {{header_max_width}};
+        --bottom_bg_color : {{bottom_bg_color}};
+        --slider-max-width: {{slider_width}};
     }
 {% endstyle %} 
 <section class="color-{{ section.settings.color_scheme }} gradient">
 
-    <div class="heroSliderLayout" style="max-width: {{slider_width}};">
+    <div class="heroSliderLayout"  >
         <div class="swiper heroSlider">
     <div class="swiper-wrapper"> 
                 {% for block in section.blocks  %}
@@ -101,10 +108,14 @@
         </div>
 
 
-        <div class="appointment_btn">
-            {% if icon_01 %}{{ icon_01 |  image_url: width: '100px' |  image_tag  }}{% endif %}
-            <span>{{ feature_01 }} Make an appointment!</span>
-        </div>
+    {% if appointment_link != blank %}
+      <div class="appointment">
+          <a class="appointment_btn" href="{{ appointment_link }}">
+            {% render 'icon-user' %}
+            <span>{{ appointment_text }}</span>
+        </a>
+      </div>
+    {% endif %}
 
 
 </section>
@@ -205,6 +216,22 @@
             "label": "Search Button Text",
             "default": "ZOEKEN"
         },
+
+        {
+            "type": "header",
+            "content": "Search Content"
+        },
+        {
+            "type": "text",
+            "id": "appointment_text",
+            "label": "Appointment Text",
+            "default":"Make an appointment!"
+        },
+        {
+            "type": "url",
+            "id": "appointment_link",
+            "label": "Appointment TLink" 
+        },
         {
             "type": "header",
             "content": "Section Style"
@@ -214,6 +241,12 @@
             "id": "color_scheme",
             "label": "Section Color",
             "default": "scheme-5"
+        },
+        {
+            "type": "color",
+            "id": "bottom_bg_color",
+            "label": "Section Bottom Color",
+            "default":"#3F7280"
         },
         {
             "type": "text",
