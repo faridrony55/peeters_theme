@@ -299,8 +299,8 @@
       }
     </script>
 
-{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag: preload: true }} 
-
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag: preload: true }}  
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}"  ></script>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

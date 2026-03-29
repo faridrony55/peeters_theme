@@ -1,0 +1,243 @@
+{{ 'scrolling-logo.css' | asset_url | stylesheet_tag }}
+
+
+{% liquid  
+    assign padding_top =  section.settings.padding_top
+    assign padding_bottom =  section.settings.padding_bottom 
+
+
+
+    assign filter = section.settings.filter 
+    assign logo_height =  section.settings.logo_height 
+    assign rtl =  section.settings.rtl 
+
+
+    if rtl == true
+    assign isRtl = 'dir="rtl"'
+    endif 
+
+    assign speed =  section.settings.speed 
+    assign loop =  section.settings.loop 
+
+     
+    if loop == true 
+        assign isLoop =  'loop: true,'
+    endif
+
+    assign slide_in_desktop =  section.settings.slide_in_desktop 
+    assign gap_desktop =  section.settings.gap_desktop 
+
+    assign slide_in_phone =  section.settings.slide_in_phone 
+    assign gap_phone =  section.settings.gap_phone  
+ 
+           
+%}
+
+{% style  %}  
+    .scrolling_logo{
+        --padding-top: {{ padding_top }}px;
+        --padding-bottom: {{ padding_bottom }}px;
+        --logo-height : {{logo_height}}px;
+        
+}
+
+{% if filter == true %}
+    .scrolling_logo .scroll_logo{
+         filter: brightness(0) invert(1);
+        opacity: 0.5;
+    }
+{% endif %}
+{% endstyle %}
+<section class="color-{{ section.settings.color_scheme }} gradient"> 
+
+          <div  {{isRtl}}  class="swiper scrolling-logo">
+            <div class="swiper-wrapper"> 
+                 {% for block in section.blocks %}
+                    {% liquid 
+                        assign media = block.settings.logo
+                     %} 
+                    <div class="swiper-slide">
+                        {% if media %} 
+                            {{ 
+                                media 
+                                | image_url: width: '300px'  
+                                | image_tag:
+                                fetchpriority: 'high',
+                                loading: 'lazy',
+                                class: 'scroll_logo'
+                            }}
+
+                        {% else %}
+                            {{ 'blog-apparel-1' | placeholder_svg_tag: 'scroll_logo' }}
+                        {% endif %}  
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+     
+</section>
+
+<script>
+    var swiper = new Swiper(".scrolling-logo", {
+          slidesPerView: {{slide_in_phone}}, 
+          spaceBetween: {{gap_phone}},
+        speed: {{speed}}, 
+        {{isLoop}}
+    //     autoplay: {
+    //     delay: 0,
+    //     disableOnInteraction: false, 
+    //   },
+      
+      breakpoints: {  
+        1024: {
+          slidesPerView: {{slide_in_desktop}},
+          spaceBetween: {{gap_desktop}},
+        },
+      },
+
+        
+
+    });
+  </script>
+{%  schema  %}
+{
+    "name": "Scrolling Logo",
+    "class": "scrolling_logo", 
+    "tag": "section",
+    "blocks": [
+        {
+            "type": "logo",
+            "name":"Logo",
+            "settings": [
+                 {
+                    "type": "image_picker",
+                    "id": "logo",
+                    "label": "Logo"
+                }
+            ]
+        }
+
+    ],
+    "settings": [
+        
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Section Color",
+            "default": "scheme-5"
+        },  
+
+        {
+            "type": "range",
+            "id": "padding_top",
+            "label": "Padding Top",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        },
+
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "label": "Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        },
+        {
+            "type": "header",
+            "content": "Slider Style"
+        }, 
+        {
+            "type": "checkbox",
+            "label": "Logo Filter",
+            "id": "filter"
+        }, 
+        {
+            "type": "range",
+            "id": "logo_height",
+            "label": "Logo Height",
+            "min": 40,
+            "max": 300, 
+            "step": 5,
+            "unit": "px",
+            "default": 60
+        } , 
+        {
+            "type": "checkbox",
+            "id": "rtl",
+            "label": "Slide Right to left",
+            "default": false
+        },
+        
+        {
+            "type": "range",
+            "id": "speed",
+            "label": "Slider Speed",
+            "min": 0,
+            "max": 9000,
+            "unit": "ms",
+            "step": 100,
+            "default": 2000
+        } ,
+        {
+            "type": "checkbox",
+            "id": "loop",
+            "label": "Loop",
+            "default": true
+        },
+        
+        {
+            "type": "range",
+            "id": "slide_in_desktop",
+            "label": "Slider Per view in Desktop",
+            "min": 1,
+            "max": 12, 
+            "step": 1,
+            "default": 5
+        } ,
+        {
+            "type": "range",
+            "id": "gap_desktop",
+            "label": "Gap in Desktop",
+            "min": 0,
+            "max": 100, 
+            "step": 1,
+            "default": 50
+        } ,
+        {
+            "type": "range",
+            "id": "slide_in_phone",
+            "label": "Slider Per view in Phone",
+            "min": 1,
+            "max": 8, 
+            "step": 1,
+            "default": 2
+        } ,
+        {
+            "type": "range",
+            "id": "gap_phone",
+            "label": "Gap in Phone",
+            "min": 0,
+            "max": 100, 
+            "step": 1,
+            "default": 30
+        } 
+
+    ],
+
+    "disabled_on": {
+        "groups": ["header","footer","aside"]
+    },
+    "presets": [
+        {
+            "name": "Scrolling Logo"
+        }
+    ]
+}
+{% endschema %}

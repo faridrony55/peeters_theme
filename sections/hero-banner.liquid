@@ -1,4 +1,5 @@
-{{ 'hero-banner.css' | asset_url | stylesheet_tag }}  
+{{ 'hero-banner.css' | asset_url | stylesheet_tag }}
+
 
 {% liquid 
     assign title = section.settings.title
@@ -27,6 +28,7 @@
 
 
     assign bottom_bg_color = section.settings.bottom_bg_color
+    assign shadow = section.settings.shadow
     
 %}
 {% style  %} 
@@ -36,9 +38,23 @@
         --header_max_width: {{header_max_width}};
         --bottom_bg_color : {{bottom_bg_color}};
         --slider-max-width: {{slider_width}};
+
+        {% if shadow == true %}
+        --box-shadow: 114px 0 150px #52b0991c;
+        {% endif %}
     }
+
+
 {% endstyle %} 
 <section class="color-{{ section.settings.color_scheme }} gradient">
+
+<div class="hero_content only-phone">
+
+    <div class="hero_title "  >
+            <h2 class="title_{{size}}">{{title}}</h2>
+        <p>{{content}}</p> 
+    </div>
+</div>    
 
     <div class="heroSliderLayout"  >
         <div class="swiper heroSlider">
@@ -68,9 +84,7 @@
     </div>
   </div>
 
-
-
-        <div class="hero-banner-content">
+        <div class="hero-banner-content only-desktop">
 
             <div class="page-width hero_content">
                 <div class="hero_title"  >
@@ -118,12 +132,18 @@
     {% endif %}
 
 
-</section>
 
-{% comment %} 
-<script src="{{ 'swiper-bundle.min.js' | asset_url }}"  ></script> {% endcomment %}
-  <!-- Swiper JS -->
- <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"  ></script> 
+    <div class="hero_content only-phone">
+         {% render 'hero-banner-search', placeholder: placeholder, search_btn_text: search_btn %}
+    </div>
+
+
+</section>
+ 
+ 
+
+<!-- Swiper JS -->
+ {% comment %} <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"  ></script>  {% endcomment %}
 
 <script>
     var swiper = new Swiper(".heroSlider", {
@@ -247,6 +267,12 @@
             "id": "bottom_bg_color",
             "label": "Section Bottom Color",
             "default":"#3F7280"
+        },
+        {
+            "type": "checkbox",
+            "id": "shadow",
+            "label": "Background Shadow",
+            "default": true
         },
         {
             "type": "text",

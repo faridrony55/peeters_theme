@@ -1,0 +1,25 @@
+.scrolling-logo{
+    padding: var(--padding-top) 0 var(--padding-bottom);
+}
+ 
+.scrolling_logo .swiper-slide{
+
+   /* max-width: 200px; */
+}
+.scrolling_logo .scroll_logo {
+    height: var(--logo-height);
+    object-fit: contain;
+    width: stretch;
+    transition-duration: 0.4s;
+
+   
+}
+
+.scrolling_logo .scroll_logo:hover{
+
+    filter: brightness(1) invert(0);
+    opacity: 1;
+}
+.scrolling_logo  .swiper-wrapper { 
+    align-items: center;
+}
