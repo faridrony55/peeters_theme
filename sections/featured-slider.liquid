@@ -1,0 +1,58 @@
+{{ 'featured-slider.css' | asset_url | stylesheet_tag }}
+
+{% render 'featured-slider' %}
+
+
+{%  schema  %} 
+{
+    "class": "featured-slider",
+    "name": "Featured Slider",
+    "tag": "section",
+    "blocks": [],
+    "settings": [
+        {
+            "type": "header",
+            "content": "Section Style"
+        },
+        {
+            "type": "text",
+            "default":"1603px",
+            "id": "layout_max_width",
+            "label": "Layout Max Width" 
+        },
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Section Color",
+            "default": "scheme-5"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "label": "Padding Top",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        },
+
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "label": "Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        }
+    ],
+    "presets": [
+        {
+            "name": "Featured Slider"
+        }
+    ]
+
+}
+{% endschema %}
