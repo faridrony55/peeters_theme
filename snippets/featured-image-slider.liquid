@@ -1,9 +1,11 @@
  
 
-<div class="swiper-slide featured-image-slider featured-slide color-{{ color_scheme }} gradient" 
-style="background-image:url({{ media |  image_url: width: '1000' }})"
->
-    {% if media_phone %} 
+<div class="swiper-slide">
+
+<div  class=" featured-image-slider featured-slide color-{{ color_scheme }} gradient" 
+style="background-image:url({{ media |  image_url: width: '1000' }})">
+
+{% if media_phone %} 
         {{ 
             media_phone 
             | image_url: width: '300px'  
@@ -31,5 +33,8 @@ style="background-image:url({{ media |  image_url: width: '1000' }})"
         {% endunless %}  
             
     </div>
+
+</div>
+    
 
 </div>
