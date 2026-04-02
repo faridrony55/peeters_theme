@@ -1,0 +1,35 @@
+ 
+
+<div class="swiper-slide featured-image-slider featured-slide color-{{ color_scheme }} gradient" 
+style="background-image:url({{ media |  image_url: width: '1000' }})"
+>
+    {% if media_phone %} 
+        {{ 
+            media_phone 
+            | image_url: width: '300px'  
+            | image_tag:
+            fetchpriority: 'high',
+            loading: 'lazy',
+            class: 'media_phone only-phone'
+        }}
+
+    {% else %}
+        {{ 'blog-apparel-1' | placeholder_svg_tag: 'media_phone only-phone' }}
+    {% endif %} 
+
+
+    <div class="feature-slide-content"> 
+        {%  unless subtitle == blank %} <h5>{{subtitle}}</h5> {% endunless %}  
+        {%  unless title == blank %} <h2>{{title}}</h2> {% endunless %}  
+        {%  unless content == blank %} <p>{{content}}</p> {% endunless %}  
+         
+        {%  unless btn_text == blank %} 
+            <a href="{{ btn_url }}" class="btn">
+                <span>{{btn_text}}</span>
+                {% render 'icon-right-arrow' %}
+            </a> 
+        {% endunless %}  
+            
+    </div>
+
+</div>

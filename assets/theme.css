@@ -80,6 +80,7 @@ strong{
     background: rgb(var(--color-background));
     background: var(--gradient-background);
     transition-duration: 0.4s;
+    border-radius: 100px;
 }
 .btn::after {
     content: "";
@@ -90,6 +91,7 @@ strong{
     left: 0;
     top: 0;
     transition-duration: 0.4s;
+    border-radius: 100px;
 }
  
 .btn:hover::after {
@@ -100,6 +102,20 @@ strong{
 /*** btn style **/
 .swiper-wrapper {
   transition-timing-function: linear !important;
+}
+
+.btn {
+    color: rgb(var(--color-foreground));
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 90%;
+    letter-spacing: 10%;
+    padding: 17px 35px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    border: 0;
+    overflow: hidden;
+    text-decoration: none;
 }
 
 @media(min-width: 768px){

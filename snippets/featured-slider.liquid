@@ -1,1 +1,50 @@
-{{ section.settings.layout_max_width }}px
+{% liquid 
+    assign layout_max_width = section.settings.layout_max_width
+    assign padding_top = section.settings.padding_top
+    assign padding_bottom = section.settings.padding_bottom
+%}
+
+
+{%  style  %} 
+    .featured-slider{
+        --padding_top: {{padding_top}}px;
+        --padding_bottom: {{padding_bottom}}px;
+    }
+    {% if layout_max_width != '' %}
+        .featured-slider .page-width{
+            max-width: {{layout_max_width}};
+        }
+    {% endif %}
+{% endstyle %}  
+
+<section class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width">
+        
+        <div class="swiper {{section.id}}">
+            <div class="swiper-wrapper">
+
+                {% for block in section.blocks %}
+                    {% case block.type %}
+                        {% when 'image_slider' %}
+
+                            {% render 'featured-image-slider',
+
+                                media: block.settings.media
+                                media_phone: block.settings.media_phone,
+                                subtitle: block.settings.subtitle
+                                title: block.settings.title
+                                content: block.settings.content
+                                btn_text: block.settings.btn_text
+                                btn_url: block.settings.btn_url ,
+                                color_scheme: block.settings.color_scheme
+                            %}
+
+                    {% endcase %}
+                {% endfor %}
+
+                
+            </div>
+        </div>
+
+    </div>
+</section>
