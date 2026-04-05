@@ -54,6 +54,7 @@ strong{
 .btn{
     position: relative;
     background-color: transparent;
+    display: inline-block;
     
 } 
 .btn svg{

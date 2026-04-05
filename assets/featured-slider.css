@@ -4,7 +4,7 @@
 
 
     .featured-slide{
-        padding: 90px 0 90px 180px;
+        padding-left:  180px;
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
@@ -25,27 +25,40 @@
         font-size: 70px; 
         line-height: 100%;
         letter-spacing: 0%; 
-        max-width: 700px;
+        max-width: var(--title_max_width);
         margin-bottom: 40px;
     }
     .featured-slide p{   
         font-weight: 400; 
-        font-size: 17px; 
+        font-size: 17px;  
         line-height: 150%;
         letter-spacing: 0%;
-        max-width: 500px;
+        max-width: var(--content_max_width);
         margin-bottom: 60px;
 
     }
-
-    .feature-slide-content{
-        position: relative;
-    }
+.feature-slide-content {
+    position: relative;
+    min-height: 640px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
     .featured-image-slider{
 
     position: relative;
     }
+.feature-slide-content .bottomtext{
+    display: block; 
+font-weight: 600; 
+font-size: 14px; 
+line-height: 100%;
+letter-spacing: 0%;
+margin-top:80px;
+opacity: 0.5;
 
+}
     .featured-image-slider::before{
         content: "";
         background: linear-gradient(88.08deg, #06123D 29.67%, rgba(6, 18, 61, 0.46) 56.22%, rgba(6, 18, 61, 0) 70.2%);
@@ -56,3 +69,72 @@
     height: 100%;
     z-index: 0;
     }
+
+
+.featured-image-slider .icons{ 
+    display: flex;
+    align-items: center;
+    gap: 22px;
+ 
+    }
+.featured-image-slider .icons img {
+    width: auto;
+    max-height: 40px;
+}
+  .featured-slider .swiper-slide-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    gap: 35px;
+}
+.featured-slider .swiper-slide-control .swiper-pagination{
+    width: auto;
+}
+    .featured-slider .swiper-slide-control .swiper-button-next{
+            position: relative;
+            margin-top: 0 !important;
+    }
+    .featured-slider .swiper-slide-control .swiper-button-prev{
+            position: relative;
+            margin-top: 0 !important;
+    }
+
+ 
+
+
+       .offer-badge{
+        width: var(--badge_width);
+        bottom: var(--vertical);
+        right: var(--horizontal);
+
+        position: absolute;
+        transform: translate(var(--horizontal), var(--vertical));
+       }
+      .offer-badge h4 {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    padding: 20px;
+    left: 0;
+    transform: translateY(-50%);
+}
+       .offer-badge img{
+            width: 100%;
+            height: 100%;
+       }
+       @media(max-width:767px){
+
+
+       .offer-badge{
+        width: var(--badge_width_phone);
+        bottom: var(--vertical_phone);
+        right: var(--horizontal_phone);
+        transform: translate(var(--horizontal_phone), var(--vertical_phone));
+       }
+
+       }

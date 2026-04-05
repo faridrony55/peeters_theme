@@ -3,7 +3,11 @@
 <div class="swiper-slide">
 
 <div  class=" featured-image-slider featured-slide color-{{ color_scheme }} gradient" 
-style="background-image:url({{ media |  image_url: width: '1000' }})">
+style="
+background-image:url({{ media |  image_url: width: '1000' }});
+--title_max_width: {{title_max_width}}px;
+--content_max_width: {{content_max_width}}px;
+">
 
 {% if media_phone %} 
         {{ 
@@ -24,15 +28,148 @@ style="background-image:url({{ media |  image_url: width: '1000' }})">
         {%  unless subtitle == blank %} <h5>{{subtitle}}</h5> {% endunless %}  
         {%  unless title == blank %} <h2>{{title}}</h2> {% endunless %}  
         {%  unless content == blank %} <p>{{content}}</p> {% endunless %}  
-         
+          
+
+ 
+        <div class="icons">
+            {% unless icons == false %}
+
+               
+                {% if icon_01  %}
+                    {{ 
+                        icon_01 
+                        | image_url: width: '60px'  
+                        | image_tag:
+                        fetchpriority: 'high',
+                        loading: 'lazy',
+                        class: ''
+                    }}
+                    {% render 'icon-plus' %}
+                {% endif %}
+
+
+                {% if icon_02  %}
+                    {{ 
+                        icon_02 
+                        | image_url: width: '60px'  
+                        | image_tag:
+                        fetchpriority: 'high',
+                        loading: 'lazy',
+                        class: ''
+                    }}
+                    {% render 'icon-plus' %}
+                {% endif %}
+
+
+                {% if icon_03  %}
+                    {{ 
+                        icon_03 
+                        | image_url: width: '60px'  
+                        | image_tag:
+                        fetchpriority: 'high',
+                        loading: 'lazy',
+                        class: ''
+                    }}
+                {% render 'icon-plus' %}
+                {% endif %}
+
+                {% if icon_04  %}
+                    {{ 
+                        icon_04 
+                        | image_url: width: '60px'  
+                        | image_tag:
+                        fetchpriority: 'high',
+                        loading: 'lazy',
+                        class: ''
+                    }}
+                {% render 'icon-plus' %}
+                {% endif %}
+
+                {% if icon_05  %}
+                    {{ 
+                        icon_05 
+                        | image_url: width: '60px'  
+                        | image_tag:
+                        fetchpriority: 'high',
+                        loading: 'lazy',
+                        class: ''
+                    }}
+                {% render 'icon-plus' %}
+                {% endif %}
+                {% if icon_06  %}
+                    {{ 
+                        icon_06 
+                        | image_url: width: '60px'  
+                        | image_tag:
+                        fetchpriority: 'high',
+                        loading: 'lazy',
+                        class: ''
+                    }}
+                {% render 'icon-plus' %}
+                {% endif %}
+                {% if icon_07  %}
+                    {{ 
+                        icon_07 
+                        | image_url: width: '60px'  
+                        | image_tag:
+                        fetchpriority: 'high',
+                        loading: 'lazy',
+                        class: ''
+                    }} 
+                {% endif %}
+
+        {% endunless %}
+        </div>
+
+
+
         {%  unless btn_text == blank %} 
             <a href="{{ btn_url }}" class="btn">
                 <span>{{btn_text}}</span>
                 {% render 'icon-right-arrow' %}
             </a> 
-        {% endunless %}  
-            
+        {% endunless %} 
+
+        {%  unless bottomtext == blank %} <span class="bottomtext">{{bottomtext}}</span> {% endunless %}
+
+   
     </div>
+
+
+
+  
+
+{% if badge == true %}
+    <div 
+    class="offer-badge" 
+    style="
+       --badge_width: {{badge_width}}px;
+       --badge_width_phone: {{badge_width_phone}}px;
+       --vertical: {{vertical}}%; 
+       --horizontal: {{horizontal}}%; 
+       --vertical_phone: {{vertical_phone}}%; 
+       --horizontal_phone: {{horizontal_phone}}%; 
+    "
+    > 
+        {% if badge_image %} 
+            {{ 
+                badge_image 
+                | image_url: width: '300px'  
+                | image_tag:
+                fetchpriority: 'high',
+                loading: 'lazy',
+                class: 'badge_image'
+            }}
+
+        {% else %}
+            {{ 'blog-apparel-1' | placeholder_svg_tag: 'badge_image' }}
+        {% endif %} 
+
+        {%  unless badge_text == blank %} <h4>{{badge_text}}</h4>{% endunless %}
+
+
+    </div>
+{% endif %}
 
 </div>
     
