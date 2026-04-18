@@ -1,77 +1,11 @@
- 
-
 <div class="swiper-slide">
 
-{% liquid 
-
-{% comment %} loop: block.settings.loop
-autoplay: block.settings.autoplay
-control: block.settings.control
-mute: block.settings.mute {% endcomment %}
-
-%}
-
- dd
-{% if videotype == 'hosted' %}
-    {{
-    video
-    | video_tag:
-    image_size: '1100x',
-    autoplay: autoplay,
-    loop: loop,
-    controls: control,
-    muted: mute
-}}
-{% elsif videotype == 'youtubevimeo' %}
-
-
-        {% if video_url.type == 'youtube' %}
-
-            <iframe
-              src="https://www.youtube.com/embed/{{ video_url.id }}?enablejsapi=1&autoplay=1{{ loop }}"
-              class="js-youtube"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              title="{{ section.settings.description | escape }}"
-            ></iframe>
-
-            
-        {%  elsif  video_url.type == 'vimeo' %}
-            <iframe
-              src="https://player.vimeo.com/video/{{ video_url.id }}?autoplay=1{{ loop }}"
-              class="js-vimeo"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              title="{{ section.settings.description | escape }}"
-            ></iframe>
-
-        {% endif %}
-
-
-{% endif %}
 
 
 
-<div  class=" featured-image-slider featured-slide color-{{ color_scheme }} gradient" 
-style="
-background-image:url({{ media |  image_url: width: '1000' }});
---title_max_width: {{title_max_width}}px;
---content_max_width: {{content_max_width}}px;
-">
+<div  class=" featured-video-slider featured-slide color-{{ color_scheme }} gradient" >
 
-{% if media_phone %} 
-        {{ 
-            media_phone 
-            | image_url: width: '300px'  
-            | image_tag:
-            fetchpriority: 'high',
-            loading: 'lazy',
-            class: 'media_phone only-phone'
-        }}
-
-    {% else %}
-        {{ 'blog-apparel-1' | placeholder_svg_tag: 'media_phone only-phone' }}
-    {% endif %} 
+ 
 
 
     <div class="feature-slide-content"> 
@@ -93,9 +27,14 @@ background-image:url({{ media |  image_url: width: '1000' }});
    
     </div>
 
+
+    <div class="featured-video">
+        {% render 'custom-video' %}
+    </div>
+
  
 
 </div>
     
 
-</div>
+</div> 
