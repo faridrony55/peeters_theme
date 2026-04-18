@@ -13,7 +13,10 @@ git commit -m "hero banner"
 git push -u origin main
 
  
-
+git pull origin main --allow-unrelated-histories
+git push -f origin main 
+//// OR ////
+git push --force-with-lease origin main
  
 
 
