@@ -38,6 +38,41 @@
                     "info": "Add link of Youtube or Vimeo",
                     "visible_if": "{{ block.settings.videotype == 'youtubevimeo' }}"
                 },
+                {
+                    "type": "checkbox",
+                    "label": "Customize Video Option",
+                    "id": "videooption",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "loop",
+                    "label": "Loop",
+                    "default": true,
+                    "visible_if": "{{ block.settings.videooption == true }}"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "autoplay",
+                    "label": "Autoplay",
+                    "default": true,
+                    "visible_if": "{{ block.settings.videooption == true }}"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "control",
+                    "label": "Control",
+                    "default": false,
+                    "visible_if": "{{ block.settings.videooption == true }}"
+                }, 
+                {
+                    "type": "checkbox",
+                    "id": "mute",
+                    "label": "Muted",
+                    "default": true,
+                    "visible_if": "{{ block.settings.videooption == true }}" 
+                
+                },
 
                 {
                     "type": "image_picker",

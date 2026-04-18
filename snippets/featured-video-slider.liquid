@@ -2,6 +2,14 @@
 
 <div class="swiper-slide">
 
+{% liquid 
+
+{% comment %} loop: block.settings.loop
+autoplay: block.settings.autoplay
+control: block.settings.control
+mute: block.settings.mute {% endcomment %}
+
+%}
 
  
 {% if videotype == 'hosted' %}
@@ -9,16 +17,16 @@
     video
     | video_tag:
     image_size: '1100x',
-    autoplay: true,
-    loop: section.settings.enable_video_looping,
-    controls: true,
-    muted: false
+    autoplay: autoplay,
+    loop: loop,
+    controls: control,
+    muted: mute
 }}
 {% elsif videotype == 'youtubevimeo' %}
 
 
         {% if video_url.type == 'youtube' %}
-            
+
             <iframe
               src="https://www.youtube.com/embed/{{ video_url.id }}?enablejsapi=1&autoplay=1{{ loop }}"
               class="js-youtube"
