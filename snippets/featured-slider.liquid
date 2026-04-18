@@ -26,6 +26,37 @@
 
                 {% for block in section.blocks %}
                     {% case block.type %}
+                        {% when 'product_slider' %}
+
+                            {% render 'featured-product-slider',
+
+                                product: block.settings.product
+                                media: block.settings.media
+                                media_phone: block.settings.media_phone,
+                                subtitle: block.settings.subtitle
+                                title: block.settings.title
+                                title_max_width: block.settings.title_max_width,
+                                content: block.settings.content
+                                content_max_width: block.settings.content_max_width,
+                                btn_text: block.settings.btn_text
+                                btn_url: block.settings.btn_url ,
+                                color_scheme: block.settings.color_scheme,
+                                bottomtext: block.settings.bottomtext,
+                                 
+
+                                badge: block.settings.badge,
+                                badge_image: block.settings.badge_image,
+                                badge_text: block.settings.badge_text,
+                                badge_width: block.settings.badge_width,
+                                vertical: block.settings.vertical,
+                                horizontal: block.settings.horizontal,
+                                badge_width_phone: block.settings.badge_width_phone,
+                                vertical_phone: block.settings.vertical_phone,
+                                horizontal_phone: block.settings.horizontal_phone,
+
+
+                            %}
+
                         {% when 'image_slider' %}
 
                              

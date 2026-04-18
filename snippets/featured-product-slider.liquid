@@ -1,0 +1,151 @@
+ 
+
+ {% liquid  
+ 
+    if product  
+        if media
+            assign media = media
+        else 
+            assign media = product.featured_media   
+        endif
+
+        if media_phone
+            assign media_phone = media_phone
+        else 
+            assign media_phone = product.featured_media   
+        endif
+
+    endif
+      
+
+%}
+
+<div class="swiper-slide">
+
+
+    
+
+<div  class=" featured-product-slider featured-slide color-{{ color_scheme }} gradient" 
+style="
+background-image:url({{ media |  image_url: width: '1000' }});
+--title_max_width: {{title_max_width}}px;
+--content_max_width: {{content_max_width}}px;
+">
+
+
+
+{% if media_phone %} 
+        {{ 
+            media_phone 
+            | image_url: width: '300px'  
+            | image_tag:
+            fetchpriority: 'high',
+            loading: 'lazy',
+            class: 'media_phone only-phone'
+        }}
+
+    {% else %}
+        {{ 'blog-apparel-1' | placeholder_svg_tag: 'media_phone only-phone' }}
+    {% endif %} 
+
+
+    <div class="feature-slide-content"> 
+        
+
+
+
+        {%  unless subtitle == blank %} <h5>{{subtitle}}</h5> {% endunless %} 
+
+
+        {%  if product %}
+            {% if title != blank %}
+                <h2>{{title}}</h2>
+            {% else %}  
+                <h2>{{ product.title }}</h2>
+            {% endif %}
+        {% endif %}
+
+
+        <div class="featured-product-slide-price">
+            <div class="slide_price"> 
+                {{ product.price | money_without_trailing_zeros }} p/st
+            </div>
+            <div class="slide_compare_at_price">{{ product.compare_at_price | money_without_trailing_zeros }}</div>
+        </div>
+
+        {% comment %} {% if product %}
+            <h2>{{ product.title }}</h2>
+        {% elsif title != blank %}
+                <h2>{{title}}</h2>
+        {% endif %} {% endcomment %}
+        
+        {% comment %} {%  unless title == blank %} <h2>{{title}}</h2> {% endunless %}   {% endcomment %}
+
+
+
+        {%  if product %}
+            {% if content != blank %}
+                {{content}}
+            {% else %}  
+                {{ product.description }}
+            {% endif %}
+        {% endif %}
+
+        {% comment %} {%  unless content == blank %} {{content}} {% endunless %}  
+           {% endcomment %}
+ 
+
+
+
+        {%  unless btn_text == blank %} 
+            <a href="{{ btn_url }}" class="btn">
+                <span>{{btn_text}}</span>
+                {% render 'icon-right-arrow' %}
+            </a> 
+        {% endunless %} 
+
+        {%  unless bottomtext == blank %} <span class="bottomtext">{{bottomtext}}</span> {% endunless %}
+
+   
+    </div>
+
+
+
+  
+
+{% if badge == true %}
+    <div 
+    class="offer-badge" 
+    style="
+       --badge_width: {{badge_width}}px;
+       --badge_width_phone: {{badge_width_phone}}px;
+       --vertical: {{vertical}}%; 
+       --horizontal: {{horizontal}}%; 
+       --vertical_phone: {{vertical_phone}}%; 
+       --horizontal_phone: {{horizontal_phone}}%; 
+    "
+    > 
+        {% if badge_image %} 
+            {{ 
+                badge_image 
+                | image_url: width: '300px'  
+                | image_tag:
+                fetchpriority: 'high',
+                loading: 'lazy',
+                class: 'badge_image'
+            }}
+
+        {% else %}
+            {{ 'blog-apparel-1' | placeholder_svg_tag: 'badge_image' }}
+        {% endif %} 
+
+        {%  unless badge_text == blank %} <h4>{{badge_text}}</h4>{% endunless %}
+
+
+    </div>
+{% endif %}
+
+</div>
+    
+
+</div>
