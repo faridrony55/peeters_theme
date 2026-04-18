@@ -209,7 +209,7 @@ opacity: 0.5;
 
 
        .featured-video-slider .featured-video {
-            position: absolute;
+            position: static;
             width:100%;
        }
 
