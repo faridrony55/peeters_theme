@@ -78,8 +78,8 @@ strong{
     left: 0;
     top: 0;
         z-index: 0;
-    background: rgb(var(--color-background));
-    background: var(--gradient-background);
+    background: rgb(var(--color-button));
+    
     transition-duration: 0.4s;
     border-radius: 100px;
 }
@@ -88,7 +88,8 @@ strong{
     width: 0;
     height: 100%;
     position: absolute;
-    background: rgba(var(--color-button), var(--alpha-button-background));
+    background: rgba(var(--color-shadow));
+    
     left: 0;
     top: 0;
     transition-duration: 0.4s;
