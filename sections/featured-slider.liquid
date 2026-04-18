@@ -73,17 +73,7 @@
                     "visible_if": "{{ block.settings.videooption == true }}" 
                 
                 },
-
-                {
-                    "type": "image_picker",
-                    "id": "media",
-                    "label": "Media"
-                },
-                {
-                    "type": "image_picker",
-                    "id": "media_phone",
-                    "label": "Media"
-                },
+ 
 
                 {
                     "type": "text",
@@ -123,12 +113,7 @@
                     "step": 10,
                     "default": 500 
                 }, 
-                {
-                    "type": "text",
-                    "label": "Bottom Text",
-                    "id": "bottomtext",
-                    "default":"*Zolang de voorraad strekt"
-                },
+                 
                 {
                     "type": "text",
                     "id":"btn_text",
@@ -146,7 +131,21 @@
                     "id": "color_scheme",
                     "label": "Slide Color",
                     "default": "scheme-5"
-                } 
+                } ,
+                {
+                    "type":"header",
+                    "content": "Phone Style"
+                },
+                {
+                    "type": "select",
+                    "id": "slide_style",
+                    "label": "Slide Style",
+                    "options": [
+                        {"label":"Media + Content ", "value": "mediacontent"},
+                        {"label":"Content + Media", "value": "contentmedia"}
+                    ],
+                    "default":"mediacontent"
+                }
 
             ]
         },
@@ -318,7 +317,21 @@
                     "id": "color_scheme",
                     "label": "Slide Color",
                     "default": "scheme-5"
-                } 
+                } ,
+                {
+                    "type":"header",
+                    "content": "Phone Style"
+                },
+                {
+                    "type": "select",
+                    "id": "slide_style",
+                    "label": "Slide Style",
+                    "options": [
+                        {"label":"Media + Content ", "value": "mediacontent"},
+                        {"label":"Content + Media", "value": "contentmedia"}
+                    ],
+                    "default":"mediacontent"
+                }
 
             ]
         },
@@ -534,7 +547,21 @@
                     "id": "color_scheme",
                     "label": "Slide Color",
                     "default": "scheme-5"
-                } 
+                } ,
+                {
+                    "type":"header",
+                    "content": "Phone Style"
+                },
+                {
+                    "type": "select",
+                    "id": "slide_style",
+                    "label": "Slide Style",
+                    "options": [
+                        {"label":"Media + Content ", "value": "mediacontent"},
+                        {"label":"Content + Media", "value": "contentmedia"}
+                    ],
+                    "default":"mediacontent"
+                }
 
             ]
         }

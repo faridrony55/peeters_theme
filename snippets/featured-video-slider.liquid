@@ -1,9 +1,21 @@
+{%  liquid   
+     if slide_style == 'mediacontent'  
+
+      assign direction =  'column'
+       
+    elsif slide_style == 'contentmedia' 
+      assign direction =  'column-reverse'
+     endif 
+ %}
+
 <div class="swiper-slide">
 
-
-
-
-<div  class=" featured-video-slider featured-slide color-{{ color_scheme }} gradient" >
+ 
+<div  class=" featured-video-slider featured-slide color-{{ color_scheme }} gradient" style=" 
+--title_max_width: {{title_max_width}}px;
+--content_max_width: {{content_max_width}}px;
+flex-direction: {{direction}};
+">
 
  
 
@@ -22,15 +34,63 @@
             </a> 
         {% endunless %} 
 
-        {%  unless bottomtext == blank %} <span class="bottomtext">{{bottomtext}}</span> {% endunless %}
-
+        
    
     </div>
 
 
-    <div class="featured-video">
-        {% render 'custom-video' %}
-    </div>
+ 
+        
+{% liquid 
+    if loop == true 
+        assign loop_true = '&loop=1'
+    endif
+    if autoplay == true 
+        assign autoplay_true = 1
+    elsif autoplay == false 
+        assign autoplay_true = 0
+    endif
+%}
+  
+{% if videotype == 'hosted' %}
+    {{
+    video
+    | video_tag:
+    image_size: '2000px',
+    autoplay: autoplay,
+    loop: loop,
+    controls: control,
+    muted: mute,
+    class: 'featured-video'
+    
+}}
+{% elsif videotype == 'youtubevimeo' %}
+
+
+        {% if video_url.type == 'youtube' %}
+
+            <iframe
+              src="https://www.youtube.com/embed/{{ video_url.id }}?enablejsapi=1&autoplay={{autoplay_true}}{{ loop_true }}"
+              class="js-youtube featured-video"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              title="{{ title }}"
+            ></iframe>
+
+            
+        {%  elsif  video_url.type == 'vimeo' %}
+            <iframe
+              src="https://player.vimeo.com/video/{{ video_url.id }}?autoplay={{autoplay_true}}{{ loop_true }}"
+              class="js-vimeo featured-video"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              title="{{ title }}"
+            ></iframe>
+
+        {% endif %}
+
+
+{% endif %} 
 
  
 

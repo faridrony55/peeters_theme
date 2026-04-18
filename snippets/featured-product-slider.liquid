@@ -1,7 +1,7 @@
  
 
  {% liquid  
- 
+
     if product  
         if media
             assign media = media
@@ -16,20 +16,28 @@
         endif
 
     endif
-      
+       
+    
+     if slide_style == 'mediacontent'  
 
-%}
+      assign direction =  'column'
+       
+    elsif slide_style == 'contentmedia' 
+      assign direction =  'column-reverse'
+     endif 
+ %}
 
 <div class="swiper-slide">
 
 
     
 
-<div  class=" featured-product-slider featured-slide color-{{ color_scheme }} gradient" 
+<div  class=" featured-product-slider  featured-slide color-{{ color_scheme }} gradient" 
 style="
 background-image:url({{ media |  image_url: width: '1000' }});
 --title_max_width: {{title_max_width}}px;
 --content_max_width: {{content_max_width}}px;
+flex-direction: {{direction}};
 ">
 
 
@@ -37,7 +45,7 @@ background-image:url({{ media |  image_url: width: '1000' }});
 {% if media_phone %} 
         {{ 
             media_phone 
-            | image_url: width: '300px'  
+            | image_url: width: '500px'  
             | image_tag:
             fetchpriority: 'high',
             loading: 'lazy',

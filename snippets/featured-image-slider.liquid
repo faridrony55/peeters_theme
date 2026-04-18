@@ -1,4 +1,13 @@
  
+{%  liquid   
+     if slide_style == 'mediacontent'  
+
+      assign direction =  'column'
+       
+    elsif slide_style == 'contentmedia' 
+      assign direction =  'column-reverse'
+     endif 
+ %}
 
 <div class="swiper-slide">
 
@@ -7,12 +16,13 @@ style="
 background-image:url({{ media |  image_url: width: '1000' }});
 --title_max_width: {{title_max_width}}px;
 --content_max_width: {{content_max_width}}px;
+flex-direction: {{direction}};
 ">
 
 {% if media_phone %} 
         {{ 
             media_phone 
-            | image_url: width: '300px'  
+            | image_url: width: '500px'  
             | image_tag:
             fetchpriority: 'high',
             loading: 'lazy',

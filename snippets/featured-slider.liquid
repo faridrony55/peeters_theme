@@ -29,9 +29,7 @@
 
                         {% when 'video_slider' %}
                               {% render 'featured-video-slider',
-
-                                media: block.settings.media
-                                media_phone: block.settings.media_phone,
+ 
                                 subtitle: block.settings.subtitle
                                 title: block.settings.title
                                 title_max_width: block.settings.title_max_width,
@@ -42,13 +40,16 @@
                                 color_scheme: block.settings.color_scheme,
                                 bottomtext: block.settings.bottomtext,
 
-                                video_url: block.settings.video_url
-                                video: block.settings.video
-                                videotype: block.settings.videotype
-                                loop: block.settings.loop
-                                autoplay: block.settings.autoplay
-                                control: block.settings.control
-                                mute: block.settings.mute
+                                video_url: block.settings.video_url,
+                                video: block.settings.video,
+                                videotype: block.settings.videotype,
+                                loop: block.settings.loop,
+                                autoplay: block.settings.autoplay,
+                                control: block.settings.control,
+                                mute: block.settings.mute,
+
+
+                                slide_style: block.settings.slide_style
 
                                  
  
@@ -70,8 +71,7 @@
                                 content_max_width: block.settings.content_max_width,
                                 btn_text: block.settings.btn_text
                                 btn_url: block.settings.btn_url ,
-                                color_scheme: block.settings.color_scheme,
-                                bottomtext: block.settings.bottomtext,
+                                color_scheme: block.settings.color_scheme, 
                                  
 
                                 badge: block.settings.badge,
@@ -83,6 +83,8 @@
                                 badge_width_phone: block.settings.badge_width_phone,
                                 vertical_phone: block.settings.vertical_phone,
                                 horizontal_phone: block.settings.horizontal_phone,
+
+                                slide_style: block.settings.slide_style
 
 
                             %}
@@ -122,6 +124,8 @@
                                 badge_width_phone: block.settings.badge_width_phone,
                                 vertical_phone: block.settings.vertical_phone,
                                 horizontal_phone: block.settings.horizontal_phone,
+
+                                slide_style: block.settings.slide_style
 
 
                             %}
