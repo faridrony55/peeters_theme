@@ -14,17 +14,29 @@
             "name":"Video Slider", 
             "settings": [
 
+            {
+                "type": "select",
+                "options": [
+                    {"value": "hosted","label": "Hosted"},
+                    {"value": "youtubevimeo","label": "Youtube or vimeo"}
+                ],
+                "default":"hosted",
+                "label": "Select video type",
+                "id": "videotype"
+            },
                 {
                     "type": "video",
                     "id": "video",
-                    "label": "Hosted Video"
+                    "label": "Hosted Video",
+                    "visible_if": "{{ block.settings.videotype == 'hosted' }}"
                 },
                 {
                     "type": "video_url",
                     "accept": ["vimeo","youtube"],
                     "id": "video_url",
                     "label": "Video",
-                    "info": "Add link of Youtube or Vimeo"
+                    "info": "Add link of Youtube or Vimeo",
+                    "visible_if": "{{ block.settings.videotype == 'youtubevimeo' }}"
                 },
 
                 {
