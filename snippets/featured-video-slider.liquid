@@ -3,7 +3,8 @@
 <div class="swiper-slide">
 
 
-{{ video }}
+{{ video |  file_url }}
+{{ video |  image_url: width: 1000, height: 500  }}
 {{video_url}}
 
 <div  class=" featured-image-slider featured-slide color-{{ color_scheme }} gradient" 
