@@ -207,4 +207,10 @@ opacity: 0.5;
         transform: translate(var(--horizontal_phone), var(--vertical_phone));
        }
 
+
+       .featured-video-slider .featured-video {
+            position: absolute;
+            width:100%;
+       }
+
        }
