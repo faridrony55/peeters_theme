@@ -8,7 +8,7 @@
 </video>
 
 
-{{
+{% comment %} {{
             video
             | video_tag:
               image_size: '1100x',
@@ -16,7 +16,7 @@
               loop: section.settings.enable_video_looping,
               controls: true,
               muted: false
-          }}
+          }} {% endcomment %}
 {{video_url}}
 
 <div  class=" featured-image-slider featured-slide color-{{ color_scheme }} gradient" 
