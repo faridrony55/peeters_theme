@@ -3,8 +3,15 @@
 <div class="swiper-slide">
 
 
-{{ video |  file_url }}
-{{ video |  image_url: width: 1000, height: 500  }}
+{{
+            video
+            | video_tag:
+              image_size: '1100x',
+              autoplay: true,
+              loop: section.settings.enable_video_looping,
+              controls: true,
+              muted: false
+          }}
 {{video_url}}
 
 <div  class=" featured-image-slider featured-slide color-{{ color_scheme }} gradient" 
