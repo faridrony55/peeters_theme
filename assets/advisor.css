@@ -1,0 +1,29 @@
+.block-advisor{
+    flex-basis: var(--block_width);
+    max-width: var(--block_width);
+}
+.block-advisor .advisor-style{
+    position: relative;
+}
+ 
+    .block-advisor .advisor-bg-color {
+    position: absolute;
+    width: 100%;
+    height: calc( 100% - 50px );
+    bottom: 0;
+    left: 0;
+    display: block;
+    z-index: 0;
+    border-radius: var(--border_radius);
+    background-color: var(--bg_color);
+ 
+} 
+.block-advisor .advisor-content-style{
+    padding: var(--block_padding_vertical) var(--block_padding_horizontal);
+    position: relative;
+}
+
+ 
+.block-advisor .content{
+    max-width: var(--content_max_width);
+}

@@ -1,0 +1,143 @@
+{{ 'content.css' | asset_url | stylesheet_tag }}
+
+{% liquid 
+ 
+    assign content = block.settings.content
+    assign btn_text = block.settings.btn_text
+    assign btn_url = block.settings.btn_url
+
+
+
+    assign block_width = block.settings.block_width
+    assign color_scheme = block.settings.color_scheme 
+    assign content_max_width = block.settings.content_max_width 
+
+    assign block_padding_horizontal = block.settings.block_padding_horizontal
+    assign block_padding_vertical = block.settings.block_padding_vertical
+
+     
+
+%}
+
+{%  style  %}
+.block-content{
+    --block_width : {{block_width}}; 
+    --content_max_width : {{content_max_width}}px;
+
+    --block_padding_horizontal : {{block_padding_horizontal}}px;
+    --block_padding_vertical : {{block_padding_vertical}}px;
+
+    
+}
+{% endstyle %} 
+
+<div class="color-{{ color_scheme }} gradient content-style">
+
+         {%  unless content == blank %} <div class="content">{{content}}</div>    {% endunless %}  
+
+         {%  unless btn_text == blank %} 
+            <a href="{{ btn_url }}" class="btn">
+                <span>{{btn_text}}</span>
+                {% render 'icon-right-arrow' %}
+            </a> 
+        {% endunless %} 
+</div>
+
+
+{%  schema  %}
+{
+    "name": "content",
+    "class": "block-content",
+    "tag":"div", 
+    "settings": [
+ 
+        {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content",
+            "default":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>"
+        }, 
+                 
+        {
+            "type": "text",
+            "id":"btn_text",
+            "label": "Button Text",
+            "default":"BEKIJK VACATURE"
+        },
+        {
+            "type": "url",
+            "label": "Button Link",
+            "id": "btn_url"
+        },
+        {
+            "type": "header",
+            "content": "Style"
+        } ,
+         
+        {
+            "type": "select",
+            "id": "block_width",
+            "label": "Block Width",
+            "options": [
+                { "value": "20%", "label": "20%" },
+                { "value": "25%", "label": "25%" },
+                { "value": "33.33%", "label": "33.33%" },
+                { "value": "40%", "label": "40%" },
+                { "value": "50%", "label": "50%" },
+                { "value": "60%", "label": "60%" },
+                { "value": "66.66%", "label": "66.66%" },
+                { "value": "75%", "label": "75%" },
+                { "value": "80%", "label": "80%" },
+                { "value": "100%", "label": "100%" }
+            ],
+            "default":"100%"
+        },
+
+
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Slide Color",
+            "default": "scheme-1"
+        },
+         
+         
+
+        {
+            "type": "range",
+            "id": "content_max_width",
+            "label": "Content Max Width",
+            "min": 400,
+            "max": 1000,
+            "unit": "px",
+            "step": 10,
+            "default": 500 
+        },
+         {
+            "type": "range",
+            "id": "block_padding_horizontal",
+            "label": "Horizontal Padding",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 10,
+            "default":30 
+        },
+         {
+            "type": "range",
+            "id": "block_padding_vertical",
+            "label": "Vertical Padding",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 10,
+            "default":30 
+        },
+    ],
+    "presets": [
+        {
+            "name": "content"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,30 @@
+
+{% liquid 
+    assign layout_max_width = section.settings.layout_max_width
+    assign padding_top = section.settings.padding_top
+    assign padding_bottom = section.settings.padding_bottom
+%}
+
+
+{%  style  %} 
+    .advisor-section{
+        --padding_top: {{padding_top}}px;
+        --padding_bottom: {{padding_bottom}}px;
+    }
+    {% if layout_max_width != '' %}
+        .advisor-section .page-width{
+            max-width: {{layout_max_width}};
+        }
+    {% endif %}
+{% endstyle %}  
+
+<section class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width">
+  
+        <div class="flex">
+            {{ children }}
+        </div>
+
+
+    </div>
+</section>

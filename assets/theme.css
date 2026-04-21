@@ -2,10 +2,14 @@
     --nohemi: 'Nohemi' ;
 }
 *{
-    font-family: var(--nohemi) ;
-
- 
-
+    font-family: var(--nohemi) ; 
+}
+.media{
+    max-width: 100%;
+}
+.flex{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -81,7 +85,7 @@ strong{
     background: rgb(var(--color-button));
     
     transition-duration: 0.4s;
-    border-radius: 100px;
+    border-radius: 100px;  
 }
 .btn::after {
     content: "";
@@ -107,7 +111,7 @@ strong{
 }
 
 .btn {
-    color: rgb(var(--color-foreground));
+    color: rgb(var(--color-button-text));
     font-weight: 500;
     font-size: 20px;
     line-height: 90%;

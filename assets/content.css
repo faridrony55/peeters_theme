@@ -1,0 +1,12 @@
+.block-content{
+    flex-basis: var(--block_width);
+    max-width: var(--block_width);
+}
+.block-content .content-style{
+    padding: var(--block_padding_vertical) var(--block_padding_horizontal);
+}
+
+ 
+.block-content .content{
+    max-width: var(--content_max_width);
+}

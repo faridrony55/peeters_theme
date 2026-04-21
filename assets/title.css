@@ -1,0 +1,15 @@
+.block-title{
+    flex-basis: var(--block_width);
+    max-width: var(--block_width);
+}
+.block-title .title-style{
+    padding: var(--block_padding_vertical) var(--block_padding_horizontal);
+}
+
+.block-title h2{
+    max-width: var(--title_max_width);
+    margin-bottom: var(--title_margin_bottom);
+}
+.block-title .content{
+    max-width: var(--content_max_width);
+}
