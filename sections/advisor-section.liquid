@@ -37,6 +37,17 @@
             "default": "scheme-5"
         },
         {
+            "type": "select",
+            "default": "center",
+            "options": [
+                {"value": "flex-start","label": "Start"},
+                {"value": "center","label": "Center"},
+                {"value": "flex-end","label": "End"}
+            ],
+            "id": "block_align",
+            "label": "Block ALignment"
+        },
+        {
             "type": "range",
             "id": "padding_top",
             "label": "Padding Top",
@@ -56,7 +67,28 @@
             "unit": "px",
             "step": 1,
             "default": 20
+        },
+        {
+            "type": "range",
+            "id": "gap_horizontal",
+            "label": "Column Gap Horizontal",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "gap_vertical",
+            "label": "Column Gap vertical",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
         }
+
     ],
     "disabled_on": {
         "groups": ["header","footer"]

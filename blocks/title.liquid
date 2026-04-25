@@ -5,8 +5,13 @@
     assign subtitle = block.settings.subtitle
     assign title = block.settings.title
     assign content = block.settings.content
+
     assign btn_text = block.settings.btn_text
     assign btn_url = block.settings.btn_url
+    assign btn_style = block.settings.btn_style
+    
+
+    
 
 
 
@@ -25,8 +30,10 @@
 %}
 
 {%  style  %}
-.block-title{
-    --block_width : {{block_width}};
+#shopify-block-{{ block.id }}.block-title{
+
+    --block_width : calc( {{block_width}} - var(--gap_horizontal)/2 ); 
+    /* --block_width : {{block_width}}; */
     --title_max_width : {{title_max_width}}px;
     --title_margin_bottom : {{title_margin_bottom}}px;
     --content_max_width : {{content_max_width}}px;
@@ -44,12 +51,11 @@
         {%  unless title == blank %} <h2 class="title_{{title_size}}">{{title}}</h2> {% endunless %}  
         {%  unless content == blank %} <div class="content">{{content}}</div>    {% endunless %}  
 
-         {%  unless btn_text == blank %} 
-            <a href="{{ btn_url }}" class="btn">
-                <span>{{btn_text}}</span>
-                {% render 'icon-right-arrow' %}
-            </a> 
-        {% endunless %} 
+       {% render 'btn', 
+        btn_text:btn_text, 
+        btn_url:btn_url, 
+        btn_style:btn_style  
+       %}
 </div>
 
 
@@ -89,6 +95,26 @@
             "type": "url",
             "label": "Button Link",
             "id": "btn_url"
+        },
+        {
+            "type": "select",
+            "id": "btn_style",
+            "label": "Button Style",
+            "default":"filled",
+            "options": [
+                {
+                    "value": "filled",
+                    "label": "Filled"
+                },
+                {
+                    "value": "outline",
+                    "label": "Outline"
+                },
+                {
+                    "value": "linked",
+                    "label": "Linked"
+                }
+            ]
         },
         {
             "type": "header",

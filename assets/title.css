@@ -6,9 +6,19 @@
     padding: var(--block_padding_vertical) var(--block_padding_horizontal);
 }
 
+.block-title h5{ 
+    color:  rgb(var(--color-link)); 
+font-weight: 600; 
+font-size: 25px; 
+line-height: 90%;
+letter-spacing: 0%;
+margin-bottom: 35px;
+
+}
 .block-title h2{
     max-width: var(--title_max_width);
     margin-bottom: var(--title_margin_bottom);
+    
 }
 .block-title .content{
     max-width: var(--content_max_width);

@@ -6,6 +6,7 @@
     assign content = block.settings.content
     assign btn_text = block.settings.btn_text
     assign btn_url = block.settings.btn_url
+    assign btn_style = block.settings.btn_style
 
 
 
@@ -14,6 +15,8 @@
     assign content_max_width = block.settings.content_max_width 
 
     assign border_radius = block.settings.border_radius
+    assign block_align = block.settings.block_align
+    assign content_text_align = block.settings.content_text_align
 
     assign block_padding_horizontal = block.settings.block_padding_horizontal
     assign block_padding_vertical = block.settings.block_padding_vertical
@@ -22,15 +25,17 @@
      
 
 %}
-
+ 
 {%  style  %}
-.block-advisor{
-    --block_width : {{block_width}}; 
+#shopify-block-{{ block.id }}.block-advisor{
+    --block_width : calc( {{block_width}} - var(--gap_horizontal)/2 ); 
     --content_max_width : {{content_max_width}}px;
     --border_radius: {{border_radius}}px;
     --block_padding_horizontal : {{block_padding_horizontal}}px;
     --block_padding_vertical : {{block_padding_vertical}}px;
     --bg_color: {{bg_color}};
+    --block_align: {{block_align}};
+    --content_text_align: {{content_text_align}};
 
     
 }
@@ -47,12 +52,11 @@
     <div class="advisor-content-style">
          {%  unless content == blank %} <div class="content">{{content}}</div>    {% endunless %}  
 
-         {%  unless btn_text == blank %} 
-            <a href="{{ btn_url }}" class="btn">
-                <span>{{btn_text}}</span>
-                {% render 'icon-right-arrow' %}
-            </a> 
-        {% endunless %} 
+         {% render 'btn', 
+            btn_text:btn_text, 
+            btn_url:btn_url, 
+            btn_style:btn_style  
+        %}
     </div>
 </div>
 
@@ -88,9 +92,40 @@
             "id": "btn_url"
         },
         {
+            "type": "select",
+            "id": "btn_style",
+            "label": "Button Style",
+            "default":"filled",
+            "options": [
+                {
+                    "value": "filled",
+                    "label": "Filled"
+                },
+                {
+                    "value": "outline",
+                    "label": "Outline"
+                },
+                {
+                    "value": "linked",
+                    "label": "Linked"
+                }
+            ]
+        },
+        {
             "type": "header",
             "content": "Style"
         } ,
+        {
+            "type": "select",
+            "default": "flex-start",
+            "options": [
+                {"value": "flex-start","label": "Start"},
+                {"value": "center","label": "Center"},
+                {"value": "flex-end","label": "End"} 
+            ],
+            "id": "block_align",
+            "label": "Block ALignment"
+        },
 
         {
             "type": "color",
@@ -148,6 +183,21 @@
             "step": 10,
             "default": 500 
         },
+
+        {
+            "type": "select",
+            "default": "left",
+            "options": [
+                {"value": "left","label": "Left"},
+                {"value": "center","label": "Center"},
+                {"value": "right","label": "Right"} 
+            ],
+            "id": "content_text_align",
+            "label": "Text ALignment"
+        },
+
+       
+
          {
             "type": "range",
             "id": "block_padding_horizontal",

@@ -9,7 +9,9 @@
 }
 .flex{
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
+    gap: var(--gap_vertical) var(--gap_horizontal);
+    align-items: var(--block_align);
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -55,6 +57,20 @@ strong{
 
 
 /*** btn style **/
+
+.btn {
+    color: rgb(var(--color-button-text));
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 90%;
+    letter-spacing: 10%;
+    padding: 17px 35px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    border: 0;
+    overflow: hidden;
+    text-decoration: none;
+}
 .btn{
     position: relative;
     background-color: transparent;
@@ -74,7 +90,43 @@ strong{
     position: relative;
     z-index: 1;
 }
-.btn::before {
+
+.btn.outline{
+
+    border:2px solid rgb(var(--color-link));
+    color:rgb(var(--color-link)) ;
+}
+.btn.filled svg path{ 
+    fill:rgb(var(--color-button-text)) ;
+}
+.btn.outline svg path{ 
+    fill:rgb(var(--color-link)) ;
+}
+
+.btn.linked{ 
+    padding: 5px 0px; 
+    border-bottom: 2px solid;
+    border-radius: 0; 
+}
+.btn.linked svg path{ 
+    fill:rgb(var(--color-link)) ;
+}
+.btn.linked{ 
+    color: rgb(var(--color-link));
+    transition-duration: 0.4s;
+}
+.btn.linked svg {
+    opacity: 1; 
+    margin-left: 0;
+}
+.btn.linked:hover{
+    color: rgb(var(--color-button-text));
+}
+.btn.linked:hover svg path{
+    fill: rgb(var(--color-button-text));
+}
+
+.btn.filled::before {
     content: "";
     width: 100%;
     height: 100%;
@@ -87,7 +139,7 @@ strong{
     transition-duration: 0.4s;
     border-radius: 100px;  
 }
-.btn::after {
+.btn.filled::after {
     content: "";
     width: 0;
     height: 100%;
@@ -100,7 +152,7 @@ strong{
     border-radius: 100px;
 }
  
-.btn:hover::after {
+.btn.filled:hover::after {
  width: 100%;
 }
 
@@ -110,19 +162,6 @@ strong{
   transition-timing-function: linear !important;
 }
 
-.btn {
-    color: rgb(var(--color-button-text));
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 90%;
-    letter-spacing: 10%;
-    padding: 17px 35px;
-    border-radius: 100px;
-    flex-shrink: 0;
-    border: 0;
-    overflow: hidden;
-    text-decoration: none;
-}
 
 @media(min-width: 768px){
     .only-phone{

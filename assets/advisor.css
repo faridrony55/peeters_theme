@@ -1,12 +1,15 @@
 .block-advisor{
     flex-basis: var(--block_width);
     max-width: var(--block_width);
+    height: stretch;
 }
 .block-advisor .advisor-style{
     position: relative;
+    height: 100%;
 }
- 
-    .block-advisor .advisor-bg-color {
+
+
+.block-advisor .advisor-bg-color {
     position: absolute;
     width: 100%;
     height: calc( 100% - 50px );
@@ -15,15 +18,19 @@
     display: block;
     z-index: 0;
     border-radius: var(--border_radius);
-    background-color: var(--bg_color);
- 
+    background-color: var(--bg_color); 
 } 
+
 .block-advisor .advisor-content-style{
     padding: var(--block_padding_vertical) var(--block_padding_horizontal);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: var(--block_align);
 }
 
  
 .block-advisor .content{
     max-width: var(--content_max_width);
+    text-align: var(--content_text_align);
 }
