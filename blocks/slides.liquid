@@ -1,0 +1,325 @@
+ 
+{{ 'slides.css' | asset_url | stylesheet_tag }}
+ 
+
+
+ {% liquid 
+ assign aspect_ratio = block.settings.media_size
+ assign radius = block.settings.radius
+ assign overlay = block.settings.overlay
+ 
+ 
+ assign navigation = block.settings.navigation
+ assign pagination = block.settings.pagination
+ assign nav_position = block.settings.nav_position
+ assign fullwidth = block.settings.fullwidth
+
+ assign gap = block.settings.gap
+ assign slide_per_row = block.settings.slide_per_row
+ assign is_partial = block.settings.is_partial
+
+ unless is_partial == false 
+    assign partial = block.settings.partial
+ endunless
+
+ assign desktop_vew = slide_per_row | append: '.' | append: partial
+
+
+ assign gap_phone = block.settings.gap_phone
+ assign slide_per_row_phone = block.settings.slide_per_row_phone
+ assign is_partial_phone = block.settings.is_partial_phone
+ assign partial_phone = block.settings.partial_phone
+
+
+ unless is_partial_phone == false 
+    assign partial_phone = block.settings.partial_phone
+ endunless
+
+ assign phone_vew = slide_per_row_phone | append: '.' | append: partial_phone
+
+%}  
+
+
+{%  capture navigation_and_pagination %} 
+    {%  unless navigation == false %}<div class="swiper-button-prev"></div>{% endunless %}   
+    {%  unless pagination == false %}<div class="swiper-pagination"></div>{% endunless %} 
+    {%  unless navigation == false %}<div class="swiper-button-next"></div>{% endunless %}   
+{% endcapture %}  
+
+
+{%  if 
+    nav_position == 'swiper-top-left' or 
+    nav_position == 'swiper-top-center' or 
+    nav_position == 'swiper-top-right' 
+%}   
+    {%  capture slide_nav_for_top %} 
+        <div class="{{nav_position}}"> 
+            {{navigation_and_pagination}}
+        </div>
+    {% endcapture %}  
+{% endif %}  
+
+
+{%  if 
+    nav_position == 'swiper-default' or 
+    nav_position == 'swiper-bottom-left' or 
+    nav_position == 'swiper-bottom-center' or 
+    nav_position == 'swiper-bottom-right'  
+%}  
+    {%  capture slide_nav_for_bottom %} 
+        <div class="{{nav_position}}">
+            {{navigation_and_pagination}}
+        </div>
+    {% endcapture %}   
+{% endif %}  
+
+ 
+{%  style  %} 
+
+
+    {% unless fullwidth == false %}
+    .mySwiper_{{block.id}}{
+        overflow: visible;
+    }
+    {% endunless %}
+
+    #shopify-block-{{block.id}}{
+
+    --aspect_ratio: {{aspect_ratio}};
+    --radius: {{radius}}px;
+
+    {% if overlay == true %}
+     --content: ''
+    {% else %}
+     --content: none
+    {% endif %}
+
+    }  
+{% endstyle %}  
+<div class="swiper mySwiper_{{block.id}} ">
+
+    {{ slide_nav_for_top }}
+     
+    <div class="swiper-wrapper">
+        {% content_for "blocks"  %}   
+    </div>
+    {{ slide_nav_for_bottom }}
+    
+   
+  </div>
+
+
+ <script>
+    var swiper = new Swiper(".mySwiper_{{block.id}}", {
+    
+      slidesPerView: {{phone_vew}},
+      spaceBetween: {{gap_phone}},
+      navigation: {
+        nextEl: ".mySwiper_{{block.id}} .swiper-button-next",
+        prevEl: ".mySwiper_{{block.id}} .swiper-button-prev",
+      }, 
+      pagination: {
+        el: ".mySwiper_{{block.id}} .swiper-pagination",
+        clickable: true
+      },
+      breakpoints: { 
+        768: {
+          slidesPerView: {{desktop_vew}},
+          spaceBetween: {{gap}},
+        } 
+      },
+    });
+  </script>
+
+
+{%  schema  %} 
+{ 
+    "class": "swiper-slide",
+    "name": "Slides",
+    "blocks": [
+        {
+            "type": "_bicyle"
+        },
+        {
+            "type": "_review"
+        }
+    ],
+    "settings": [
+        
+        {
+            "type": "header",
+            "content": "Slide Style"
+        },
+
+
+        {
+            "type": "select",
+            "id": "media_size",
+            "label": "Media Size",
+            "default": "auto",
+            "options": [
+                {"label": "Adapt the default size","value": "auto"},
+                {"label": "Portrait","value": "2/3"},
+                {"label": "Horizontal","value": "3/2"},
+                {"label": "Square","value": "1/1"}
+            ]
+        } ,
+        {
+            "type": "range",
+            "id": "radius",
+            "label": "Radius",
+            "min": 0,
+            "max": 300,
+            "step": 5,
+            "unit": "px",
+            "default": 10 
+        },
+        {
+            "type": "checkbox",
+            "id": "overlay",
+            "label": "Overlay Color",
+            "default": true
+        },
+
+
+        {
+            "type": "checkbox",
+            "id": "fullwidth",
+            "label": "Visible Full Width",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "navigation",
+            "label": "Navigation",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "pagination",
+            "label": "Pagination",
+            "default": false
+        },  
+        {
+            "type": "select",
+            "default":"swiper-default",
+            "label": "Navigation Position",
+            "id": "nav_position",
+            "options": [
+                {
+                    "value": "swiper-default",
+                    "label": "Default"
+                },
+                {
+                    "value": "swiper-top-left",
+                    "label": "Top Left"
+                },
+                {
+                    "value": "swiper-top-center",
+                    "label": "Top Center"
+                },
+                {
+                    "value": "swiper-top-right",
+                    "label": "Top Right"
+                },
+                {
+                    "value": "swiper-bottom-left",
+                    "label": "Bottom Left"
+                },
+                {
+                    "value": "swiper-bottom-center",
+                    "label": "Bottom Center"
+                },
+                {
+                    "value": "swiper-bottom-right",
+                    "label": "Bottom Right"
+                }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Desktop Slide"
+        },
+
+        {
+            "type": "range",
+            "label": "Gap",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30,
+            "id": "gap"
+        },
+
+        {
+            "type": "range",
+            "label": "Slide Per Row",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "default": 4,
+            "id": "slide_per_row"
+        },
+        {
+            "type": "checkbox",
+            "id": "is_partial",
+            "label": "Partial Slide",
+            "default": true
+        },
+        {
+            "type": "range",
+            "label": "Partial",
+            "min": 1,
+            "max": 9,
+            "step": 1,
+            "default": 2,
+            "id": "partial",
+            "visible_if": "{{ block.settings.is_partial == true }}"
+        },
+        {
+            "type": "header",
+            "content": "Phone Slide"
+        },
+
+        {
+            "type": "range",
+            "label": "Gap ",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30,
+            "id": "gap_phone"
+        },
+        {
+            "type": "range",
+            "label": "Slide Per Row",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "default": 1,
+            "id": "slide_per_row_phone"
+        },
+        {
+            "type": "checkbox",
+            "id": "is_partial_phone",
+            "label": "Partial Slide",
+            "default": true
+        },
+        {
+            "type": "range",
+            "label": "Partial",
+            "min": 1,
+            "max": 9,
+            "step": 1,
+            "default": 2,
+            "id": "partial_phone",
+            "visible_if": "{{ block.settings.is_partial_phone == true }}"
+        },
+         
+         
+    ],
+    "presets": [
+        {"name": "Slides"}
+    ]
+}
+{% endschema %}

@@ -1,0 +1,47 @@
+{% liquid 
+
+    assign image = block.settings.image
+    assign title = block.settings.title
+    assign link = block.settings.link 
+
+%} 
+
+<div class="bicyle">
+     {% render 'media', media: image %}
+     <h3>
+        {% if link != blank %}
+            <a class="btn" href="{{link}}">{{title}} {% render 'icon-right-arrow' %}</a>
+        {% else %} 
+            {{title}}
+        {% endif %}
+    </h3>
+</div>
+
+{%  schema  %} 
+{ 
+    "class": "swiper-slide",
+    "name": "Bicycle",
+    "settings": [ 
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Media"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "E-bikes"
+        },
+        {
+            "type": "url",
+            "id": "link",
+            "label": "Url"
+        }
+
+    ],
+    "presets": [
+        {"name": "Bicycle"}
+    ]
+}
+{% endschema %}

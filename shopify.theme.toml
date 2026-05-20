@@ -1,0 +1,4 @@
+[environments.starter]
+store = "peeters-tweewielers-theme-dev.myshopify.com"
+store-password = 123
+theme-editor-sync = true

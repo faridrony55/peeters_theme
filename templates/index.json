@@ -1,5 +1,651 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "advisor_section_c476gD": {
+      "type": "advisor-section",
+      "blocks": {
+        "title_B7p4Ei": {
+          "type": "title",
+          "name": "title",
+          "settings": {
+            "subtitle": "EERLIJK ADVIES",
+            "title": "Plan je afspraak gemakkelijk online!",
+            "content": "",
+            "btn_text": "",
+            "btn_url": "",
+            "btn_style": "filled",
+            "block_width": "50%",
+            "color_scheme": "scheme-4",
+            "title_max_width": 700,
+            "title_size": "large",
+            "title_margin_bottom": 0,
+            "content_max_width": 500,
+            "block_padding_horizontal": 30,
+            "block_padding_vertical": 10,
+            "block_width_phone": "100%"
+          },
+          "blocks": {}
+        },
+        "content_88hYkD": {
+          "type": "content",
+          "name": "content",
+          "settings": {
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>",
+            "btn_text": "",
+            "btn_url": "",
+            "btn_style": "filled",
+            "block_width": "50%",
+            "color_scheme": "scheme-4",
+            "content_max_width": 500,
+            "block_padding_horizontal": 30,
+            "block_padding_vertical": 10
+          },
+          "blocks": {}
+        },
+        "advisor_mgi4eP": {
+          "type": "advisor",
+          "name": "Advisor",
+          "settings": {
+            "media": "shopify://shop_images/Home-PT-asset_1200x_ed7b4dca-cfba-41f3-836e-8dfab8814653.png",
+            "content": "",
+            "btn_text": "BEKIJK VACATURE",
+            "btn_url": "",
+            "add_icon": false,
+            "icon_type": "svg",
+            "icon_code": "<svg width=\"32\" height=\"32\" viewbox=\"0 0 32 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M7.99996 8.00008L14 14.0001M7.99996 8.00008H3.99996L2.66663 4.00008L3.99996 2.66675L7.99996 4.00008V8.00008ZM25.6786 3.65476L22.1751 7.15825C21.6471 7.68628 21.3831 7.95029 21.2842 8.25473C21.1972 8.52252 21.1972 8.81098 21.2842 9.07877C21.3831 9.38321 21.6471 9.64722 22.1751 10.1752L22.4915 10.4916C23.0195 11.0196 23.2835 11.2836 23.5879 11.3825C23.8557 11.4695 24.1442 11.4695 24.412 11.3825C24.7164 11.2836 24.9804 11.0196 25.5085 10.4916L28.7857 7.21437C29.1386 8.07326 29.3333 9.01394 29.3333 10.0001C29.3333 14.0502 26.05 17.3334 22 17.3334C21.5117 17.3334 21.0345 17.2857 20.573 17.1947C19.9248 17.0668 19.6007 17.0029 19.4042 17.0225C19.1953 17.0433 19.0924 17.0746 18.9073 17.1737C18.7332 17.2668 18.5586 17.4415 18.2093 17.7907L8.66663 27.3334C7.56206 28.438 5.7712 28.438 4.66663 27.3334C3.56206 26.2288 3.56206 24.438 4.66663 23.3334L14.2093 13.7907C14.5586 13.4414 14.7332 13.2668 14.8264 13.0927C14.9254 12.9077 14.9567 12.8047 14.9776 12.5958C14.9971 12.3994 14.9332 12.0753 14.8054 11.4271C14.7143 10.9655 14.6666 10.4884 14.6666 10.0001C14.6666 5.94999 17.9499 2.66675 22 2.66675C23.3406 2.66675 24.5973 3.02651 25.6786 3.65476ZM16 20L23.3333 27.3333C24.4379 28.4378 26.2287 28.4378 27.3333 27.3333C28.4378 26.2287 28.4378 24.4378 27.3333 23.3333L21.3004 17.3005C20.8733 17.2601 20.4569 17.183 20.0543 17.0725C19.5356 16.9301 18.9666 17.0335 18.5862 17.4139L16 20Z\" stroke=\"white\" stroke-opacity=\"0.5\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n</svg>",
+            "icon_style": "with_color",
+            "icon_size": 50,
+            "btn_style": "filled",
+            "block_align": "center",
+            "bg_color": "#06123d",
+            "block_width": "50%",
+            "border_radius": 25,
+            "color_scheme": "",
+            "content_max_width": 500,
+            "content_text_align": "left",
+            "block_padding_horizontal": 30,
+            "block_padding_vertical": 40,
+            "block_width_phone": "100%"
+          },
+          "blocks": {}
+        },
+        "advisor_iXTGfy": {
+          "type": "advisor",
+          "name": "Advisor",
+          "settings": {
+            "media": "shopify://shop_images/Mask_group_1200x_5bcf56d4-440f-40f0-941d-a62cb5275d75.png",
+            "content": "",
+            "btn_text": "BEKIJK VACATURE",
+            "btn_url": "",
+            "add_icon": false,
+            "icon_type": "svg",
+            "icon_code": "",
+            "icon_style": "without_color",
+            "icon_size": 50,
+            "btn_style": "filled",
+            "block_align": "center",
+            "bg_color": "#06123d",
+            "block_width": "50%",
+            "border_radius": 25,
+            "color_scheme": "",
+            "content_max_width": 500,
+            "content_text_align": "left",
+            "block_padding_horizontal": 30,
+            "block_padding_vertical": 40,
+            "block_width_phone": "100%"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "title_B7p4Ei",
+        "content_88hYkD",
+        "advisor_mgi4eP",
+        "advisor_iXTGfy"
+      ],
+      "name": "Advisor Section",
+      "settings": {
+        "layout_max_width": "1603px",
+        "color_scheme": "",
+        "block_align": "center",
+        "padding_top": 64,
+        "padding_bottom": 48,
+        "gap_horizontal": 20,
+        "gap_vertical": 20
+      }
+    },
+    "bicycles_section_R4jNfE": {
+      "type": "bicycles-section",
+      "blocks": {
+        "title_JV43iY": {
+          "type": "title",
+          "name": "title",
+          "settings": {
+            "subtitle": "",
+            "title": "Bekijk ons veelzijdige assortiment fietsen",
+            "content": "",
+            "btn_text": "",
+            "btn_url": "",
+            "btn_style": "filled",
+            "block_width": "100%",
+            "color_scheme": "scheme-1",
+            "title_max_width": 730,
+            "title_size": "large",
+            "title_margin_bottom": 30,
+            "content_max_width": 500,
+            "block_padding_horizontal": 30,
+            "block_padding_vertical": 30,
+            "block_width_phone": "100%"
+          },
+          "blocks": {}
+        },
+        "slides_PrJWxd": {
+          "type": "slides",
+          "name": "Slides",
+          "settings": {
+            "media_size": "auto",
+            "radius": 10,
+            "overlay": true,
+            "fullwidth": true,
+            "navigation": true,
+            "pagination": true,
+            "nav_position": "swiper-default",
+            "gap": 30,
+            "slide_per_row": 3,
+            "is_partial": true,
+            "partial": 2,
+            "gap_phone": 30,
+            "slide_per_row_phone": 1,
+            "is_partial_phone": true,
+            "partial_phone": 2
+          },
+          "blocks": {
+            "review_JmwbgJ": {
+              "type": "_review",
+              "name": "Review",
+              "settings": {
+                "name": "Benjamin Maaslans",
+                "review": "2 weken geleden binnen gelopen om me te laten informeren over een elektrische fiets. Na een prettig geprek en deskundig advies een offerte mee gekregen. Vorige week de koop gesloten en vandaag de fiets met alle accessoires erop gemonteerd opgehaald. No nonsens verkoper met kennis van zaken. (Robin) Tot zover zeer tevreden. Er zitten meerdere beurten in het servicepakket dus ik ben benieuwd.",
+                "rating": 4.5,
+                "color_scheme": "scheme-2"
+              },
+              "blocks": {}
+            },
+            "bicyle_cMmMWd": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_Wj4HtX": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "review_JmwbgJ",
+            "bicyle_cMmMWd",
+            "bicyle_Wj4HtX"
+          ]
+        },
+        "slides_W4Yhpx": {
+          "type": "slides",
+          "name": "Slides",
+          "disabled": true,
+          "settings": {
+            "media_size": "auto",
+            "radius": 15,
+            "overlay": true,
+            "fullwidth": true,
+            "navigation": true,
+            "pagination": true,
+            "nav_position": "",
+            "gap": 30,
+            "slide_per_row": 3,
+            "is_partial": false,
+            "partial": 5,
+            "gap_phone": 30,
+            "slide_per_row_phone": 1,
+            "is_partial_phone": true,
+            "partial_phone": 3
+          },
+          "blocks": {
+            "bicyle_AG8YBy": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_VYTB6r": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_BHAGtT": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_gy9dDe": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": "shopify://collections"
+              },
+              "blocks": {}
+            },
+            "bicyle_Pyd9wN": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_WL4i69": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "bicyle_AG8YBy",
+            "bicyle_VYTB6r",
+            "bicyle_BHAGtT",
+            "bicyle_gy9dDe",
+            "bicyle_Pyd9wN",
+            "bicyle_WL4i69"
+          ]
+        }
+      },
+      "block_order": [
+        "title_JV43iY",
+        "slides_PrJWxd",
+        "slides_W4Yhpx"
+      ],
+      "name": "Bicycles Slider",
+      "settings": {
+        "layout_max_width": "1603px",
+        "background_color": "#3f7280",
+        "color_scheme": "scheme-3",
+        "block_align": "center",
+        "padding_top": 75,
+        "padding_bottom": 235,
+        "gap_horizontal": 20,
+        "gap_vertical": 20,
+        "radius_top_left": 0,
+        "radius_top_right": 0,
+        "radius_bottom_left": 250,
+        "radius_bottom_right": 0,
+        "padding_top_phone": 50,
+        "padding_bottom_phone": 155
+      }
+    },
+    "bicycles_section_VP3eTq": {
+      "type": "bicycles-section",
+      "blocks": {
+        "title_QiGXTn": {
+          "type": "title",
+          "name": "title",
+          "settings": {
+            "subtitle": "",
+            "title": "Bekijk ons veelzijdige assortiment fietsen",
+            "content": "",
+            "btn_text": "",
+            "btn_url": "",
+            "btn_style": "filled",
+            "block_width": "100%",
+            "color_scheme": "scheme-1",
+            "title_max_width": 730,
+            "title_size": "large",
+            "title_margin_bottom": 30,
+            "content_max_width": 500,
+            "block_padding_horizontal": 30,
+            "block_padding_vertical": 30,
+            "block_width_phone": "100%"
+          },
+          "blocks": {}
+        },
+        "slides_iYeqCF": {
+          "type": "slides",
+          "name": "Slides",
+          "settings": {
+            "media_size": "auto",
+            "radius": 10,
+            "overlay": true,
+            "fullwidth": true,
+            "navigation": true,
+            "pagination": true,
+            "nav_position": "swiper-default",
+            "gap": 30,
+            "slide_per_row": 3,
+            "is_partial": true,
+            "partial": 2,
+            "gap_phone": 30,
+            "slide_per_row_phone": 1,
+            "is_partial_phone": true,
+            "partial_phone": 2
+          },
+          "blocks": {
+            "bicyle_wqgJpr": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_79inTV": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_tTXykg": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_bCn9mL": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_ern6hF": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "bicyle_wqgJpr",
+            "bicyle_79inTV",
+            "bicyle_tTXykg",
+            "bicyle_bCn9mL",
+            "bicyle_ern6hF"
+          ]
+        },
+        "slides_qFX3GC": {
+          "type": "slides",
+          "name": "Slides",
+          "disabled": true,
+          "settings": {
+            "media_size": "auto",
+            "radius": 15,
+            "overlay": true,
+            "fullwidth": true,
+            "navigation": true,
+            "pagination": true,
+            "nav_position": "",
+            "gap": 30,
+            "slide_per_row": 3,
+            "is_partial": false,
+            "partial": 5,
+            "gap_phone": 30,
+            "slide_per_row_phone": 1,
+            "is_partial_phone": true,
+            "partial_phone": 3
+          },
+          "blocks": {
+            "bicyle_FNrQPB": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_WXncAD": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_LC4XUp": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_TRFJ7G": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": "shopify://collections"
+              },
+              "blocks": {}
+            },
+            "bicyle_6yd8NW": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            },
+            "bicyle_Ky6PgF": {
+              "type": "_bicyle",
+              "name": "Bicycle",
+              "settings": {
+                "image": "shopify://shop_images/Peeters_Tweewielers_sRGB-39_1.png",
+                "title": "E-bikes",
+                "link": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "bicyle_FNrQPB",
+            "bicyle_WXncAD",
+            "bicyle_LC4XUp",
+            "bicyle_TRFJ7G",
+            "bicyle_6yd8NW",
+            "bicyle_Ky6PgF"
+          ]
+        }
+      },
+      "block_order": [
+        "title_QiGXTn",
+        "slides_iYeqCF",
+        "slides_qFX3GC"
+      ],
+      "name": "Bicycles Slider",
+      "settings": {
+        "layout_max_width": "1603px",
+        "background_color": "#06123d",
+        "color_scheme": "scheme-5",
+        "block_align": "center",
+        "padding_top": 75,
+        "padding_bottom": 235,
+        "gap_horizontal": 20,
+        "gap_vertical": 20,
+        "radius_top_left": 0,
+        "radius_top_right": 0,
+        "radius_bottom_left": 250,
+        "radius_bottom_right": 0,
+        "padding_top_phone": 50,
+        "padding_bottom_phone": 155
+      }
+    },
+    "rich_text_section_EjfpQC": {
+      "type": "rich-text-section",
+      "blocks": {
+        "title_mHnDbR": {
+          "type": "title",
+          "name": "title",
+          "settings": {
+            "subtitle": "",
+            "title": "Tweedehands fietsen",
+            "content": "<p>Bij ons vind je tweedehands fietsen met omruilgarantie én afgesteld door de vakman. Je kunt deze fietsen veilig online bestellen en betalen. Vervolgens kun je de bestelling zonder bijkomende kosten afhalen bij de Bike Totaal winkel of thuis laten bezorgen voor € 29,95 in NL/ € 49,95 in BE.</p>",
+            "btn_text": "BEKIJK HET ASSORTIMENT",
+            "btn_url": "shopify://pages/contact",
+            "btn_style": "filled",
+            "block_width": "50%",
+            "color_scheme": "scheme-1",
+            "title_max_width": 400,
+            "title_size": "large",
+            "title_margin_bottom": 30,
+            "content_max_width": 500,
+            "block_padding_horizontal": 20,
+            "block_padding_vertical": 50,
+            "block_width_phone": "100%"
+          },
+          "blocks": {}
+        },
+        "media_eMzyHw": {
+          "type": "media",
+          "name": "Media",
+          "settings": {
+            "media": "shopify://shop_images/Peeters_Tweewielers_sRGB-18_2.png",
+            "btn_url": "",
+            "block_width": "50%",
+            "radius_top_left": 500,
+            "radius_top_right": 0,
+            "radius_bottom_left": 500,
+            "radius_bottom_right": 0,
+            "postion": true,
+            "horizontal_position": "right",
+            "transformY": -110,
+            "color_scheme": "",
+            "media_max_width": 1000,
+            "block_padding_horizontal": 0,
+            "block_padding_vertical": 0,
+            "block_width_phone": "90%",
+            "transformY_phone": -40,
+            "vertcal_position": "top"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "title_mHnDbR",
+        "media_eMzyHw"
+      ],
+      "name": "Richtext Section",
+      "settings": {
+        "layout_max_width": "1603px",
+        "background_color": "#06123d",
+        "color_scheme": "scheme-1",
+        "block_align": "center",
+        "block_horizontal_align": "flex-start",
+        "padding_top": 205,
+        "padding_bottom": 205,
+        "gap_horizontal": 20,
+        "gap_vertical": 20,
+        "radius_top_left": 0,
+        "radius_top_right": 0,
+        "radius_bottom_left": 0,
+        "radius_bottom_right": 0,
+        "flex_direction": "column-reverse",
+        "padding_top_phone": 260,
+        "padding_bottom_phone": 50
+      }
+    },
+    "featured_collection_Ppc8yU": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "",
+        "products_to_show": 4,
+        "title": "Featured collection",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -37,12 +683,13 @@
       "settings": {
         "image_overlay_opacity": 40,
         "image_height": "large",
+        "image_behavior": "none",
         "desktop_content_position": "bottom-center",
-        "show_text_box": false,
         "desktop_content_alignment": "center",
+        "show_text_box": false,
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
         "show_text_below": false
       }
     },
@@ -59,7 +706,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
           }
         }
       },
@@ -68,6 +715,8 @@
         "text"
       ],
       "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "scheme-1",
         "full_width": true,
         "padding_top": 40,
@@ -77,19 +726,27 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
         "collection": "all",
         "products_to_show": 8,
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
+        "full_width": false,
         "show_view_all": false,
-        "swipe_on_mobile": false,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
+        "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
+        "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 28,
         "padding_bottom": 36
       }
@@ -127,6 +784,7 @@
         "heading_size": "h2",
         "desktop_layout": "left",
         "mobile_layout": "collage",
+        "card_styles": "product-card-wrapper",
         "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36
@@ -136,8 +794,9 @@
       "type": "video",
       "settings": {
         "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "heading_size": "h1",
+        "enable_video_looping": false,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "description": "",
         "full_width": false,
         "color_scheme": "scheme-1",
@@ -152,7 +811,7 @@
           "type": "column",
           "settings": {
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "",
             "link": ""
           }
@@ -161,7 +820,7 @@
           "type": "column",
           "settings": {
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "",
             "link": ""
           }
@@ -170,7 +829,7 @@
           "type": "column",
           "settings": {
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "link_label": "",
             "link": ""
           }
@@ -186,20 +845,25 @@
         "heading_size": "h1",
         "image_width": "third",
         "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
         "columns_desktop": 3,
         "column_alignment": "center",
         "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
         "color_scheme": "scheme-1",
         "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
   "order": [
+    "advisor_section_c476gD",
+    "bicycles_section_R4jNfE",
+    "bicycles_section_VP3eTq",
+    "rich_text_section_EjfpQC",
+    "featured_collection_Ppc8yU",
     "image_banner",
     "rich_text",
     "featured_collection",

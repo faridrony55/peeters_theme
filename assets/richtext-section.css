@@ -1,0 +1,29 @@
+ .richtext-section{
+   /* overflow-x: hidden; */
+ }
+.richtext-section section{
+    padding: var(--padding_top) 0 var(--padding_bottom); 
+    border-radius: var(--radius_top_left) var(--radius_top_right) var(--radius_bottom_right) var(--radius_bottom_left)  ;
+ 
+ 
+    @media(max-width: 767px) { 
+         padding: var(--padding_top_phone) 0 var(--padding_bottom_phone); 
+         
+      }
+
+
+   .page-width{
+      max-width: var(--max-width); 
+      @media(max-width: 767px) { 
+         padding: 0 0;
+      }
+   }
+   .flex{ 
+
+      @media(max-width: 767px) {
+         flex-direction: var( --flex_direction);
+      }
+   }
+}
+
+ 

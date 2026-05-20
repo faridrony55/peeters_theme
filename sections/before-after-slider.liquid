@@ -1,0 +1,548 @@
+{{ 'before-after-slider.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign section_title    = section.settings.section_title
+  assign section_eyebrow  = section.settings.section_eyebrow
+  assign section_subtitle = section.settings.section_subtitle
+  assign text_align       = section.settings.text_align
+  assign columns         = section.settings.columns
+  assign gap             = section.settings.gap
+  assign aspect_ratio    = section.settings.aspect_ratio
+  assign card_radius     = section.settings.card_radius
+  assign card_shadow     = section.settings.card_shadow
+  assign line_color      = section.settings.line_color
+  assign line_width      = section.settings.line_width
+  assign handle_size     = section.settings.handle_size
+  assign handle_bg       = section.settings.handle_bg
+  assign handle_icon_color  = section.settings.handle_icon_color
+  assign label_before_bg    = section.settings.label_before_bg
+  assign label_before_color = section.settings.label_before_color
+  assign label_after_bg     = section.settings.label_after_bg
+  assign label_after_color  = section.settings.label_after_color
+  assign padding_top        = section.settings.padding_top
+  assign padding_bottom     = section.settings.padding_bottom
+  assign radius_tl          = section.settings.radius_tl
+  assign radius_tr          = section.settings.radius_tr
+  assign radius_br          = section.settings.radius_br
+  assign radius_bl          = section.settings.radius_bl
+  assign autoplay           = section.settings.autoplay
+  assign autoplay_speed     = section.settings.autoplay_speed
+%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .ba-section {
+    --ba-padding-top:    {{ padding_top }}px;
+    --ba-padding-bottom: {{ padding_bottom }}px;
+    --ba-radius-tl:      {{ radius_tl }}px;
+    --ba-radius-tr:      {{ radius_tr }}px;
+    --ba-radius-br:      {{ radius_br }}px;
+    --ba-radius-bl:      {{ radius_bl }}px;
+    --ba-text-align:     {{ text_align }};
+    --ba-columns:        {{ columns }};
+    --ba-gap:            {{ gap }}px;
+    --ba-ratio:          {{ aspect_ratio }};
+    --ba-card-radius:    {{ card_radius }}px;
+    --ba-line-color:     {{ line_color }};
+    --ba-line-width:     {{ line_width }}px;
+    --ba-handle-size:    {{ handle_size }}px;
+    --ba-handle-bg:      {{ handle_bg }};
+    --ba-handle-icon-color:    {{ handle_icon_color }};
+    --ba-label-before-bg:      {{ label_before_bg }};
+    --ba-label-before-color:   {{ label_before_color }};
+    --ba-label-after-bg:       {{ label_after_bg }};
+    --ba-label-after-color:    {{ label_after_color }};
+    {% if card_shadow %}
+    --ba-card-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    {% endif %}
+  }
+{% endstyle %}
+
+<section class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="ba-section">
+
+      {% if section_title != blank or section_eyebrow != blank or section_subtitle != blank %}
+        <div class="ba-header">
+          {% if section_eyebrow != blank %}
+            <span class="ba-eyebrow">{{ section_eyebrow }}</span>
+          {% endif %}
+          {% if section_title != blank %}
+            <h2 class="ba-title h2">{{ section_title }}</h2>
+          {% endif %}
+          {% if section_subtitle != blank %}
+            <p class="ba-subtitle">{{ section_subtitle }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="ba-grid">
+        {% for block in section.blocks %}
+          {% liquid
+            assign before_img      = block.settings.before_image
+            assign after_img       = block.settings.after_image
+            assign before_label    = block.settings.before_label
+            assign after_label     = block.settings.after_label
+            assign show_labels     = block.settings.show_labels
+            assign orientation     = block.settings.orientation
+            assign start_position  = block.settings.start_position
+            assign card_title      = block.settings.card_title
+            assign card_text       = block.settings.card_text
+
+            assign autoplay_ms = 0
+            if autoplay
+              assign autoplay_ms = autoplay_speed
+            endif
+          %}
+
+          <div class="ba-card" {{ block.shopify_attributes }}>
+
+            <div
+              class="ba-slider"
+              data-orientation="{{ orientation }}"
+              data-start-position="{{ start_position | divided_by: 100.0 }}"
+              data-autoplay-speed="{{ autoplay_ms }}"
+              role="img"
+              aria-label="{{ 'sections.before_after.aria_label' | t: before: before_label, after: after_label | default: 'Before and after comparison' }}"
+            >
+              {% comment %} After image (bottom layer — fully visible) {% endcomment %}
+              {% if after_img %}
+                {{
+                  after_img
+                  | image_url: width: 1400
+                  | image_tag:
+                    class: 'ba-slider__img ba-slider__after',
+                    loading: 'lazy',
+                    draggable: 'false',
+                    alt: after_img.alt | default: after_label
+                }}
+              {% else %}
+                <div class="ba-slider__img ba-slider__after">
+                  {{ 'product-apparel-2' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+
+              {% comment %} Before image (top layer — clipped) {% endcomment %}
+              {% if before_img %}
+                {{
+                  before_img
+                  | image_url: width: 1400
+                  | image_tag:
+                    class: 'ba-slider__img ba-slider__before',
+                    loading: 'lazy',
+                    draggable: 'false',
+                    alt: before_img.alt | default: before_label
+                }}
+              {% else %}
+                <div class="ba-slider__img ba-slider__before">
+                  {{ 'product-apparel-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+
+              {% comment %} Divider line {% endcomment %}
+              <div class="ba-slider__divider" aria-hidden="true"></div>
+
+              {% comment %} Drag handle {% endcomment %}
+              <button
+                class="ba-slider__handle"
+                type="button"
+                aria-label="{{ 'sections.before_after.handle_label' | t | default: 'Drag to compare' }}"
+                aria-valuenow="{{ start_position }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                tabindex="0"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <!-- left arrow -->
+                  <polyline points="11 17 6 12 11 7"></polyline>
+                  <!-- right arrow -->
+                  <polyline points="13 17 18 12 13 7"></polyline>
+                </svg>
+              </button>
+
+              {% comment %} Labels {% endcomment %}
+              {% if show_labels %}
+                <span class="ba-slider__label ba-slider__label--before">{{ before_label }}</span>
+                <span class="ba-slider__label ba-slider__label--after">{{ after_label }}</span>
+              {% endif %}
+            </div>
+
+            {% if card_title != blank or card_text != blank %}
+              <div class="ba-card__caption">
+                {% if card_title != blank %}
+                  <p class="ba-card__caption-title">{{ card_title }}</p>
+                {% endif %}
+                {% if card_text != blank %}
+                  <p class="ba-card__caption-text">{{ card_text }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'before-after-slider.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Before / After Slider",
+  "tag": "section",
+  "class": "before-after-slider-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "section_eyebrow",
+      "label": "Eyebrow Text",
+      "default": "See the difference"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Before & After"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "Subtitle",
+      "default": "Drag the handle to reveal the transformation."
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Grid Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap Between Cards",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Image Aspect Ratio",
+      "default": "16/9",
+      "options": [
+        { "value": "16/9",  "label": "16:9 (Widescreen)" },
+        { "value": "4/3",   "label": "4:3 (Standard)" },
+        { "value": "1/1",   "label": "1:1 (Square)" },
+        { "value": "3/2",   "label": "3:2 (Photo)" },
+        { "value": "21/9",  "label": "21:9 (Ultrawide)" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Card Style"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card Border Radius",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "card_shadow",
+      "label": "Card Drop Shadow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Divider Line"
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Line Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "line_width",
+      "label": "Line Thickness",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Handle"
+    },
+    {
+      "type": "range",
+      "id": "handle_size",
+      "label": "Handle Size",
+      "min": 32,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "handle_bg",
+      "label": "Handle Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "handle_icon_color",
+      "label": "Handle Icon Color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "color",
+      "id": "label_before_bg",
+      "label": "Before Label Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "label_before_color",
+      "label": "Before Label Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "label_after_bg",
+      "label": "After Label Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "label_after_color",
+      "label": "After Label Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay Speed (lower = faster)",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "default": 15,
+      "info": "Milliseconds between each animation frame. Pauses on hover."
+    },
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Section Radius"
+    },
+    {
+      "type": "range",
+      "id": "radius_tl",
+      "label": "Top Left",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "radius_tr",
+      "label": "Top Right",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "radius_br",
+      "label": "Bottom Right",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "radius_bl",
+      "label": "Bottom Left",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slider",
+      "name": "Comparison Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Images"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "Before Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "After Image"
+        },
+        {
+          "type": "header",
+          "content": "Labels"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_labels",
+          "label": "Show Before / After Labels",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "before_label",
+          "label": "Before Label",
+          "default": "Before"
+        },
+        {
+          "type": "text",
+          "id": "after_label",
+          "label": "After Label",
+          "default": "After"
+        },
+        {
+          "type": "header",
+          "content": "Slider Options"
+        },
+        {
+          "type": "select",
+          "id": "orientation",
+          "label": "Drag Orientation",
+          "default": "horizontal",
+          "options": [
+            { "value": "horizontal", "label": "Horizontal (left / right)" },
+            { "value": "vertical",   "label": "Vertical (up / down)" }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "start_position",
+          "label": "Starting Position",
+          "min": 5,
+          "max": 95,
+          "step": 5,
+          "default": 50,
+          "info": "Percentage of the before image shown at load."
+        },
+        {
+          "type": "header",
+          "content": "Caption"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Caption Title"
+        },
+        {
+          "type": "textarea",
+          "id": "card_text",
+          "label": "Caption Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before / After Slider",
+      "blocks": [
+        { "type": "slider" }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

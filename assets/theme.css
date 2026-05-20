@@ -12,6 +12,7 @@
     flex-wrap: wrap; 
     gap: var(--gap_vertical) var(--gap_horizontal);
     align-items: var(--block_align);
+    justify-content: var(--block_horizontal_align);
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -33,6 +34,7 @@ strong{
 }
 .title_large{
     font-size: 65px; 
+     
 }
 .title_extralarge{
     font-size: 85px;
@@ -70,6 +72,14 @@ strong{
     border: 0;
     overflow: hidden;
     text-decoration: none;
+
+    @media(max-width: 767px){ 
+        padding: 16px 20px; 
+        
+        display: flex !important;
+        justify-content: center;
+        gap: 5px;
+    }
 }
 .btn{
     position: relative;
@@ -81,6 +91,10 @@ strong{
     opacity: 0;
     transition-duration: 0.4s;
     margin-left: -20px;
+     @media(max-width: 767px){ 
+         opacity: 1;
+        margin-left: 0;
+     }
 }
 .btn:hover svg{
     opacity: 1;

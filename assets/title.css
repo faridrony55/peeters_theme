@@ -1,6 +1,11 @@
 .block-title{
     flex-basis: var(--block_width);
     max-width: var(--block_width);
+
+    @media screen and (max-width: 767px) {
+       flex-basis:  var(--block_width_phone);
+        max-width: var(--block_width_phone);
+    }
 }
 .block-title .title-style{
     padding: var(--block_padding_vertical) var(--block_padding_horizontal);
@@ -23,3 +28,12 @@ margin-bottom: 35px;
 .block-title .content{
     max-width: var(--content_max_width);
 }
+
+
+/* @media(max-width: 767px){
+    .block-title{
+    flex-basis:  var(--block_width_phone);
+    max-width: var(--block_width_phone);
+}
+}
+  */

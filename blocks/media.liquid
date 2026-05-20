@@ -1,0 +1,318 @@
+{{ 'media.css' | asset_url | stylesheet_tag }}
+
+{% liquid 
+   
+    assign media = block.settings.media 
+    assign btn_url = block.settings.btn_url 
+
+
+
+    assign radius_top_left = block.settings.radius_top_left
+    assign radius_top_right = block.settings.radius_top_right
+    assign radius_bottom_left = block.settings.radius_bottom_left
+    assign radius_bottom_right = block.settings.radius_bottom_right
+
+    assign postion = block.settings.postion
+    assign horizontal_position = block.settings.horizontal_position
+    assign transform = block.settings.transformY
+    assign transformY_phone = block.settings.transformY_phone
+    assign vertcal_position = block.settings.vertcal_position
+ 
+ 
+
+    assign block_width = block.settings.block_width
+    assign block_width_phone = block.settings.block_width_phone
+    assign color_scheme = block.settings.color_scheme 
+    assign media_max_width = block.settings.media_max_width 
+
+    assign block_padding_horizontal = block.settings.block_padding_horizontal
+    assign block_padding_vertical = block.settings.block_padding_vertical
+
+     
+
+%}
+
+{%  style  %}
+#shopify-block-{{ block.id }}.block-content{
+    --block_width : calc( {{block_width}} - var(--gap_horizontal)/2 ); 
+    /* --block_width : {{block_width}};  */
+    --media_max_width : {{media_max_width}}px;
+
+    --block_padding_horizontal : {{block_padding_horizontal}}px;
+    --block_padding_vertical : {{block_padding_vertical}}px;
+    --block_width_phone: {{block_width_phone}};
+
+
+
+        --radius_top_left: {{radius_top_left}}px;
+        --radius_top_right: {{radius_top_right}}px;
+        --radius_bottom_left: {{radius_bottom_left}}px;
+        --radius_bottom_right: {{radius_bottom_right}}px;
+
+        
+
+        {%  unless postion == false %} 
+            --position: absolute;
+            {%  if horizontal_position == 'left' %} 
+                --left: 0;
+                --right:auto;
+            {% else %}
+                --left: auto;
+                --right:0;
+            {% endif %}
+
+            --transformY: translateY({{ transform }}px);
+            --transformY_phone:translateY({{ transformY_phone }}px);
+
+
+
+            {%  if vertcal_position == 'top' %} 
+                --top: 0;
+                --bottom:auto;
+            {% else %}
+                --top: auto;
+                --bottom:0;
+            {% endif %}
+            
+
+
+
+        {% endunless %}  
+
+
+
+    
+}
+{% endstyle %} 
+
+<div class="color-{{ color_scheme }} gradient media-style">
+
+        <div class="img">
+
+            {%  unless btn_url == blank %} <a href="{{btn_url}}"> {% endunless %}  
+            {% render 'image', media: media %}
+            {%  unless btn_url == blank %} </a> {% endunless %}  
+ 
+        </div>
+
+         
+         {% comment %} {% render 'btn', 
+            btn_text:btn_text, 
+            btn_url:btn_url, 
+            btn_style:btn_style  
+        %} {% endcomment %}
+</div>
+
+
+{%  schema  %}
+{
+    "name": "Media",
+    "class": "block-content",
+    "tag":"div", 
+    "settings": [
+
+        {
+        "type": "image_picker",
+        "id": "media",
+        "label": "Media"   
+        },
+ 
+         
+        {
+            "type": "url",
+            "label": "Link",
+            "id": "btn_url"
+        } ,
+         
+         
+        {
+            "type": "select",
+            "id": "block_width",
+            "label": "Block Width",
+            "options": [
+                { "value": "20%", "label": "20%" },
+                { "value": "25%", "label": "25%" },
+                { "value": "33.33%", "label": "33.33%" },
+                { "value": "40%", "label": "40%" },
+                { "value": "50%", "label": "50%" },
+                { "value": "60%", "label": "60%" },
+                { "value": "66.66%", "label": "66.66%" },
+                { "value": "75%", "label": "75%" },
+                { "value": "80%", "label": "80%" },
+                { "value": "100%", "label": "100%" }
+            ],
+            "default":"100%"
+        },
+
+        {
+            "type": "header",
+            "content": "Media Style"
+        }, 
+        {
+            "type": "range",
+            "id": "radius_top_left",
+            "label": "Radius Top left",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "radius_top_right",
+            "label": "Radius Top Right",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "radius_bottom_left",
+            "label": "Radius Bottom left",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 250
+        },
+        {
+            "type": "range",
+            "id": "radius_bottom_right",
+            "label": "Radius Bottom Right",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 0
+        },
+ 
+        {
+            "type": "checkbox",
+            "id": "postion",
+            "default": true,
+            "label": "Position"
+        },
+        {
+            "type": "select",
+            "id": "horizontal_position",
+            "label": "Horizontal Position",
+            "default":"right",
+            "options": [
+                {"value": "left","label": "Left"},
+                {"value": "right","label": "Right"}
+            ],
+            "visible_if": "{{ block.settings.postion == true }}"
+        },
+        {
+            "type": "range",
+            "id": "transformY",
+            "label": "Vertical Position",
+            "min": -500,
+            "max": 500,
+            "unit": "px",
+            "step": 10,
+            "default": 0,
+
+            "visible_if": "{{ block.settings.postion == true }}"
+
+        },
+
+
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Slide Color",
+            "default": "scheme-1"
+        }, 
+
+        {
+            "type": "range",
+            "id": "media_max_width",
+            "label": "media Max Width",
+            "min": 200,
+            "max": 1000,
+            "unit": "px",
+            "step": 10,
+            "default": 500 
+        },
+         {
+            "type": "range",
+            "id": "block_padding_horizontal",
+            "label": "Horizontal Padding",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 10,
+            "default":30 
+        },
+         {
+            "type": "range",
+            "id": "block_padding_vertical",
+            "label": "Vertical Padding",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 10,
+            "default":30 
+        }, 
+
+        {
+            "type": "header",
+            "content": "Mobile Responsive"
+        },
+         
+        {
+            "type": "select",
+            "id": "block_width_phone",
+            "label": "Block Width",
+            "options": [
+                { "value": "20%", "label": "20%" },
+                { "value": "25%", "label": "25%" },
+                { "value": "33.33%", "label": "33.33%" },
+                { "value": "40%", "label": "40%" },
+                { "value": "50%", "label": "50%" },
+                { "value": "60%", "label": "60%" },
+                { "value": "66.66%", "label": "66.66%" },
+                { "value": "75%", "label": "75%" },
+                { "value": "80%", "label": "80%" },
+                { "value": "90%", "label": "90%" },
+                { "value": "100%", "label": "100%" }
+            ],
+            "default":"100%"
+        } ,
+        {
+            "type": "range",
+            "id": "transformY_phone",
+            "label": "Vertical Position",
+            "min": -500,
+            "max": 500,
+            "unit": "px",
+            "step": 10,
+            "default": 0,
+
+            "visible_if": "{{ block.settings.postion == true }}"
+
+        },
+
+        {
+            "type": "select",
+            "id": "vertcal_position",
+            "label": "Vertical Position",
+            "default":"top",
+            "options": [
+                {"value": "top","label": "Top"},
+                {"value": "bottom","label": "Bottom"}
+            ],
+            "visible_if": "{{ block.settings.postion == true }}"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Media"
+        }
+    ]
+}
+{% endschema %}

@@ -11,6 +11,9 @@
 
 
     assign block_width = block.settings.block_width
+
+    assign block_width_phone = block.settings.block_width_phone
+
     assign color_scheme = block.settings.color_scheme 
     assign content_max_width = block.settings.content_max_width 
 
@@ -23,8 +26,42 @@
     assign bg_color = block.settings.bg_color
 
      
+    assign add_icon = block.settings.add_icon
+    assign icon_type = block.settings.icon_type
+    assign icon_image = block.settings.icon_image
+    assign icon_code = block.settings.icon_code
+    assign icon_style = block.settings.icon_style
+    assign icon_size = block.settings.icon_size
 
 %}
+
+{%  unless add_icon == false %}  
+    {%  capture advisor_icon %} 
+        
+        {% if icon_style == 'without_color' %}
+            <div class="icon_style " style="">
+
+            {% if icon_type == 'svg' %} 
+                {{icon_code}}
+            {% elsif icon_type == 'image' %} 
+                {% render 'media', media: icon_image %}
+            {% endif %} 
+
+            </div>
+        {% elsif icon_style == 'with_color' %}
+            <div class="icon_style color_icon" style=" ">
+                {% if icon_type == 'svg' %} 
+                    {{icon_code}}
+                {% elsif icon_type == 'image' %} 
+                    {% render 'media', media: icon_image %}
+                {% endif %}  
+            </div>
+        {% endif %}
+
+        
+
+    {% endcapture %} 
+{% endunless %}  
  
 {%  style  %}
 #shopify-block-{{ block.id }}.block-advisor{
@@ -36,6 +73,8 @@
     --bg_color: {{bg_color}};
     --block_align: {{block_align}};
     --content_text_align: {{content_text_align}};
+    --icon-size:{{icon_size}}px;
+    --block_width_phone: {{block_width_phone}};
 
     
 }
@@ -46,7 +85,11 @@
 
     <div class=" advisor-bg-color"></div>
 
-        {% render 'media', media: media %}
+       <div class="advisor_media">
+         {% render 'media', media: media %}
+
+        {{ advisor_icon }}
+       </div>
 
          
     <div class="advisor-content-style">
@@ -79,6 +122,8 @@
             "label": "Content",
             "default":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>"
         }, 
+
+
                  
         {
             "type": "text",
@@ -90,6 +135,69 @@
             "type": "url",
             "label": "Button Link",
             "id": "btn_url"
+        },
+        {
+            "type": "checkbox",
+            "id": "add_icon",
+            "label": "Add Icon",
+            "default": false
+        },
+        {
+            "type": "select",
+            "label": "Icon Type",
+            "options": [
+                {
+                    "value": "svg",
+                    "label": "Svg Code"
+                },
+                {
+                    "value": "image",
+                    "label":"Image"
+                }
+            ],
+            "id": "icon_type",
+            "default":"svg",
+            "visible_if": "{{ block.settings.add_icon == true }}"
+        },
+        {
+            "type": "image_picker",
+            "id": "icon_image",
+            "label": "Add Icon Image" ,
+            "visible_if": "{{ block.settings.icon_type == 'image' and block.settings.add_icon == true}}"
+
+        },
+        {
+            "type": "html",
+            "id": "icon_code",
+            "label": "Add SVG Icon" ,
+            "visible_if": "{{ block.settings.icon_type == 'svg' and block.settings.add_icon == true }}"
+
+        },
+        {
+            "type": "header",
+            "content": "Style"
+        } ,
+        {
+            "type": "select",
+            "label": "Icon Style",
+            "id": "icon_style",
+            "default":"without_color",
+            "options": [
+                {"value": "with_color","label": "With Color"},
+                {"value": "without_color","label": "Without Color"}
+            ] ,
+            "visible_if": "{{block.settings.add_icon == true }}"
+        },
+        {
+            "type": "range",
+            "label": "Icon Size",
+            "id": "icon_size",
+            "min": 30,
+            "max": 200, 
+            "unit": "px",
+            "step": 2,
+            "default": 50,
+            "visible_if": "{{block.settings.add_icon == true }}"
         },
         {
             "type": "select",
@@ -111,10 +219,6 @@
                 }
             ]
         },
-        {
-            "type": "header",
-            "content": "Style"
-        } ,
         {
             "type": "select",
             "default": "flex-start",
@@ -218,6 +322,29 @@
             "step": 10,
             "default":30 
         },
+         {
+            "type": "header",
+            "content": "Mobile Responsive"
+        },
+         
+        {
+            "type": "select",
+            "id": "block_width_phone",
+            "label": "Block Width",
+            "options": [
+                { "value": "20%", "label": "20%" },
+                { "value": "25%", "label": "25%" },
+                { "value": "33.33%", "label": "33.33%" },
+                { "value": "40%", "label": "40%" },
+                { "value": "50%", "label": "50%" },
+                { "value": "60%", "label": "60%" },
+                { "value": "66.66%", "label": "66.66%" },
+                { "value": "75%", "label": "75%" },
+                { "value": "80%", "label": "80%" },
+                { "value": "100%", "label": "100%" }
+            ],
+            "default":"100%"
+        } 
     ],
     "presets": [
         {

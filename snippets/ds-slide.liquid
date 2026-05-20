@@ -1,0 +1,121 @@
+{% liquid
+  assign image          = block.settings.image
+  assign bg_color       = block.settings.bg_color
+  assign dark_overlay   = block.settings.dark_overlay
+
+  assign grad_enabled   = block.settings.gradient_enabled
+  assign grad_color_1   = block.settings.gradient_color_1
+  assign grad_color_2   = block.settings.gradient_color_2
+  assign grad_dir       = block.settings.gradient_direction
+  assign grad_opacity   = block.settings.gradient_opacity | divided_by: 100.0
+
+  assign subtitle       = block.settings.subtitle
+  assign title          = block.settings.title
+  assign description    = block.settings.description
+  assign min_height     = block.settings.min_height
+
+  assign content_align  = block.settings.content_align
+  assign content_pos    = block.settings.content_position
+  assign text_color     = block.settings.text_color
+
+  assign btn1_text      = block.settings.btn1_text
+  assign btn1_url       = block.settings.btn1_url
+  assign btn1_style     = block.settings.btn1_style
+  assign btn2_text      = block.settings.btn2_text
+  assign btn2_url       = block.settings.btn2_url
+  assign btn2_style     = block.settings.btn2_style
+
+  case content_align
+    when 'center'
+      assign flex_align = 'center'
+    when 'right'
+      assign flex_align = 'flex-end'
+    else
+      assign flex_align = 'flex-start'
+  endcase
+
+  case content_pos
+    when 'top'
+      assign flex_justify = 'flex-start'
+    when 'bottom'
+      assign flex_justify = 'flex-end'
+    else
+      assign flex_justify = 'center'
+  endcase
+%}
+
+{% style %}
+  .ds-slide-{{ block.id }} .ds-slide {
+    --ds-min-height:       {{ min_height }}px;
+    --ds-content-align:    {{ flex_align }};
+    --ds-content-justify:  {{ flex_justify }};
+    --ds-text-align:       {{ content_align }};
+    --ds-text-color:       {{ text_color }};
+    --ds-bg-color:         {{ bg_color }};
+  }
+{% endstyle %}
+
+<div class="swiper-slide ds-slide-wrap ds-slide-{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="ds-slide">
+
+    {% comment %} Background image {% endcomment %}
+    {% if image %}
+      {{
+        image
+        | image_url: width: 1800
+        | image_tag:
+          class: 'ds-slide__bg',
+          loading: 'lazy',
+          fetchpriority: 'auto',
+          widths: '375, 750, 1100, 1500, 1800'
+      }}
+      {% if dark_overlay %}
+        <div class="ds-slide__dark-overlay"></div>
+      {% endif %}
+    {% endif %}
+
+    {% comment %} Gradient layer {% endcomment %}
+    {% if grad_enabled %}
+      {% if grad_dir == 'radial' %}
+        {% assign grad_css = 'radial-gradient(circle at center, ' | append: grad_color_1 | append: ', ' | append: grad_color_2 | append: ')' %}
+      {% else %}
+        {% assign grad_css = 'linear-gradient(' | append: grad_dir | append: ', ' | append: grad_color_1 | append: ', ' | append: grad_color_2 | append: ')' %}
+      {% endif %}
+      <div class="ds-slide__gradient" style="background: {{ grad_css }}; opacity: {{ grad_opacity }};"></div>
+    {% endif %}
+
+    {% comment %} Content {% endcomment %}
+    <div class="ds-slide__content">
+
+      {% if subtitle != blank %}
+        <span class="ds-slide__subtitle">{{ subtitle }}</span>
+      {% endif %}
+
+      {% if title != blank %}
+        <h2 class="ds-slide__title">{{ title }}</h2>
+      {% endif %}
+
+      {% if description != blank %}
+        <p class="ds-slide__description">{{ description }}</p>
+      {% endif %}
+
+      {% if btn1_text != blank or btn2_text != blank %}
+        <div class="ds-slide__btn-group">
+          {% if btn1_text != blank %}
+            <a class="ds-btn ds-btn--{{ btn1_style }}"
+               {% if btn1_url != blank %}href="{{ btn1_url }}"{% endif %}>
+              {{ btn1_text }}
+            </a>
+          {% endif %}
+          {% if btn2_text != blank %}
+            <a class="ds-btn ds-btn--{{ btn2_style }}"
+               {% if btn2_url != blank %}href="{{ btn2_url }}"{% endif %}>
+              {{ btn2_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>

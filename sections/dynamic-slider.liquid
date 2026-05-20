@@ -1,0 +1,634 @@
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+{{ 'dynamic-slider.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+<script src="{{ 'dynamic-slider.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign section_title    = section.settings.section_title
+  assign section_subtitle = section.settings.section_subtitle
+  assign title_align      = section.settings.title_align
+
+  assign effect           = section.settings.effect
+  assign autoplay         = section.settings.autoplay
+  assign autoplay_delay   = section.settings.autoplay_delay
+  assign loop             = section.settings.loop
+  assign center           = section.settings.center_slides
+
+  assign slides_desktop   = section.settings.slides_per_view
+  assign slides_mobile    = section.settings.slides_per_view_mobile
+  assign gap              = section.settings.gap
+  assign gap_mobile       = section.settings.gap_mobile
+  assign partial          = section.settings.partial_slide
+  assign partial_amount   = section.settings.partial_amount
+
+  assign navigation       = section.settings.navigation
+  assign nav_position     = section.settings.nav_position
+  assign pagination       = section.settings.pagination
+  assign pagination_type  = section.settings.pagination_type
+
+  assign slide_radius     = section.settings.slide_radius
+  assign full_width       = section.settings.full_width
+  assign padding_top      = section.settings.padding_top
+  assign padding_bottom   = section.settings.padding_bottom
+%}
+
+{% comment %} Compute slides per view with optional partial peek {% endcomment %}
+{% if partial and effect == 'slide' %}
+  {% assign desktop_view = slides_desktop | append: '.' | append: partial_amount %}
+  {% assign mobile_view  = slides_mobile | append: '.3' %}
+{% else %}
+  {% assign desktop_view = slides_desktop %}
+  {% assign mobile_view  = slides_mobile %}
+{% endif %}
+
+{% style %}
+  #shopify-section-{{ section.id }} .dynamic-slider-section {
+    --ds-padding-top:    {{ padding_top }}px;
+    --ds-padding-bottom: {{ padding_bottom }}px;
+    --ds-radius:         {{ slide_radius }}px;
+  }
+  {% if partial and effect == 'slide' %}
+  #shopify-section-{{ section.id }} .ds-slider {
+    overflow: visible;
+  }
+  {% endif %}
+{% endstyle %}
+
+{% comment %} ---- Navigation & Pagination markup ---- {% endcomment %}
+{% capture nav_arrows %}
+  {% if navigation %}
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  {% endif %}
+{% endcapture %}
+
+{% capture nav_pagination %}
+  {% if pagination %}
+    <div class="swiper-pagination"></div>
+  {% endif %}
+{% endcapture %}
+
+{% comment %} For progressbar: always render pagination inside the swiper {% endcomment %}
+{% if pagination_type == 'progressbar' %}
+  {% assign pagination_in_nav  = false %}
+  {% assign pagination_in_swiper = pagination %}
+{% else %}
+  {% assign pagination_in_nav    = pagination %}
+  {% assign pagination_in_swiper = false %}
+{% endif %}
+
+{% comment %} Build top / bottom nav containers {% endcomment %}
+{% if nav_position == 'top-left' or nav_position == 'top-center' or nav_position == 'top-right' %}
+  {% capture nav_top %}
+    <div class="ds-nav-wrap ds-nav-wrap--{{ nav_position }}">
+      {{ nav_arrows }}
+      {% if pagination_in_nav %}<div class="swiper-pagination"></div>{% endif %}
+    </div>
+  {% endcapture %}
+{% endif %}
+
+{% if nav_position == 'bottom-left' or nav_position == 'bottom-center' or nav_position == 'bottom-right' %}
+  {% capture nav_bottom %}
+    <div class="ds-nav-wrap ds-nav-wrap--{{ nav_position }}">
+      {{ nav_arrows }}
+      {% if pagination_in_nav %}<div class="swiper-pagination"></div>{% endif %}
+    </div>
+  {% endcapture %}
+{% endif %}
+
+{% comment %} ---- Section HTML ---- {% endcomment %}
+<section class="dynamic-slider-section color-{{ section.settings.color_scheme }} gradient ds-section">
+
+  {% unless full_width %}<div class="page-width">{% endunless %}
+
+    {% comment %} Section header {% endcomment %}
+    {% if section_title != blank or section_subtitle != blank %}
+      <div class="ds-section-header" style="text-align: {{ title_align }}">
+        {% if section_title != blank %}
+          <h2 class="ds-section-title">{{ section_title }}</h2>
+        {% endif %}
+        {% if section_subtitle != blank %}
+          <p class="ds-section-subtitle">{{ section_subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ds-slider-wrap">
+
+      {{ nav_top }}
+
+      <div class="swiper ds-slider"
+        data-effect="{{ effect }}"
+        data-autoplay="{{ autoplay }}"
+        data-autoplay-delay="{{ autoplay_delay }}"
+        data-loop="{{ loop }}"
+        data-slides-desktop="{{ desktop_view }}"
+        data-slides-mobile="{{ mobile_view }}"
+        data-gap-desktop="{{ gap }}"
+        data-gap-mobile="{{ gap_mobile }}"
+        data-center="{{ center }}"
+        data-navigation="{{ navigation }}"
+        data-pagination="{{ pagination }}"
+        data-pagination-type="{{ pagination_type }}"
+      >
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+            {% render 'ds-slide', block: block, section: section %}
+          {% endfor %}
+        </div>
+
+        {% comment %} Default (overlay) nav position: arrows + bullets inside swiper {% endcomment %}
+        {% if nav_position == 'default' %}
+          {% if navigation %}
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          {% endif %}
+          {% if pagination_in_nav %}
+            <div class="swiper-pagination"></div>
+          {% endif %}
+        {% endif %}
+
+        {% comment %} Progressbar always lives inside the swiper {% endcomment %}
+        {% if pagination_in_swiper %}
+          <div class="swiper-pagination"></div>
+        {% endif %}
+
+      </div>
+
+      {{ nav_bottom }}
+
+    </div>
+
+  {% unless full_width %}</div>{% endunless %}
+
+</section>
+
+
+{% schema %}
+{
+  "name": "Dynamic Slider",
+  "class": "dynamic-slider",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "select",
+      "id": "title_align",
+      "label": "Title Alignment",
+      "default": "left",
+      "options": [
+        { "label": "Left",   "value": "left"   },
+        { "label": "Center", "value": "center" },
+        { "label": "Right",  "value": "right"  }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Slider Options"
+    },
+    {
+      "type": "select",
+      "id": "effect",
+      "label": "Slide Effect",
+      "default": "slide",
+      "options": [
+        { "label": "Slide",     "value": "slide"      },
+        { "label": "Fade",      "value": "fade"       },
+        { "label": "Coverflow", "value": "coverflow"  },
+        { "label": "Flip",      "value": "flip"       }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay",
+      "label": "Autoplay Delay",
+      "min": 1000,
+      "max": 8000,
+      "step": 500,
+      "unit": "ms",
+      "default": 4000
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "center_slides",
+      "label": "Center Active Slide",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Desktop Slides"
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view",
+      "label": "Slides Per Row",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "partial_slide",
+      "label": "Partial Peek (show next slide edge)",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "partial_amount",
+      "label": "Peek Amount",
+      "min": 1,
+      "max": 9,
+      "step": 1,
+      "default": 3,
+      "visible_if": "{{ section.settings.partial_slide == true }}"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Slides"
+    },
+    {
+      "type": "range",
+      "id": "slides_per_view_mobile",
+      "label": "Slides Per Row",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Gap",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Navigation & Pagination"
+    },
+    {
+      "type": "checkbox",
+      "id": "navigation",
+      "label": "Show Arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "pagination",
+      "label": "Show Pagination",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "pagination_type",
+      "label": "Pagination Style",
+      "default": "bullets",
+      "options": [
+        { "label": "Dots",           "value": "bullets"     },
+        { "label": "Fraction (1/3)", "value": "fraction"    },
+        { "label": "Progress Bar",   "value": "progressbar" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "nav_position",
+      "label": "Controls Position",
+      "default": "default",
+      "options": [
+        { "label": "Default (Overlay Arrows)", "value": "default"        },
+        { "label": "Top Left",                 "value": "top-left"       },
+        { "label": "Top Center",               "value": "top-center"     },
+        { "label": "Top Right",                "value": "top-right"      },
+        { "label": "Bottom Left",              "value": "bottom-left"    },
+        { "label": "Bottom Center",            "value": "bottom-center"  },
+        { "label": "Bottom Right",             "value": "bottom-right"   }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section Style"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "slide_radius",
+      "label": "Slide Corner Radius",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Background"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Fallback Background Color",
+          "default": "#1a1a2e"
+        },
+        {
+          "type": "checkbox",
+          "id": "dark_overlay",
+          "label": "Dark Image Overlay",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Gradient"
+        },
+        {
+          "type": "checkbox",
+          "id": "gradient_enabled",
+          "label": "Enable Gradient",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "gradient_color_1",
+          "label": "Gradient — Color 1",
+          "default": "#667eea"
+        },
+        {
+          "type": "color",
+          "id": "gradient_color_2",
+          "label": "Gradient — Color 2",
+          "default": "#764ba2"
+        },
+        {
+          "type": "select",
+          "id": "gradient_direction",
+          "label": "Gradient Direction",
+          "default": "to right",
+          "options": [
+            { "label": "Left → Right",     "value": "to right"  },
+            { "label": "Right → Left",     "value": "to left"   },
+            { "label": "Top → Bottom",     "value": "to bottom" },
+            { "label": "Bottom → Top",     "value": "to top"    },
+            { "label": "Diagonal ↘",       "value": "135deg"    },
+            { "label": "Diagonal ↗",       "value": "45deg"     },
+            { "label": "Radial (center)",  "value": "radial"    }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "gradient_opacity",
+          "label": "Gradient Opacity",
+          "min": 10,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 90
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Eyebrow / Subtitle",
+          "default": "New Collection"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "Your Slide Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Add a short description to engage your visitors."
+        },
+        {
+          "type": "select",
+          "id": "content_align",
+          "label": "Horizontal Alignment",
+          "default": "left",
+          "options": [
+            { "label": "Left",   "value": "left"   },
+            { "label": "Center", "value": "center" },
+            { "label": "Right",  "value": "right"  }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Vertical Position",
+          "default": "middle",
+          "options": [
+            { "label": "Top",    "value": "top"    },
+            { "label": "Middle", "value": "middle" },
+            { "label": "Bottom", "value": "bottom" }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "min_height",
+          "label": "Slide Height",
+          "min": 200,
+          "max": 900,
+          "step": 20,
+          "unit": "px",
+          "default": 520
+        },
+        {
+          "type": "header",
+          "content": "Primary Button"
+        },
+        {
+          "type": "text",
+          "id": "btn1_text",
+          "label": "Button Label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "btn1_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "select",
+          "id": "btn1_style",
+          "label": "Button Style",
+          "default": "primary",
+          "options": [
+            { "label": "Solid (Primary)", "value": "primary"   },
+            { "label": "Glass",           "value": "secondary" },
+            { "label": "Outline",         "value": "outline"   }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Secondary Button"
+        },
+        {
+          "type": "text",
+          "id": "btn2_text",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "btn2_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "select",
+          "id": "btn2_style",
+          "label": "Button Style",
+          "default": "outline",
+          "options": [
+            { "label": "Solid (Primary)", "value": "primary"   },
+            { "label": "Glass",           "value": "secondary" },
+            { "label": "Outline",         "value": "outline"   }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic Slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "gradient_enabled": true,
+            "gradient_color_1": "#667eea",
+            "gradient_color_2": "#764ba2",
+            "subtitle": "New Arrivals",
+            "title": "Welcome to Our Store",
+            "description": "Discover our latest collection and find the perfect item for you.",
+            "btn1_text": "Shop Now",
+            "btn1_style": "primary",
+            "btn2_text": "Learn More",
+            "btn2_style": "outline"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "gradient_enabled": true,
+            "gradient_color_1": "#f093fb",
+            "gradient_color_2": "#f5576c",
+            "gradient_direction": "135deg",
+            "subtitle": "Limited Time",
+            "title": "Summer Sale",
+            "description": "Up to 50% off on selected items. Don't miss out!",
+            "btn1_text": "View Deals",
+            "btn1_style": "primary"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "gradient_enabled": true,
+            "gradient_color_1": "#4facfe",
+            "gradient_color_2": "#00f2fe",
+            "gradient_direction": "to bottom",
+            "subtitle": "Exclusive Offer",
+            "title": "Free Shipping",
+            "description": "On all orders over €50. Shop with confidence.",
+            "btn1_text": "Start Shopping",
+            "btn1_style": "primary"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

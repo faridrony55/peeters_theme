@@ -1,0 +1,21 @@
+{% if media %} 
+        
+ 
+    {%  capture media_style %} 
+        height:auto;
+    {% endcapture %} 
+     
+    {{ 
+        media 
+        |  image_url: width: '1200px' 
+        |  image_tag: 
+        class: 'media',
+        fetchpriority: 'high',
+        loading: 'lazy',
+        style: media_style  
+         
+    }}
+
+{% else %}
+    {{ 'blog-apparel-1' | placeholder_svg_tag: 'icon' }}
+{% endif %}

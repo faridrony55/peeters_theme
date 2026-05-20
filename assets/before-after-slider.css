@@ -1,0 +1,244 @@
+/* ============================================================
+   Before / After Slider — Section Styles
+   ============================================================ */
+
+.ba-section {
+  padding-top: var(--ba-padding-top, 80px);
+  padding-bottom: var(--ba-padding-bottom, 80px);
+  border-radius: var(--ba-radius-tl, 0) var(--ba-radius-tr, 0) var(--ba-radius-br, 0) var(--ba-radius-bl, 0);
+  overflow: hidden;
+}
+
+/* ---- Section header ---- */
+.ba-header {
+  text-align: var(--ba-text-align, center);
+  margin-bottom: 48px;
+}
+
+.ba-header .ba-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin-bottom: 10px;
+}
+
+.ba-header .ba-title {
+  margin: 0 0 14px;
+  line-height: 1.15;
+}
+
+.ba-header .ba-subtitle {
+  max-width: 640px;
+  margin: 0 auto;
+  opacity: 0.75;
+  line-height: 1.6;
+}
+
+/* ---- Grid of sliders ---- */
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--ba-columns, 1), 1fr);
+  gap: var(--ba-gap, 32px);
+}
+
+@media screen and (max-width: 749px) {
+  .ba-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Single slider card ---- */
+.ba-card {
+  border-radius: var(--ba-card-radius, 16px);
+  overflow: hidden;
+  box-shadow: var(--ba-card-shadow, none);
+  background: #000;
+}
+
+.ba-card__caption {
+  padding: 16px 20px 20px;
+  background: var(--ba-caption-bg, transparent);
+}
+
+.ba-card__caption-title {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.ba-card__caption-text {
+  margin: 0;
+  font-size: 0.875rem;
+  opacity: 0.75;
+  line-height: 1.5;
+}
+
+/* ---- Slider wrapper ---- */
+.ba-slider {
+  position: relative;
+  overflow: hidden;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--ba-ratio, 16/9);
+  background: #111;
+}
+
+.ba-slider[data-orientation="vertical"] {
+  cursor: row-resize;
+}
+
+/* ---- Images ---- */
+.ba-slider__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.ba-slider__after {
+  z-index: 1;
+}
+
+.ba-slider__before {
+  z-index: 2;
+  clip-path: inset(0 50% 0 0); /* trimmed on the right — JS updates this */
+}
+
+.ba-slider[data-orientation="vertical"] .ba-slider__before {
+  clip-path: inset(0 0 50% 0); /* trimmed on the bottom */
+}
+
+/* SVG placeholders */
+.ba-slider__img svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Divider line ---- */
+.ba-slider__divider {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 50%;
+  width: var(--ba-line-width, 2px);
+  height: 100%;
+  transform: translateX(-50%);
+  background: var(--ba-line-color, #fff);
+  pointer-events: none;
+  transition: left 0s; /* JS handles movement, no transition */
+}
+
+.ba-slider[data-orientation="vertical"] .ba-slider__divider {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: var(--ba-line-width, 2px);
+  transform: translateY(-50%);
+}
+
+/* ---- Drag handle ---- */
+.ba-slider__handle {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--ba-handle-size, 48px);
+  height: var(--ba-handle-size, 48px);
+  border-radius: 50%;
+  background: var(--ba-handle-bg, #fff);
+  border: var(--ba-handle-border, 3px solid rgba(0,0,0,0.15));
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: inherit;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.ba-slider__handle:focus-visible {
+  outline: 3px solid var(--ba-focus-color, #005fcc);
+  outline-offset: 3px;
+}
+
+.ba-slider__handle:hover,
+.ba-slider--dragging .ba-slider__handle {
+  transform: translate(-50%, -50%) scale(1.12);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+
+/* handle arrows icon */
+.ba-slider__handle svg {
+  width: 60%;
+  height: 60%;
+  color: var(--ba-handle-icon-color, #333);
+  flex-shrink: 0;
+}
+
+.ba-slider[data-orientation="vertical"] .ba-slider__handle svg {
+  transform: rotate(90deg);
+}
+
+/* ---- Labels ---- */
+.ba-slider__label {
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  white-space: nowrap;
+}
+
+.ba-slider__label--before {
+  left: 14px;
+  background: var(--ba-label-before-bg, rgba(0,0,0,0.55));
+  color: var(--ba-label-before-color, #fff);
+}
+
+.ba-slider__label--after {
+  right: 14px;
+  background: var(--ba-label-after-bg, rgba(0,0,0,0.55));
+  color: var(--ba-label-after-color, #fff);
+}
+
+.ba-slider[data-orientation="vertical"] .ba-slider__label {
+  top: auto;
+  transform: none;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ba-slider[data-orientation="vertical"] .ba-slider__label--before {
+  top: 14px;
+  bottom: auto;
+}
+
+.ba-slider[data-orientation="vertical"] .ba-slider__label--after {
+  top: auto;
+  bottom: 14px;
+}
+
+.ba-slider__label[hidden] {
+  display: none;
+}
+
+/* ---- Fade labels near edge ---- */
+.ba-slider.ba-slider--near-start .ba-slider__label--before { opacity: 0; }
+.ba-slider.ba-slider--near-end   .ba-slider__label--after  { opacity: 0; }
