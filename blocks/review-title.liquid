@@ -26,7 +26,12 @@
     assign block_padding_horizontal = block.settings.block_padding_horizontal
     assign block_padding_vertical = block.settings.block_padding_vertical
 
-     
+
+
+    assign logo = block.settings.logo
+    assign review_text = block.settings.review_text
+    assign rating = block.settings.rating
+         
 
 %}
 
@@ -46,27 +51,41 @@
 
     
 }
+
 {% endstyle %} 
 
 
 <div class="color-{{ color_scheme }} gradient title-style">
 
-        {%  unless subtitle == blank %} <h5>{{subtitle}}</h5> {% endunless %}  
-        {%  unless title == blank %} <h2 class="title_{{title_size}}">{{title}}</h2> {% endunless %}  
-        {%  unless content == blank %} <div class="content">{{content}}</div>    {% endunless %}  
+       <div class="title_left">
+            {%  unless subtitle == blank %} <h5>{{subtitle}}</h5> {% endunless %}  
+            {%  unless title == blank %} <h2 class="title_{{title_size}}">{{title}}</h2> {% endunless %}  
+            {%  unless content == blank %} <div class="content">{{content}}</div>    {% endunless %}  
 
-       {% render 'btn', 
-        btn_text:btn_text, 
-        btn_url:btn_url, 
-        btn_style:btn_style  
-       %}
+            {% render 'btn', 
+                btn_text:btn_text, 
+                btn_url:btn_url, 
+                btn_style:btn_style  
+            %}
+       </div> 
+       <div class="google_review_block"> 
+        <div class="google_review">
+                {{ logo |  
+                image_url: width: 500 |  
+                image_tag  }}
+                <h3>{{rating}}</h3>
+                <p>{{review_text}}</p>
+
+        </div>
+       </div>
+
 </div>
 
 
 {%  schema  %}
 {
-    "name": "title",
-    "class": "block-title",
+    "name": "Review Title",
+    "class": "block-title review-title",
     "tag":"div", 
     "settings": [
 
@@ -88,6 +107,8 @@
             "label": "Content",
             "default":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>"
         }, 
+
+
                  
         {
             "type": "text",
@@ -119,6 +140,30 @@
                     "label": "Linked"
                 }
             ]
+        },
+        {
+            "type": "header",
+            "content": "Google Review"
+        },
+        {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Google Logo"
+        },
+        {
+            "type": "inline_richtext",
+            "id":"review_text",
+            "label":"Review Text",
+            "default":"Gebaseerd op 175+ reviews",
+        },
+        {
+            "type": "range",
+            "min": 1,
+            "max": 5,
+            "step": 0.5,
+            "default": 4.5,
+            "label": "Rating",
+            "id": "rating"
         },
         {
             "type": "header",
@@ -243,7 +288,7 @@
     ],
     "presets": [
         {
-            "name": "title"
+            "name": "Review Title"
         }
     ]
 }
@@ -282,6 +327,52 @@ margin-bottom: 35px;
     max-width: var(--content_max_width);
 }
 
+.review-title{
+
+    .title-style{
+            display: flex;
+            gap: 10px;
+            justify-content: space-between; 
+            align-items: flex-end;
+
+        .title_left{} 
+
+        .google_review_block{
+            .google_review{ 
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 25px 30px 13px;
+                    gap: 28px;
+
+                    border: 3px solid #3C5358;
+                    border-radius: 25px;
+
+                img{ 
+                    width: 57px;
+                    height: auto;
+                }
+                h3{ 
+                    font-size: 80px;
+                    font-family: var(--nohemi);
+                } 
+                p{
+                     display: flex;
+                    flex-direction: column;
+                    margin: 0;
+                    font-size: 12px;
+                    color: #fff;
+                    opacity: 0.5;
+                    strong{
+                        color: #fff;
+                    } 
+                } 
+            
+
+            }
+        } 
+    }
+}   
 
 /* @media(max-width: 767px){
     .block-title{

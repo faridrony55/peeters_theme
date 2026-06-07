@@ -120,6 +120,9 @@ review
 
     .reviewer{
         border-bottom:2px solid rgb(var(--color-button));
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         h3{  
             font-weight: 600; 
             font-size: 22px; 
@@ -127,7 +130,14 @@ review
             letter-spacing: 0%;
 
         }
-    }
+         .reviews{
+            color:#EDD500;
+            svg{
+                width: 20px;
+                height:20px;
+            }
+        }
+    
     p{ 
         font-weight: 400; 
         font-size: 17px; 

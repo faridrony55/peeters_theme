@@ -617,6 +617,142 @@
         "padding_bottom_phone": 50
       }
     },
+    "review_section_chzf8g": {
+      "type": "review-section",
+      "blocks": {
+        "review_title_PTf7tF": {
+          "type": "review-title",
+          "name": "Review Title",
+          "settings": {
+            "subtitle": "Reviews",
+            "title": "De ervaringen van onze klanten",
+            "content": "",
+            "btn_text": "",
+            "btn_url": "",
+            "btn_style": "filled",
+            "logo": "shopify://shop_images/Google_beeldmerk_1_2.png",
+            "review_text": "Gebaseerd op <strong>175+ reviews</strong>",
+            "rating": 4.5,
+            "block_width": "100%",
+            "color_scheme": "",
+            "title_max_width": 610,
+            "title_size": "large",
+            "title_margin_bottom": 30,
+            "content_max_width": 500,
+            "block_padding_horizontal": 0,
+            "block_padding_vertical": 0,
+            "block_width_phone": "100%"
+          },
+          "blocks": {}
+        },
+        "slides_97Gdpw": {
+          "type": "slides",
+          "name": "Slides",
+          "settings": {
+            "media_size": "auto",
+            "radius": 10,
+            "overlay": true,
+            "fullwidth": true,
+            "navigation": true,
+            "pagination": false,
+            "nav_position": "swiper-top-right",
+            "gap": 30,
+            "slide_per_row": 3,
+            "is_partial": false,
+            "partial": 2,
+            "gap_phone": 30,
+            "slide_per_row_phone": 1,
+            "is_partial_phone": true,
+            "partial_phone": 2
+          },
+          "blocks": {
+            "review_BATTFX": {
+              "type": "_review",
+              "name": "Review",
+              "settings": {
+                "name": "Benjamin Maaslans",
+                "review": "2 weken geleden binnen gelopen om me te laten informeren over een elektrische fiets. Na een prettig geprek en deskundig advies een offerte mee gekregen. Vorige week de koop gesloten en vandaag de fiets met alle accessoires erop gemonteerd opgehaald. No nonsens verkoper met kennis van zaken. (Robin) Tot zover zeer tevreden. Er zitten meerdere beurten in het servicepakket dus ik ben benieuwd.",
+                "rating": 1,
+                "color_scheme": "scheme-2"
+              },
+              "blocks": {}
+            },
+            "review_pm7MCB": {
+              "type": "_review",
+              "name": "Review",
+              "settings": {
+                "name": "Benjamin Maaslans",
+                "review": "2 weken geleden binnen gelopen om me te laten informeren over een elektrische fiets. Na een prettig geprek en deskundig advies een offerte mee gekregen. Vorige week de koop gesloten en vandaag de fiets met alle accessoires erop gemonteerd opgehaald. No nonsens verkoper met kennis van zaken. (Robin) Tot zover zeer tevreden. Er zitten meerdere beurten in het servicepakket dus ik ben benieuwd.",
+                "rating": 4.5,
+                "color_scheme": "scheme-2"
+              },
+              "blocks": {}
+            },
+            "review_zHxVnY": {
+              "type": "_review",
+              "name": "Review",
+              "settings": {
+                "name": "Benjamin Maaslans",
+                "review": "2 weken geleden binnen gelopen om me te laten informeren over een elektrische fiets. Na een prettig geprek en deskundig advies een offerte mee gekregen. Vorige week de koop gesloten en vandaag de fiets met alle accessoires erop gemonteerd opgehaald. No nonsens verkoper met kennis van zaken. (Robin) Tot zover zeer tevreden. Er zitten meerdere beurten in het servicepakket dus ik ben benieuwd.",
+                "rating": 5,
+                "color_scheme": "scheme-2"
+              },
+              "blocks": {}
+            },
+            "review_mY4CXj": {
+              "type": "_review",
+              "name": "Review",
+              "settings": {
+                "name": "Benjamin Maaslans",
+                "review": "2 weken geleden binnen gelopen om me te laten informeren over een elektrische fiets. Na een prettig geprek en deskundig advies een offerte mee gekregen. Vorige week de koop gesloten en vandaag de fiets met alle accessoires erop gemonteerd opgehaald. No nonsens verkoper met kennis van zaken. (Robin) Tot zover zeer tevreden. Er zitten meerdere beurten in het servicepakket dus ik ben benieuwd.",
+                "rating": 5,
+                "color_scheme": "scheme-2"
+              },
+              "blocks": {}
+            },
+            "review_FXwnAy": {
+              "type": "_review",
+              "name": "Review",
+              "settings": {
+                "name": "Benjamin Maaslans",
+                "review": "2 weken geleden binnen gelopen om me te laten informeren over een elektrische fiets. Na een prettig geprek en deskundig advies een offerte mee gekregen. Vorige week de koop gesloten en vandaag de fiets met alle accessoires erop gemonteerd opgehaald. No nonsens verkoper met kennis van zaken. (Robin) Tot zover zeer tevreden. Er zitten meerdere beurten in het servicepakket dus ik ben benieuwd.",
+                "rating": 5,
+                "color_scheme": "scheme-2"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "review_BATTFX",
+            "review_pm7MCB",
+            "review_zHxVnY",
+            "review_mY4CXj",
+            "review_FXwnAy"
+          ]
+        }
+      },
+      "block_order": [
+        "review_title_PTf7tF",
+        "slides_97Gdpw"
+      ],
+      "name": "Review Slider",
+      "settings": {
+        "layout_max_width": "1603px",
+        "background_color": "#06123d",
+        "color_scheme": "scheme-3",
+        "block_align": "center",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "gap_horizontal": 20,
+        "gap_vertical": 20,
+        "radius_top_left": 0,
+        "radius_top_right": 0,
+        "radius_bottom_left": 250,
+        "radius_bottom_right": 0,
+        "padding_top_phone": 50,
+        "padding_bottom_phone": 50
+      }
+    },
     "featured_collection_Ppc8yU": {
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
@@ -863,6 +999,7 @@
     "bicycles_section_R4jNfE",
     "bicycles_section_VP3eTq",
     "rich_text_section_EjfpQC",
+    "review_section_chzf8g",
     "featured_collection_Ppc8yU",
     "image_banner",
     "rich_text",

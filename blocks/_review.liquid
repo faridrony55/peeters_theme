@@ -6,18 +6,23 @@
     assign color_scheme = block.settings.color_scheme 
     
 
+  
+
 %} 
+ 
 
 <div class="review color-{{ color_scheme }} gradient">
      
     <div class="reviewer"> 
-        <h3>{{name}}</h3>
-        {{rating}} 
- 
+        <h3>{{name}}</h3> 
 
-        {% for i in (1..3) %}
+        <div class="reviews">
+            {% render 'review-icons', rate: rating %}
+        </div>
+
+        {% comment %} {% for i in (1..5) %}
             hello
-        {% endfor %}
+        {% endfor %} {% endcomment %}
     </div>
 
     <p> {{review}} </p>
