@@ -1,7 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "cusfooter": {
+      "type": "cus-footer",
+      "blocks": {
+        "top_footer_xj93xR": {
+          "type": "top_footer",
+          "settings": {
+            "logo": "{{ shop.brand.logo }}",
+            "logo_width": 150,
+            "label_01": "PLAN DIRECT:",
+            "button_01": "Een adviesgesprek",
+            "link_01": "shopify://products/hello-copy",
+            "icon": "settings",
+            "btn_color_scheme_01": "scheme-3"
+          }
+        },
+        "company_information_WLeLff": {
+          "type": "company_information",
+          "settings": {
+            "logo": "{{ shop.brand.logo }}",
+            "label_01": "Filiaal Heel",
+            "address_01": "Wilhelminaplein 4, 6097 AT Heel\n0475 - 58 23 41\nheel@peeters-tweewielers.nl",
+            "label_02": "Filiaal Heel",
+            "address_02": "Wilhelminaplein 4, 6097 AT Heel\n0475 - 58 23 41\nheel@peeters-tweewielers.nl",
+            "show_social": false
+          }
+        },
+        "link_list_yxaDeM": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Fietsen",
+            "menu": "fietsen"
+          }
+        },
+        "link_list_V73RRp": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Service",
+            "menu": "fietsen"
+          }
+        },
+        "link_list_jqjnRw": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Overige",
+            "menu": "fietsen"
+          }
+        }
+      },
+      "block_order": [
+        "top_footer_xj93xR",
+        "company_information_WLeLff",
+        "link_list_yxaDeM",
+        "link_list_V73RRp",
+        "link_list_jqjnRw"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -23,7 +102,7 @@
           "type": "text",
           "settings": {
             "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
           }
         }
       },
@@ -32,22 +111,25 @@
         "footer-1",
         "footer-2"
       ],
+      "disabled": true,
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": false,
         "enable_language_selector": false,
         "payment_enable": true,
         "show_policy": false,
-        "margin_top": 48,
+        "margin_top": 0,
         "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
   "order": [
+    "cusfooter",
     "footer"
   ]
 }

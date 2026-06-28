@@ -1,0 +1,36 @@
+{% liquid 
+
+    assign image = block.settings.image
+    assign title = block.settings.title
+    assign link = block.settings.link 
+
+%} 
+
+<div class="best_seller">
+     {% render 'media', media: image %}
+     {% comment %} <h3>
+        {% if link != blank %}
+            <a class="btn" href="{{link}}">{{title}} {% render 'icon-right-arrow' %}</a>
+        {% else %} 
+            {{title}}
+        {% endif %}
+    </h3> {% endcomment %}
+</div>
+
+{%  schema  %} 
+{ 
+    "class": "swiper-slide",
+    "name": "Best Seller",
+    "settings": [ 
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Media"
+        }  
+
+    ],
+    "presets": [
+        {"name": "Best Seller"}
+    ]
+}
+{% endschema %}

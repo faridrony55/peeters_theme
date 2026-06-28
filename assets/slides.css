@@ -114,7 +114,7 @@ bicyle
 /******* =====================
 review
 ===================== ****/
-.review{
+.review {
     border-radius: 15px;
     padding: 25px 35px;
 
@@ -138,16 +138,120 @@ review
             }
         }
     
-    p{ 
-        font-weight: 400; 
-        font-size: 17px; 
-        line-height: 150%;
-        letter-spacing: 0%;
+        p{ 
+            font-weight: 400; 
+            font-size: 17px; 
+            line-height: 150%;
+            letter-spacing: 0%;
 
 
-        strong{
+            strong{
+
+            }
+        }
+
+    }
+}
+
+
+/******* =====================
+Best Seller
+===================== ****/
+.swiper{
+
+    
+    max-width: var(--width);
+    min-height: 600px;
+    .swiper-wrapper{ 
+        align-items: flex-end;
+    }
+    .swiper-slide{ 
+        
+        display: flex;
+        height: stretch;
+       /* justify-content:center; */
+        align-items: flex-end;
+    }
+    .swiper-slide .best_seller {
+       
+        width: calc(100% - 300px); 
+         
+        
+    }
+    .swiper-slide.swiper-slide-active .best_seller{ 
+          width: 100% ;   
+          justify-content: center;
+    }
+    .swiper-slide.swiper-slide-prev { 
+         justify-content: flex-end;
+           
+    }
+    .swiper-slide.swiper-slide-next { 
+         justify-content: center;
+          
+    }
+}
+.best_seller{
+
+    display: flex;
+    justify-content: center;
+
+     
+}
+
+ 
+
+
+/*
+best_bicycle_content_slider
+*/
+.best_bicycle_content_slider{
+        transform: translateY(-80px);
+    position: relative;
+    z-index: 0;
+    .best_bicycle_content{
+            width: 100%; 
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    background: rgb(var(--color-background));
+        h2{ 
+            font-weight: 900; 
+            font-size:  clamp(30px, 30vw, 140px); 
+            line-height: 90%;
+            letter-spacing: 0%;
+            text-align: center;
+
+        }
+        .best_bicycle_info{
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            .info{ 
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                align-items: flex-start;
+                strong{ 
+                    font-weight: 600; 
+                    font-size: 25px; 
+                    line-height: 90%;
+                    letter-spacing: 0%;
+                    color:#06123D;
+
+                }
+                 > span{ 
+                    font-weight: 400; 
+                    font-size: 20px; 
+                    line-height: 90%;
+                    letter-spacing: 0%;
+                    color:#06123D;
+
+
+                }
+            }
 
         }
     }
-
 }

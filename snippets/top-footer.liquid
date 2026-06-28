@@ -1,0 +1,121 @@
+{%  assign topfooter = block.settings %}  
+<div class="top_footer">
+     {%- if topfooter.logo != blank -%}
+    {%- assign brand_image_height = topfooter.logo_width
+        | divided_by: topfooter.logo.aspect_ratio
+    -%}
+    <div
+        class="footer-block__image-wrapper"
+        style="max-width: min(100%, {{ topfooter.logo_width }}px);"
+    >
+        {{
+        topfooter.logo
+        | image_url: width: 1100
+        | image_tag:
+            loading: 'lazy',
+            widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
+            height: brand_image_height,
+            width: topfooter.logo_width
+        }}
+    </div>
+    {%- endif -%}
+
+
+    {% if topfooter.link_01 != blank %}
+    <div class="top_footer_button">
+        <a href="{{topfooter.link_01}}" class="    color-{{topfooter.btn_color_scheme_01}} gradient">
+
+        <span class="icon"> 
+            {% render 'icons', icon: topfooter.icon  %}
+        </span>
+
+        <div class="btn_text">
+            <span>{{topfooter.label_01}}</span>
+            <strong>{{topfooter.button_01}}</strong>
+        </div>
+
+        <div class="arrow">
+            {% render 'arrow-right' %}
+        </div>
+
+        </a>
+    </div>
+    {% endif %}
+
+     {% if topfooter.link_01 != blank %}
+    <div class="top_footer_button">
+        <a href="{{topfooter.link_01}}" class="     color-{{topfooter.btn_color_scheme_01}} gradient">
+
+        <span class="icon"> 
+            {% render 'icons', icon: topfooter.icon  %}
+        </span>
+
+        <div class="btn_text">
+            <span>{{topfooter.label_01}}</span>
+            <strong>{{topfooter.button_01}}</strong>
+        </div>
+
+        <div class="arrow">
+            {% render 'arrow-right' %}
+        </div>
+
+        </a>
+    </div>
+    {% endif %}
+
+
+</div>
+
+
+{%  stylesheet  %} 
+.top_footer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+
+    .footer-block__image-wrapper{
+        img{}
+    }
+
+    .top_footer_button{
+        a{
+            display: flex;
+            border-radius: 24px;
+            padding: 15px 20px;
+            align-items: center;
+            text-decoration: none;
+            gap: 10px;
+            justify-content: space-between;
+            svg{
+                display: block;
+            }
+            .icon{}
+            .btn_text{
+                display: flex;
+                flex-direction: column;
+                span{ 
+                    font-weight: 600; 
+                    font-size: 15px; 
+                    line-height: 90%;
+                    letter-spacing: 0%;
+
+                }
+                strong{ 
+                    font-weight: 600; 
+                    font-size: 20px; 
+                    line-height: 150%;
+                    letter-spacing: 5%;
+
+                }
+            }
+            .arrow{
+
+            }
+
+
+        }
+    }
+
+}
+
+{% endstylesheet %}

@@ -1,0 +1,210 @@
+
+ {% liquid 
+ assign bicycle_section = section.settings
+ assign aspect_ratio = bicycle_section.media_size
+ assign radius = bicycle_section.radius
+ assign overlay = bicycle_section.overlay
+ 
+ 
+ assign navigation = bicycle_section.navigation
+ assign pagination = bicycle_section.pagination
+ assign nav_position = bicycle_section.nav_position
+ assign fullwidth = bicycle_section.fullwidth
+
+ assign gap = bicycle_section.gap
+ assign slide_per_row = bicycle_section.slide_per_row
+ assign is_partial = bicycle_section.is_partial
+
+ unless is_partial == false 
+    assign partial = bicycle_section.partial
+ endunless
+
+ assign desktop_vew = slide_per_row | append: '.' | append: partial
+
+
+ assign gap_phone = bicycle_section.gap_phone
+ assign slide_per_row_phone = bicycle_section.slide_per_row_phone
+ assign is_partial_phone = bicycle_section.is_partial_phone
+ assign partial_phone = bicycle_section.partial_phone
+
+
+ unless is_partial_phone == false 
+    assign partial_phone = bicycle_section.partial_phone
+ endunless
+
+ assign phone_vew = slide_per_row_phone | append: '.' | append: partial_phone
+
+%}  
+
+
+{%  capture navigation_and_pagination %} 
+    {%  unless navigation == false %}<div class="swiper-button-prev"></div>{% endunless %}   
+    {%  unless pagination == false %}<div class="swiper-pagination"></div>{% endunless %} 
+    {%  unless navigation == false %}<div class="swiper-button-next"></div>{% endunless %}   
+{% endcapture %}  
+
+
+{%  if 
+    nav_position == 'swiper-top-left' or 
+    nav_position == 'swiper-top-center' or 
+    nav_position == 'swiper-top-right' 
+%}   
+    {%  capture slide_nav_for_top %} 
+        <div class="{{nav_position}}"> 
+            {{navigation_and_pagination}}
+        </div>
+    {% endcapture %}  
+{% endif %}  
+
+
+{%  if 
+    nav_position == 'swiper-default' or 
+    nav_position == 'swiper-bottom-left' or 
+    nav_position == 'swiper-bottom-center' or 
+    nav_position == 'swiper-bottom-right'  
+%}  
+    {%  capture slide_nav_for_bottom %} 
+        <div class="{{nav_position}}">
+            {{navigation_and_pagination}}
+        </div>
+    {% endcapture %}   
+{% endif %}  
+
+ 
+{%  style  %} 
+
+
+    {% unless fullwidth == false %}
+    .mySwiper_{{block.id}}{
+        overflow: visible;
+    }
+    {% endunless %}
+
+    #shopify-block-{{block.id}}{
+
+    --aspect_ratio: {{aspect_ratio}};
+    --radius: {{radius}}px;
+
+    {% if overlay == true %}
+     --content: ''
+    {% else %}
+     --content: none
+    {% endif %}
+
+    }  
+{% endstyle %}  
+
+<div class="swiper mySwiper_{{section.id}} " style="overflow: visible;">
+
+    {{ slide_nav_for_top }}
+     
+    <div class="swiper-wrapper">
+       {% for block in section.blocks %}
+        {% liquid  
+            assign image = block.settings.image
+            assign title = block.settings.title
+            assign link = block.settings.link  
+        %} 
+
+        <div class="swiper-slide">
+            <div class="best_seller">
+                {% render 'media', media: image %}
+            </div>
+        </div> 
+        {% endfor %} 
+    </div>
+    {{ slide_nav_for_bottom }} 
+  </div>
+
+
+
+<div class="swiper best_bicycle_content_slider " >
+ 
+     
+    <div class="swiper-wrapper">
+       {% for block in section.blocks %}
+        {% liquid   
+            assign title = block.settings.title
+            assign link = block.settings.link  
+            assign product_link = all_products[link]
+            assign feature_01 = block.settings.feature_01  
+
+            assign info_01 = block.settings.info_01  
+            assign feature_02 = block.settings.feature_02  
+            assign info_02 = block.settings.info_02  
+            assign feature_03 = block.settings.feature_03  
+            assign info_03 = block.settings.info_03  
+        %} 
+
+        <div class="swiper-slide">
+            <div class="best_bicycle_content">
+                 <h2>{{title}}</h2>
+                 <div class="best_bicycle_info">
+                    <div class="info"> <strong>{{feature_01 | newline_to_br }}</strong> <span>{{info_01}}</span> </div>
+                    <div class="info"> <strong>{{feature_02 | newline_to_br }}</strong> <span>{{info_02}}</span> </div>
+                    <div class="info"> <strong>{{feature_03 | newline_to_br }}</strong> <span>{{info_03}}</span> </div>
+                    <div class="info"> 
+                        {% comment %} <a href="{{product_link.url}}" class="btn">More Info</a> {% endcomment %}
+                        {% render 'btn', 
+                            btn_text:'More Info', 
+                            btn_url:product_link.url, 
+                            btn_style:'filled'  
+                        %}
+ 
+                    </div>
+                 </div>
+            </div>
+        </div> 
+        {% endfor %} 
+    </div> 
+  </div>
+
+
+
+ <script>
+    var best_bicycle_image_slider = new Swiper(".mySwiper_{{section.id}}", {
+    
+       slidesPerView: {{phone_vew}},
+            //slidesPerView: "auto",
+            //cssMode: true,
+            //centeredSlides: true,
+            loop:true,
+        initialSlide: 1,
+      spaceBetween: {{gap_phone}},
+      navigation: {
+        nextEl: ".mySwiper_{{section.id}} .swiper-button-next",
+        prevEl: ".mySwiper_{{section.id}} .swiper-button-prev",
+      }, 
+      pagination: {
+        el: ".mySwiper_{{section.id}} .swiper-pagination",
+        clickable: true
+      }, 
+    });
+
+
+    var best_bicycle_content_slider = new Swiper(".best_bicycle_content_slider", {
+    
+       slidesPerView: {{phone_vew}},
+       effect: 'fade',
+        initialSlide: 1,
+            loop:true,
+
+            //slidesPerView: "auto",
+            //cssMode: true,
+            //centeredSlides: true,
+      spaceBetween: {{gap_phone}},
+      navigation: {
+        nextEl: ".best_bicycle_content_slider .swiper-button-next",
+        prevEl: ".best_bicycle_content_slider .swiper-button-prev",
+      }, 
+      pagination: {
+        el: ".best_bicycle_content_slider .swiper-pagination",
+        clickable: true
+      },
+       
+    });
+
+     best_bicycle_image_slider.controller.control = best_bicycle_content_slider 
+
+    
+  </script>

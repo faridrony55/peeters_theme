@@ -1,0 +1,81 @@
+{% liquid 
+
+    assign image = block.settings.image
+    assign title = block.settings.title
+    assign link = block.settings.link 
+
+%} 
+
+<div class="best_seller">
+      <h3>
+        {% if link != blank %}
+            <a class="btn" href="{{link}}">{{title}} {% render 'icon-right-arrow' %}</a>
+        {% else %} 
+            {{title}}
+        {% endif %}
+    </h3>  
+</div>
+
+{%  schema  %} 
+{ 
+    "class": "swiper-slide",
+    "name": "Best Seller Content",
+    "settings": [  
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "RIH MOVENDA"
+        },
+        {
+            "type": "url",
+            "id": "link",
+            "label": "Url"
+        },
+        {
+            "type": "header",
+            "content": "features"
+        },
+        {
+            "type": "text",
+            "id": "feature_01",
+            "label": "feature",
+            "default": "Bosch Active Line Plus"
+        },
+        {
+            "type": "text",
+            "id": "info_01",
+            "label": "info",
+            "default": "MOTOR"
+        }, 
+        {
+            "type": "text",
+            "id": "feature_02",
+            "label": "feature",
+            "default": "Bosch Active Line Plus"
+        },
+        {
+            "type": "text",
+            "id": "info_02",
+            "label": "info",
+            "default": "MOTOR"
+        }, 
+        {
+            "type": "text",
+            "id": "feature_03",
+            "label": "feature",
+            "default": "Bosch Active Line Plus"
+        },
+        {
+            "type": "text",
+            "id": "info_03",
+            "label": "info",
+            "default": "MOTOR"
+        }, 
+
+    ],
+    "presets": [
+        {"name": "Best Seller Content"}
+    ]
+}
+{% endschema %}

@@ -1,0 +1,89 @@
+<style>
+    ul a{
+        color: #fff;
+        text-decoration: none;
+    }
+    ul a.true{
+        color: seagreen;
+    }
+    .megamenu_grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+</style>
+
+<div class="color-scheme-3 gradient">
+    <div class="page-width" style="padding-block: 100px;">
+         {% liquid 
+            assign menu = section.settings.menu
+         %}
+ 
+ 
+
+         <ul>
+
+         {% for link in menu.links %}
+            <li class="{{ link.handle }}"> 
+                
+                {% if link.levels == 0 %}
+                    {{link.levels}}
+                    <a href="{{ link.url }}" class="{{ link.active }} ">{{link.title}}</a>
+
+                {% elsif link.levels == 1 %} 
+                    
+                    <div class="dropdown {{ link.active }} ">{{link.levels}} {{link.title}}</div> 
+                    <ul>
+                        {% for child in link.links %}
+                            <li class="{{ child.handle }}">
+                                <a href="{{ child.url }}" class="{{ child.active }} ">{{child.title}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                
+                {% elsif link.levels == 2 %} 
+                    <div class="megamenu {{ link.active }} ">{{link.levels}} {{link.title}}</div> 
+                    <div class="megamenu_grid">
+                        {% for child in link.links %}
+                            <div class="column {{ link.handle }}">
+                                <div class="{{ child.active }} "><strong>{{child.title}}</strong></div>
+                                <ul>
+                                    {% for parent in child.links %}
+                                        <li class="{{ parent.handle }}">
+                                            <a href="{{ parent.url }}" class="{{ parent.active }} ">{{child.title}}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                
+                 
+            </li>
+          {% endfor %}
+
+         </ul>
+          
+
+
+          
+
+    </div>
+</div>
+
+
+{%  schema  %}
+{
+    "name": "Cus Header",
+    "settings": [
+
+        {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Menu" 
+        }
+
+    ]
+}
+{% endschema %}

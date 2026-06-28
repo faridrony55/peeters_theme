@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "logo": "shopify://shop_images/logo-peeterstweewielers_1_5f28f6b7-2c48-4017-8330-1e365d8ab9f2.svg",
     "logo_width": 90,
     "type_header_font": "assistant_n4",
     "heading_scale": 100,
@@ -103,10 +104,13 @@
     "badge_corner_radius": 40,
     "sale_badge_color_scheme": "scheme-5",
     "sold_out_badge_color_scheme": "scheme-3",
-    "social_facebook_link": "",
-    "social_instagram_link": "",
-    "social_youtube_link": "",
-    "social_tiktok_link": "",
+    "brand_headline": "wedwewe",
+    "brand_description": "<p>weew</p>",
+    "brand_image": "{{ shop.brand.logo }}",
+    "social_facebook_link": "https://www.facebook.com/",
+    "social_instagram_link": "https://www.instagram.com/",
+    "social_youtube_link": "https://www.youtube.com/",
+    "social_tiktok_link": "https://www.tiktok.com/",
     "social_twitter_link": "",
     "social_snapchat_link": "",
     "social_pinterest_link": "",
@@ -151,7 +155,7 @@
         "settings": {
           "background": "#ffffff",
           "background_gradient": "",
-          "text": "#000000",
+          "text": "#06123d",
           "button": "#52b099",
           "button_label": "#f3f3f3",
           "secondary_button_label": "#121212",
@@ -189,6 +193,39 @@
           "button_label": "#3f7280",
           "secondary_button_label": "#ffffff",
           "shadow": "#3f7280"
+        }
+      },
+      "scheme-208c8557-e0ff-472c-bff5-5f27ab4367ce": {
+        "settings": {
+          "background": "#efeeee",
+          "background_gradient": "",
+          "text": "#000000",
+          "button": "#52b099",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#52b099",
+          "shadow": "#3f7280"
+        }
+      },
+      "scheme-466f3f94-73a9-4b51-a93a-a4f36a60661c": {
+        "settings": {
+          "background": "#efeeee",
+          "background_gradient": "",
+          "text": "#ffffff",
+          "button": "#52b099",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#52b099",
+          "shadow": "#3f7280"
+        }
+      },
+      "scheme-9d46b56f-9dc3-4ab2-b481-5c0432b91832": {
+        "settings": {
+          "background": "#efeeee",
+          "background_gradient": "",
+          "text": "#ffffff",
+          "button": "#06123d",
+          "button_label": "#efeeee",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#1f9850"
         }
       }
     }

@@ -266,7 +266,7 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when '@app' -%}
-            {% render block %}
+            {% render block %} 
         {%- endcase -%}
       {%- endfor -%}
 
@@ -632,6 +632,40 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "cus_megamenu",
+      "name":"Cus Megamenu",
+      "settings": [
+        {
+          "type":"text",
+          "id": "handle",
+          "label": "Menu name"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default":"Waar ben je naar op zoek?" 
+        },
+        {
+          "type": "image_picker",
+          "id": "media",
+          "label": "Media" 
+        }, 
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Url" 
+        },
+        {
+          "type": "text",
+          "id": "linktext",
+          "label": "Button Text",
+          "default":"ADVIESGESPREK" 
+        }
+
+      ]
     }
   ]
 }

@@ -25,28 +25,60 @@
       "block_order": [
         "announcement-bar-0"
       ],
-      "settings": {}
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "cus_megamenu_3HQgPB": {
+          "type": "cus_megamenu",
+          "settings": {
+            "handle": "big sale",
+            "title": "Waar ben je naar op zoek?",
+            "link": "",
+            "linktext": "ADVIESGESPREK"
+          }
+        }
+      },
+      "block_order": [
+        "cus_megamenu_3HQgPB"
+      ],
       "settings": {
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
-        "menu": "main-menu",
+        "menu": "home",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
-        "color_scheme": "scheme-1",
-        "enable_country_selector": true,
-        "enable_language_selector": true,
+        "color_scheme": "scheme-3",
+        "menu_color_scheme": "scheme-2",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "enable_customer_avatar": false,
         "margin_bottom": 0,
         "padding_top": 20,
         "padding_bottom": 20
+      }
+    },
+    "cusheader": {
+      "type": "cus-header",
+      "disabled": true,
+      "settings": {
+        "menu": "home"
       }
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "cusheader"
   ]
 }

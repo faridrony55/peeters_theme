@@ -75,7 +75,9 @@
 
  
 {%  style  %} 
-
+.mySwiper_{{block.id}}{
+    --width:900px;
+}
 
     {% unless fullwidth == false %}
     .mySwiper_{{block.id}}{
@@ -96,33 +98,45 @@
 
     }  
 {% endstyle %}  
-<div class="swiper mySwiper_{{block.id}} ">
 
-    {{ slide_nav_for_top }}
-     
+{% comment %} {%  capture  bestSlider %} 
+    {% content_for "block", id: 'best-seller', type: "_best-seller"  %} 
+{% endcapture %}  {% endcomment %}
+
+<div class="swiper mySwiper_best-seller "> 
+    {{ slide_nav_for_top }} 
     <div class="swiper-wrapper">
-        {% content_for "blocks"  %}   
+         {% content_for "block", id: 'best-seller', type: "_best-seller"  %} 
     </div>
-    {{ slide_nav_for_bottom }}
-    
-   
-  </div>
+    {{ slide_nav_for_bottom }} 
+</div>
+
+{% comment %} <div class="swiper best-seller-content ">  
+    <div class="swiper-wrapper">
+         {% content_for "block", id: 'best-seller-content', type: "_best-seller-content"  %} 
+    </div> 
+</div> {% endcomment %}
+
+ 
 
 
  <script>
-    var swiper = new Swiper(".mySwiper_{{block.id}}", {
+    var swiper = new Swiper(".mySwiper_best-seller", {
     
        slidesPerView: {{phone_vew}},
             //slidesPerView: "auto",
             //cssMode: true,
             //centeredSlides: true,
+            
+    loop:true,
       spaceBetween: {{gap_phone}},
+       initialSlide: 1,
       navigation: {
-        nextEl: ".mySwiper_{{block.id}} .swiper-button-next",
-        prevEl: ".mySwiper_{{block.id}} .swiper-button-prev",
+        nextEl: ".mySwiper_best-seller .swiper-button-next",
+        prevEl: ".mySwiper_best-seller} .swiper-button-prev",
       }, 
       pagination: {
-        el: ".mySwiper_{{block.id}} .swiper-pagination",
+        el: ".mySwiper_best-seller .swiper-pagination",
         clickable: true
       },
       breakpoints: { 
@@ -144,15 +158,12 @@
 { 
     "class": "swiper-slide",
     "name": "Slides",
-    "blocks": [
-        {
-            "type": "_bicyle"
-        },
-        {
-            "type": "_review"
-        },
+    "blocks": [ 
         {
             "type": "_best-seller"
+        },
+        {
+            "type": "_best-seller-content"
         }
     ],
     "settings": [

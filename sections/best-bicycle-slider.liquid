@@ -1,0 +1,477 @@
+{{ 'best-seller-slider.css' | asset_url | stylesheet_tag }}
+ 
+{{ 'slides.css' | asset_url | stylesheet_tag }}
+ 
+
+{% comment %} {% capture children %} 
+    {% content_for "blocks" %}
+{% endcapture %}  
+
+{% render 'advisor-section', , section: section, children: children %} {% endcomment %}
+
+
+{% liquid 
+    assign layout_max_width = section.settings.layout_max_width
+    assign block_align = section.settings.block_align
+    assign padding_top = section.settings.padding_top
+    assign padding_bottom = section.settings.padding_bottom
+
+
+    assign padding_top_phone = section.settings.padding_top_phone
+    assign padding_bottom_phone = section.settings.padding_bottom_phone
+
+    assign background_color = section.settings.background_color
+    assign radius_top_left = section.settings.radius_top_left
+    assign radius_top_right = section.settings.radius_top_right
+    assign radius_bottom_left = section.settings.radius_bottom_left
+    assign radius_bottom_right = section.settings.radius_bottom_right
+
+
+    assign gap_horizontal =  section.settings.gap_horizontal
+    assign gap_vertical =  section.settings.gap_vertical
+%}
+
+{%  style  %} 
+    #shopify-section-{{section.id}}{
+
+        --max-width: {{layout_max_width}};
+        --block_align: {{block_align}};
+        --padding_top: {{padding_top}}px;
+        --gap_horizontal : {{gap_horizontal}}px;
+        --gap_vertical : {{gap_vertical}}px;
+        --padding_bottom: {{padding_bottom}}px;
+        --radius_top_left: {{radius_top_left}}px;
+        --radius_top_right: {{radius_top_right}}px;
+        --radius_bottom_left: {{radius_bottom_left}}px;
+        --radius_bottom_right: {{radius_bottom_right}}px;
+        --background_color: {{background_color}};
+
+
+        --padding_top_phone: {{padding_top_phone}}px;
+        --padding_bottom_phone: {{padding_bottom_phone}}px;
+        
+
+        background-color: var(--background_color);
+        /* overflow:hidden; */
+    } 
+{% endstyle %}
+ 
+<section class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width">
+  
+        <div class="flex">
+             <h2></h2>
+            
+        </div>
+
+      
+        {% render 'best-bicycle-slider' %}
+
+
+    </div>
+</section>
+
+ 
+ 
+
+
+{%  schema  %} 
+{
+    "class": "best-bicycle-section",
+    "name": "Best By bicycle Slider",
+    "tag": "section",
+    "blocks": [ 
+            
+        {
+            "type": "bicycle_info",
+            "name":"Bicycle Info",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Media"
+                } ,
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "RIH MOVENDA"
+                },
+                {
+                    "type": "product",
+                    "id": "link",
+                    "label": "Url"
+                },
+                {
+                    "type": "header",
+                    "content": "features"
+                },
+                {
+                    "type": "textarea",
+                    "id": "feature_01",
+                    "label": "feature",
+                    "default": "Bosch Active Line Plus"
+                },
+                {
+                    "type": "text",
+                    "id": "info_01",
+                    "label": "info",
+                    "default": "MOTOR"
+                }, 
+                {
+                    "type": "textarea",
+                    "id": "feature_02",
+                    "label": "feature",
+                    "default": "Bosch Active Line Plus"
+                },
+                {
+                    "type": "text",
+                    "id": "info_02",
+                    "label": "info",
+                    "default": "MOTOR"
+                }, 
+                {
+                    "type": "textarea",
+                    "id": "feature_03",
+                    "label": "feature",
+                    "default": "Bosch Active Line Plus"
+                },
+                {
+                    "type": "text",
+                    "id": "info_03",
+                    "label": "info",
+                    "default": "MOTOR"
+                }, 
+            ]
+        }
+        
+         
+    ],
+    "settings": [
+        {
+            "type": "header",
+            "content": "Section Style"
+        },
+        {
+            "type": "text",
+            "default":"1603px",
+            "id": "layout_max_width",
+            "label": "Layout Max Width" 
+        },
+        {
+            "type": "color",
+            "id":"background_color",
+            "label": "Background Color",
+            "default":"#06123D"
+        },
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Section Color",
+            "default": "scheme-5"
+        },
+        {
+            "type": "select",
+            "default": "center",
+            "options": [
+                {"value": "flex-start","label": "Start"},
+                {"value": "center","label": "Center"},
+                {"value": "flex-end","label": "End"}
+            ],
+            "id": "block_align",
+            "label": "Block ALignment"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "label": "Padding Top",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5, 
+            "default": 100
+        },
+
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "label": "Padding Bottom",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 100
+        },
+        {
+            "type": "range",
+            "id": "gap_horizontal",
+            "label": "Column Gap Horizontal",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "gap_vertical",
+            "label": "Column Gap vertical",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        },
+
+        {
+            "type": "header",
+            "content": "Slide Style"
+        },
+
+
+        {
+            "type": "select",
+            "id": "media_size",
+            "label": "Media Size",
+            "default": "auto",
+            "options": [
+                {"label": "Adapt the default size","value": "auto"},
+                {"label": "Portrait","value": "2/3"},
+                {"label": "Horizontal","value": "3/2"},
+                {"label": "Square","value": "1/1"}
+            ]
+        } ,
+        {
+            "type": "range",
+            "id": "radius",
+            "label": "Radius",
+            "min": 0,
+            "max": 300,
+            "step": 5,
+            "unit": "px",
+            "default": 10 
+        },
+        {
+            "type": "checkbox",
+            "id": "overlay",
+            "label": "Overlay Color",
+            "default": true
+        },
+
+
+        {
+            "type": "checkbox",
+            "id": "fullwidth",
+            "label": "Visible Full Width",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "navigation",
+            "label": "Navigation",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "pagination",
+            "label": "Pagination",
+            "default": false
+        },  
+        {
+            "type": "select",
+            "default":"swiper-default",
+            "label": "Navigation Position",
+            "id": "nav_position",
+            "options": [
+                {
+                    "value": "swiper-default",
+                    "label": "Default"
+                },
+                {
+                    "value": "swiper-top-left",
+                    "label": "Top Left"
+                },
+                {
+                    "value": "swiper-top-center",
+                    "label": "Top Center"
+                },
+                {
+                    "value": "swiper-top-right",
+                    "label": "Top Right"
+                },
+                {
+                    "value": "swiper-bottom-left",
+                    "label": "Bottom Left"
+                },
+                {
+                    "value": "swiper-bottom-center",
+                    "label": "Bottom Center"
+                },
+                {
+                    "value": "swiper-bottom-right",
+                    "label": "Bottom Right"
+                }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Desktop Slide"
+        },
+
+        {
+            "type": "range",
+            "label": "Gap",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30,
+            "id": "gap"
+        },
+
+        {
+            "type": "range",
+            "label": "Slide Per Row",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "default": 4,
+            "id": "slide_per_row"
+        },
+        {
+            "type": "checkbox",
+            "id": "is_partial",
+            "label": "Partial Slide",
+            "default": true
+        },
+        {
+            "type": "range",
+            "label": "Partial",
+            "min": 1,
+            "max": 9,
+            "step": 1,
+            "default": 2,
+            "id": "partial",
+            "visible_if": "{{ section.settings.is_partial == true }}"
+        },
+        {
+            "type": "header",
+            "content": "Phone Slide"
+        },
+
+        {
+            "type": "range",
+            "label": "Gap ",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30,
+            "id": "gap_phone"
+        },
+        {
+            "type": "range",
+            "label": "Slide Per Row",
+            "min": 1,
+            "max": 12,
+            "step": 1,
+            "default": 1,
+            "id": "slide_per_row_phone"
+        },
+        {
+            "type": "checkbox",
+            "id": "is_partial_phone",
+            "label": "Partial Slide",
+            "default": true
+        },
+        {
+            "type": "range",
+            "label": "Partial",
+            "min": 1,
+            "max": 9,
+            "step": 1,
+            "default": 2,
+            "id": "partial_phone",
+            "visible_if": "{{ section.settings.is_partial_phone == true }}"
+        },
+        {
+            "type": "header",
+            "content": "Section Radius"
+        },
+        {
+            "type": "range",
+            "id": "radius_top_left",
+            "label": "Radius Top left",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "radius_top_right",
+            "label": "Radius Top Right",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "radius_bottom_left",
+            "label": "Radius Bottom left",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 250
+        },
+        {
+            "type": "range",
+            "id": "radius_bottom_right",
+            "label": "Radius Bottom Right",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 0
+        },
+        {
+            "type": "header",
+            "content": "Mobile Responsive"
+        },
+        {
+            "type": "range",
+            "id": "padding_top_phone",
+            "label": "Padding Top",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5, 
+            "default": 50
+        },
+
+        {
+            "type": "range",
+            "id": "padding_bottom_phone",
+            "label": "Padding Bottom",
+            "min": 0,
+            "max": 500,
+            "unit": "px",
+            "step": 5,
+            "default": 50
+        }
+
+
+    ],
+    "disabled_on": {
+        "groups": ["header","footer"]
+    },
+    "presets": [
+        {
+            "name": "Best By Bicycle Slider"
+        }
+    ]
+
+}
+{% endschema %}

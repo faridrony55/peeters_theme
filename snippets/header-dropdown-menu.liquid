@@ -7,8 +7,11 @@
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
-    {%- for link in section.settings.menu.links -%}
-      <li>
+
+ 
+
+    {%- for link in section.settings.menu.links -%} 
+      <li> 
         {%- if link.links != blank -%}
           <header-menu>
             <details id="Details-HeaderMenu-{{ forloop.index }}">
@@ -21,7 +24,7 @@
                     class="header__active-menu-item"
                   {% endif %}
                 >
-                  {{- link.title | escape -}}
+                  {{- link.title | escape -}}  
                 </span>
                 {{- 'icon-caret.svg' | inline_asset_content -}}
               </summary>
@@ -31,6 +34,14 @@
                 role="list"
                 tabindex="-1"
               >
+
+              {%- for block in section.blocks -%}
+                {% if block.type == 'cus_megamenu' %} 
+                    {% render 'cus_megamenu', link: link.title, block: block %}
+                {% endif %} 
+              {%- endfor -%}
+
+
                 {%- for childlink in link.links -%}
                   <li>
                     {%- if childlink.links == blank -%}
@@ -93,7 +104,7 @@
                 class="header__active-menu-item"
               {% endif %}
             >
-              {{- link.title | escape -}}
+              {{- link.title | escape -}}  
             </span>
           </a>
         {%- endif -%}
