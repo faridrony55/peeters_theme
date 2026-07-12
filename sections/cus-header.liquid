@@ -1,4 +1,70 @@
-<style>
+{%  style  %}  
+.cus_header{
+
+}
+.cus_header .grid{
+    display:grid;
+    grid-template-columns: 1fr 5fr 1fr;
+}
+.menu_parent{
+    list-style:none;
+    display:flex;
+     
+}
+.menu_parent li{
+
+}
+.menu_parent li div.menu-item,
+.menu_parent li a.menu-item{  
+    display:block;
+    padding:5px 10px;
+    border-radius:5px;
+}
+.menu_parent li.active > a,
+.menu_parent li  a:hover{
+background:#3f7280;
+}
+
+
+.menu_parent .dropdown.menu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 10px;
+}
+
+.menu_parent .dropdown.menu-item svg{
+    transform:rotate(180deg);
+    transition-duration:0.4s;
+}
+.menu_parent .dropdown_hover:hover .dropdown.menu-item svg{
+    transform:rotate(0deg);
+}
+.menu_parent .dropdown_hover{
+position:relative;
+}
+.menu_parent .dropdown_hover .dropdown_menu {
+    position: absolute;
+     opacity: 0;  
+     visibility: hidden; 
+    /* background-color: #3f7280; */
+    width: 100%;
+    left: 0;
+    min-width: 250px;
+    border-radius: 12px;
+    padding: 10px;
+    transform: translateY(30px);
+    transition-duration:0.4s;
+}
+.menu_parent .dropdown_hover:hover .dropdown_menu {
+     opacity: 1;  
+     visibility: visible; 
+    transform: translateY(0);
+
+}
+.menu_parent .dropdown_menu a{
+
+}
     ul a{
         color: #fff;
         text-decoration: none;
@@ -10,18 +76,147 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
     }
-</style>
+{% endstyle %}  
 
-<div class="color-scheme-3 gradient">
-    <div class="page-width" style="padding-block: 100px;">
-         {% liquid 
-            assign menu = section.settings.menu
-         %}
+
+{% liquid 
+    assign logo = section.settings.logo
+    assign logo_height = section.settings.logo_height
+
+    assign menu = section.settings.menu
  
- 
+%}
 
-         <ul>
+{%  capture item_name %} 
+    {% for block in section.blocks %}
+        {{- block.settings.item_name | downcase -}}
+    {% endfor %}
+{% endcapture %}  
 
+{%  capture logo_image %}  
+     {%- if logo != blank -%}
+        <img
+        src="{{ logo | image_url: width: 500 }}"
+        srcset="
+            {{ logo | image_url: width: 300 }} 300w,
+            {{ logo | image_url: width: 400 }} 400w,
+            {{ logo | image_url: width: 500 }} 500w
+        "
+        sizes="(max-width: 768px) 88vw, 25vw"
+        alt="{{ logo.alt | escape | default: 'peeters' }}"
+        loading="lazy"
+        decoding="async"
+        width="{{ logo.width }}"
+        height="{{ logo.height }}"
+        >
+    {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+    {%- endif -%}
+{% endcapture %} 
+
+
+
+{%  capture navigation %} 
+
+    <ul class="menu_parent">
+        {% for parent in menu.links %}  
+
+            {% if parent.levels == 0 %}
+               <li class="{% if parent.active %}active{% endif %}">
+                <a class="menu-item" href="{{parent.url}}">{{parent.title}}</a>
+               </li>
+            {% endif %}
+
+
+            {% if parent.levels == 1 %}
+
+                   
+               <li class="dropdown_hover {% if parent.active %}active{% endif %}">
+                <div class="dropdown menu-item">
+                    <span>{{parent.title}}</span>
+                    {% render 'arrow-down' %}
+                </div>
+
+                {% capture dropdown_menu_list %}
+                    <div class="dropdown_menu color-{{section.settings.color_scheme_01}} gradient">
+                        {% for child in parent.links %}
+                            <a class="menu-item" href="{{child.url}}">{{child.title}}</a>
+                        {% endfor %}
+                    </div>
+                {% endcapture %}
+
+                
+                {%  assign parent_title = parent.title | downcase %}
+                {% assign matching_block = nil %}
+                 
+              
+
+                 
+                
+                {% for block in section.blocks %}
+                    {% if block.type == 'icon_menu' %}
+                        {%  assign title =  block.settings.title %}
+                        {%  assign media_01 =  block.settings.media_01 %}
+                        {%  assign btn_text_01 =  block.settings.btn_text_01 %}
+                        {%  assign btn_url_01 =  block.settings.btn_url_01 %}
+                        {%  assign media_02 =  block.settings.media_02 %}
+                        {%  assign btn_text_02 =  block.settings.btn_text_02 %}
+                        {%  assign btn_url_02 =  block.settings.btn_url_02 %}
+                        {%  assign media_03 =  block.settings.media_03 %}
+                        {%  assign btn_text_03 =  block.settings.btn_text_03 %}
+                        {%  assign btn_url_03 =  block.settings.btn_url_03 %}
+                        {%  assign item_name =  block.settings.item_name | downcase %}   
+                        {% if item_name == parent_title %}
+                           {%  assign matching_block =  block  %}
+                            {% break %}
+                        {% endif %}
+                    {% endif %} 
+                {% endfor %}
+
+                {% if matching_block %}
+                    {% render 'icon_dropdown_menu', 
+                        dropdown_data: parent.links, 
+                        title: title  ,
+                        media_01: media_01,
+                        btn_text_01: btn_text_01,
+                        btn_url_01:btn_url_01 ,
+                        media_02: media_02,
+                        btn_text_02: btn_text_02,
+                        btn_url_02:btn_url_02 ,
+                        media_03: media_03,
+                        btn_text_03: btn_text_03,
+                        btn_url_03:btn_url_03 ,
+                        color:  section.settings.color_scheme_01,
+                        block:section.blocks
+                    %}
+                {% else %}
+                   {{dropdown_menu_list}}
+                {% endif %}
+              
+
+             
+
+                 
+
+                
+
+               </li>
+            {% endif %}
+
+            {% if parent.levels == 2 %}
+               <li class="{% if parent.active %}active{% endif %}">
+                    <div class="menu-item">{{parent.title}}</div>
+               </li>
+            {% endif %}
+
+            
+        {% endfor %}
+    </ul>
+
+{% endcapture %}
+{% comment %} {%  capture nav %}  
+
+         <ul> 
          {% for link in menu.links %}
             <li class="{{ link.handle }}"> 
                 
@@ -32,6 +227,7 @@
                 {% elsif link.levels == 1 %} 
                     
                     <div class="dropdown {{ link.active }} ">{{link.levels}} {{link.title}}</div> 
+
                     <ul>
                         {% for child in link.links %}
                             <li class="{{ child.handle }}">
@@ -64,6 +260,32 @@
           {% endfor %}
 
          </ul>
+{% endcapture %}   {% endcomment %}
+
+
+<div class="color-{{section.settings.color_scheme}} gradient">
+    <div class="page-width" style="padding-block: ;">
+
+         <div class="grid">
+            <div>
+                {{logo_image}}
+            </div>
+            <nav>
+                {{navigation}}
+            </nav>
+            <div></div>
+         </div>
+        
+ 
+
+         {% comment %} {% for parent in section.settings.menu.links %}
+            {% for child in parent.links %} 
+                {% for grandchild in child.links %}
+                {% endfor %}
+            {% endfor %}
+         {% endfor %} {% endcomment %}
+
+ 
           
 
 
@@ -76,12 +298,110 @@
 {%  schema  %}
 {
     "name": "Cus Header",
+    "class": "cus_header",
+    "limit": 1,
+    "blocks":[
+        {
+            "type":"icon_menu",
+            "name":"Icon Menu",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "item_name",
+                    "label": "Item Name"
+                },
+                {
+                    "type":"text",
+                    "label": "Title",
+                    "id": "title",
+                    "default":"Waar ben je naar op zoek?"
+                },
+                {
+                    "type": "header",
+                    "content":"Banner Info"
+                    
+                },
+                {
+                    "type": "image_picker",
+                    "id": "media_01",
+                    "label": "Media"
+                },
+                {
+                    "type": "text",
+                    "id": "btn_text_01",
+                    "label": "Button Text"
+                },
+                {
+                    "type": "url",
+                    "id": "btn_url_01",
+                    "label": "Button Url"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "media_02",
+                    "label": "Media"
+                },
+                {
+                    "type": "text",
+                    "id": "btn_text_02",
+                    "label": "Button Text"
+                },
+                {
+                    "type": "url",
+                    "id": "btn_url_02",
+                    "label": "Button Url"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "media_03",
+                    "label": "Media"
+                },
+                {
+                    "type": "text",
+                    "id": "btn_text_03",
+                    "label": "Button Text"
+                },
+                {
+                    "type": "url",
+                    "id": "btn_url_03",
+                    "label": "Button Url"
+                }
+            ]
+        }
+    ],
     "settings": [
 
         {
             "type": "link_list",
             "id": "menu",
             "label": "Menu" 
+        },
+        {
+            "type":"image_picker",
+            "id": "logo",
+            "label": "Logo"
+        },
+        {
+            "type": "range",
+            "min": 20,
+            "max": 200,
+            "step": 5,
+            "unit": "px",
+            "id": "logo_height",
+            "label": "Logo Height",
+            "default": 80
+        },
+        {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-1"
+        },
+        {
+        "type": "color_scheme",
+        "id": "color_scheme_01",
+        "label": "Drop Down Color",
+        "default": "scheme-2"
         }
 
     ]

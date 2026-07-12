@@ -1,0 +1,359 @@
+{% liquid 
+
+assign slider_count = 0
+unless media_01 == blank
+  assign slider_count = slider_count | plus: 1
+endunless
+unless media_02 == blank
+  assign slider_count = slider_count | plus: 1
+endunless
+unless media_03 == blank
+  assign slider_count = slider_count | plus: 1
+endunless
+%}
+ 
+
+{% if slider_count == 1 %} 
+  {% if media_01 != blank %}
+    <div class="menu_slider">
+        <div class=" menu-advisor">
+            <div class=" advisor-style ">
+                    
+                <div class="advisor_media">
+                    {% render 'media', media: media_01 %} 
+                </div> 
+                <div class="advisor-content-style">
+                
+                    {%  unless btn_url_01 == blank %}  
+                    {% render 'btn', 
+                        btn_text:btn_text_01, 
+                        btn_url:btn_url_01, 
+                        btn_style:btn_style  
+                    %}
+                    {% endunless %} 
+                </div>
+            </div>
+        </div> 
+    </div>  
+    {% endif %}
+  {% if media_02 != blank %}
+    <div class="menu_slider">
+        <div class=" menu-advisor">
+            <div class=" advisor-style ">
+                    
+                <div class="advisor_media">
+                    {% render 'media', media: media_02 %} 
+                </div> 
+                <div class="advisor-content-style">
+                
+                    {%  unless btn_url_02 == blank %}  
+                    {% render 'btn', 
+                        btn_text:btn_text_02, 
+                        btn_url:btn_url_02, 
+                        btn_style:btn_style  
+                    %}
+                    {% endunless %} 
+                </div>
+            </div>
+        </div> 
+    </div>  
+    {% endif %}
+  {% if media_03 != blank %}
+    <div class="menu_slider">
+        <div class=" menu-advisor">
+            <div class=" advisor-style ">
+                    
+                <div class="advisor_media">
+                    {% render 'media', media: media_03 %} 
+                </div> 
+                <div class="advisor-content-style">
+                
+                    {%  unless btn_url_03 == blank %}  
+                    {% render 'btn', 
+                        btn_text:btn_text_03, 
+                        btn_url:btn_url_03, 
+                        btn_style:btn_style  
+                    %}
+                    {% endunless %} 
+                </div>
+            </div>
+        </div> 
+    </div>  
+    {% endif %}
+
+{% else %}
+
+ 
+ 
+
+<section class="splide menu_slider" aria-label="Splide Basic HTML Example">
+  <div class="splide__track">
+		<ul class="splide__list">
+
+        {% if media_01 != blank %}
+            <li class="splide__slide ">
+                <div class="menu-advisor">
+                    <div class=" advisor-style "> 
+                            <div class="advisor_media">
+                                {% render 'media', media: media_01 %} 
+                            </div> 
+                            <div class="advisor-content-style">
+                            
+                            {%  unless btn_url_01 == blank %}  
+                            {% render 'btn', 
+                                btn_text:btn_text_01, 
+                                btn_url:btn_url_01, 
+                                btn_style:btn_style  
+                            %}
+                            {% endunless %} 
+                        </div>
+                    </div>
+                </div>
+            </li> 
+        {% endif %}
+
+
+
+        {% if media_02 != blank %}
+            <li class="splide__slide  ">
+                <div class="menu-advisor">
+                <div class=" advisor-style "> 
+                        <div class="advisor_media">
+                            {% render 'media', media: media_02 %} 
+                        </div> 
+                        <div class="advisor-content-style">
+                        
+
+                        {%  unless btn_url_02 == blank %}  
+                        {% render 'btn', 
+                            btn_text:btn_text_02, 
+                            btn_url:btn_url_02, 
+                            btn_style:btn_style  
+                        %}
+                        {% endunless %}
+                    </div>
+                </div>
+                </div>
+            </li> 
+        {% endif %}
+
+
+        {% if media_03 != blank %}
+            <li class="splide__slide   ">
+                <div class="menu-advisor">
+                <div class=" advisor-style  "> 
+                        <div class="advisor_media">
+                            {% render 'media', media: media_03 %} 
+                        </div> 
+                        <div class="advisor-content-style">
+                        
+
+                        {%  unless btn_url_03 == blank %}  
+                        {% render 'btn', 
+                            btn_text:btn_text_03, 
+                            btn_url:btn_url_03, 
+                            btn_style:btn_style  
+                        %}
+                        {% endunless %} 
+                    </div>
+                </div>
+                </div>
+            </li> 
+        {% endif %}
+			 
+		</ul>
+  </div>
+</section> 
+ 
+{{ 'splide.min.css' |  asset_url  | stylesheet_tag }}
+<script src="{{ 'splide.min.js' |  asset_url }}"></script>
+{% comment %} <script>
+  document.addEventListener( 'DOMContentLoaded', function() {
+    var splide = new Splide( '.splide',{
+        type   : 'loop',
+        perPage: 1,
+    } );
+    splide.mount();
+  } );
+</script>  {% endcomment %}
+<script>
+  function initSplideSliders(container) {
+    var scope = container || document;
+    var sliders = scope.querySelectorAll('.splide:not(.is-initialized)');
+
+    sliders.forEach(function (el) {
+      var splide = new Splide(el, {
+        type: 'loop',
+        perPage: 1,
+      });
+      splide.mount();
+      el.classList.add('is-initialized');
+    });
+  }
+
+  // Normal page load
+  document.addEventListener('DOMContentLoaded', function () {
+    initSplideSliders();
+  });
+
+  // Theme editor: re-init when a section is added/re-rendered
+  document.addEventListener('shopify:section:load', function (event) {
+    initSplideSliders(event.target);
+  });
+
+  // Optional: handle re-selecting/re-rendering blocks too
+  document.addEventListener('shopify:block:select', function (event) {
+    initSplideSliders(event.target.closest('.splide') ? event.target.closest('.splide').parentElement : document);
+  });
+</script>
+
+{% endif %}
+ 
+<style>
+    .menu_slider{
+        width: 100%;
+        --block_width: 100%;
+        --block_width_phone: 100%;
+    display: flex;
+    flex-direction: column;
+    }
+     .menu_slider .splide__pagination { 
+    position: static; 
+    margin-top: 20px;
+}
+ 
+.menu_slider .splide__arrows {
+    order: 1;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    transform: translateY(-25px);
+    gap: 90px;
+}
+.menu_slider .splide__arrows .splide__arrow.splide__arrow--prev{
+    position: static;
+    transform: translateY(0);
+}
+.menu_slider .splide__arrows .splide__arrow.splide__arrow--next{ 
+    position: static;
+    transform: translateY(0);
+}
+   .menu-advisor{
+    flex-basis: var(--block_width);
+    max-width: var(--block_width);
+    height: stretch;
+
+     @media screen and (max-width: 767px) {
+       flex-basis:  var(--block_width_phone);
+        max-width: var(--block_width_phone);
+    }
+}
+.menu-advisor .advisor-style {
+    position: relative;
+    height: 100%;
+    border-radius: 0 0 20px 20px;
+    overflow: hidden;
+}
+.menu-advisor .advisor-style::before {
+    background-color: #3f7280;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 70px);
+}
+   .menu-advisor img{
+    max-width: 100%;
+   }
+.menu-advisor .advisor-bg-color {
+    position: absolute;
+    width: 100%;
+    height: calc( 100% - 50px );
+    bottom: 0;
+    left: 0;
+    display: block;
+    z-index: 0;
+    border-radius: var(--border_radius);
+    background-color: var(--bg_color); 
+} 
+.menu-advisor .advisor-bg-color::after{
+    content: "";
+    background-image: url(https://cdn.shopify.com/s/files/1/0993/6247/2068/files/blur_74beeb3e-bf11-4a93-b202-5139e44c7617.png?v=1779207915);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+
+}
+
+.menu-advisor .advisor-content-style{
+    padding: var(--block_padding_vertical) var(--block_padding_horizontal);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 15px;
+
+}
+
+.menu-advisor .advisor-content-style a{
+    background-color: #fff;
+    --color:#52B099;
+    color: var(--color);
+    font-size: 18px;
+    padding: 14px 25px;
+}
+ 
+.menu-advisor .advisor-content-style a svg{
+    fill: var(--color);
+
+}
+.menu-advisor .advisor-content-style a:hover  {
+    background-color: #fff;
+
+}
+.menu-advisor .content{
+    max-width: var(--content_max_width);
+    text-align: var(--content_text_align);
+}
+.advisor_media{
+    position: relative;
+}
+.icon_style {
+    position: absolute;
+    max-width: var(--icon-size);
+    left: 50%;
+    transform: translate(-50%, calc(var(--icon-size) / 2) );
+    bottom: 0;
+}
+.icon_style.color_icon{
+    background-color: rgba(var(--color-shadow)) ;
+    width: var(--icon-size);
+    height: var(--icon-size);
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+}
+.icon_style.color_icon img{
+     max-width: calc( var(--icon-size) / 1.6);
+}
+.icon_style.color_icon svg{
+     width: calc( var(--icon-size) / 1.6);
+     height: calc( var(--icon-size) / 1.6);
+}
+ 
+.icon_style img{
+
+     max-width: var(--icon-size); 
+}
+.icon_style svg {
+
+     width: var(--icon-size);
+     height: var(--icon-size);
+}
+</style>
+

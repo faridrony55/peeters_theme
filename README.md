@@ -19,7 +19,7 @@ git push -f origin main
 git push --force-with-lease origin main
  
 
-
+// shopify theme dev --store=peeters-tweewielers-theme-dev.myshopify.com --theme-editor-sync
 
 
 shopify theme dev --store=peeters-tweewielers-theme-dev.myshopify.com
