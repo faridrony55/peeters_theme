@@ -72,7 +72,7 @@
     "cusheader": {
       "type": "cus-header",
       "blocks": {
-        "icon_menu_W8cDK3": {
+        "icon_menu_r4e4wU": {
           "type": "icon_menu",
           "settings": {
             "item_name": "big SALE",
@@ -85,10 +85,40 @@
             "btn_text_03": "ADVIESGESPREK",
             "btn_url_03": ""
           }
+        },
+        "icon_menu_W8cDK3": {
+          "type": "icon_menu",
+          "disabled": true,
+          "settings": {
+            "item_name": "Tweedehands",
+            "title": "Waar ben je naar op zoek?",
+            "media_01": "shopify://shop_images/Mask_group_1_7475c019-edd8-4bf7-b5d3-5591335ef60d.png",
+            "btn_text_01": "ADVIESGESPREK",
+            "btn_url_01": "shopify://products/hello-copy-copy",
+            "btn_text_02": "ADVIESGESPREK",
+            "btn_url_02": "shopify://collections/e-bike-copy",
+            "btn_text_03": "ADVIESGESPREK",
+            "btn_url_03": ""
+          }
+        },
+        "icon_menu_yHAg7g": {
+          "type": "icon_menu",
+          "settings": {
+            "item_name": "",
+            "title": "Waar ben je naar op zoek?",
+            "btn_text_01": "",
+            "btn_url_01": "",
+            "btn_text_02": "",
+            "btn_url_02": "",
+            "btn_text_03": "",
+            "btn_url_03": ""
+          }
         }
       },
       "block_order": [
-        "icon_menu_W8cDK3"
+        "icon_menu_r4e4wU",
+        "icon_menu_W8cDK3",
+        "icon_menu_yHAg7g"
       ],
       "settings": {
         "menu": "home",

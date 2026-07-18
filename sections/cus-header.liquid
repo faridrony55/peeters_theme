@@ -4,11 +4,12 @@
 }
 .cus_header .grid{
     display:grid;
-    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-columns: 1fr 7fr 4fr;
 }
 .menu_parent{
     list-style:none;
     display:flex;
+    position:relative;
      
 }
 .menu_parent li{
@@ -41,7 +42,7 @@ background:#3f7280;
     transform:rotate(0deg);
 }
 .menu_parent .dropdown_hover{
-position:relative;
+/* position:relative; */
 }
 .menu_parent .dropdown_hover .dropdown_menu {
     position: absolute;
@@ -50,7 +51,7 @@ position:relative;
     /* background-color: #3f7280; */
     width: 100%;
     left: 0;
-    min-width: 250px;
+    max-width: 250px;
     border-radius: 12px;
     padding: 10px;
     transform: translateY(30px);
@@ -76,6 +77,54 @@ position:relative;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
     }
+
+
+.menu_parent .dropdown_hover.megamenu .dropdown_menu {
+    position: absolute;
+     opacity: 0;  
+     visibility: hidden; 
+    /* background-color: #3f7280; */
+    width: 100%;
+    left: 0;
+    min-width: 250px;
+    max-width: 100%;
+    border-radius: 12px;
+    padding: 10px;
+    transform: translateY(30px);
+    transition-duration:0.4s;
+}
+.menu_parent .dropdown_hover.megamenu:hover .dropdown_menu{
+opacity: 1;  
+     visibility: visible; 
+    transform: translateY(0);
+}
+.menu_parent .dropdown_hover.megamenu .dropdown_menu .megamenu_cols{
+        display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 15px;
+}
+.menu_parent .dropdown_hover.megamenu .dropdown_menu .megamenu_cols .mega_column{
+       
+}
+.menu_parent .dropdown_hover.megamenu .dropdown_menu .megamenu_cols .mega_column strong{
+       
+}
+.menu_parent .dropdown_hover.megamenu .dropdown_menu .megamenu_cols .mega_column a{
+           display: block;
+    padding: 2px 0;
+    border-radius: 5px;
+}
+.menu_parent .dropdown_hover.megamenu .dropdown_menu .megamenu_cols .mega_column a:hover{
+    background:transparent;
+
+}
+
+
+.header_action{
+
+    display: flex;
+    align-items: center;
+}
 {% endstyle %}  
 
 
@@ -128,17 +177,21 @@ position:relative;
             {% endif %}
 
 
-            {% if parent.levels == 1 %}
-
+            {% if parent.levels == 1 %} 
                    
-               <li class="dropdown_hover {% if parent.active %}active{% endif %}">
+               <li class="dropdown_hover {% if parent.active %}active{% endif %}"   
+                {% if matching_block %}
+                   style="position: relative;"
+                 {% endif %}
+                 >
+                
                 <div class="dropdown menu-item">
                     <span>{{parent.title}}</span>
                     {% render 'arrow-down' %}
                 </div>
 
                 {% capture dropdown_menu_list %}
-                    <div class="dropdown_menu color-{{section.settings.color_scheme_01}} gradient">
+                    <div class="dropdown_menu color-{{section.settings.color_scheme_01}} gradient" >
                         {% for child in parent.links %}
                             <a class="menu-item" href="{{child.url}}">{{child.title}}</a>
                         {% endfor %}
@@ -148,10 +201,7 @@ position:relative;
                 
                 {%  assign parent_title = parent.title | downcase %}
                 {% assign matching_block = nil %}
-                 
-              
-
-                 
+                  
                 
                 {% for block in section.blocks %}
                     {% if block.type == 'icon_menu' %}
@@ -204,9 +254,35 @@ position:relative;
             {% endif %}
 
             {% if parent.levels == 2 %}
-               <li class="{% if parent.active %}active{% endif %}">
+                <li class="dropdown_hover megamenu{% if parent.active %}active{% endif %}">
+                    <div class="dropdown menu-item">
+                        <span>{{parent.title}}</span>
+                        {% render 'arrow-down' %}
+                    </div>
+
+                     <div class="dropdown_menu color-{{section.settings.color_scheme_01}} gradient" >
+                        <div class="megamenu_cols">
+                            {% for child in parent.links %}
+                                <div class="mega_column">
+                                    <strong>{{child.title}}</strong>
+                                    <div>
+                                        {% for grandchild in child.links %}
+                                            <a class="" href="{{grandchild.url}}">{{grandchild.title}}</a>
+                                        {% endfor %}
+                                    </div>
+                                    
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </li>
+
+
+               {% comment %} <li class="{% if parent.active %}active{% endif %}">
                     <div class="menu-item">{{parent.title}}</div>
-               </li>
+                    {{dropdown_menu_list}}
+               </li> {% endcomment %}
             {% endif %}
 
             
@@ -214,66 +290,76 @@ position:relative;
     </ul>
 
 {% endcapture %}
-{% comment %} {%  capture nav %}  
+ 
 
-         <ul> 
-         {% for link in menu.links %}
-            <li class="{{ link.handle }}"> 
-                
-                {% if link.levels == 0 %}
-                    {{link.levels}}
-                    <a href="{{ link.url }}" class="{{ link.active }} ">{{link.title}}</a>
+{%  capture country %} 
 
-                {% elsif link.levels == 1 %} 
-                    
-                    <div class="dropdown {{ link.active }} ">{{link.levels}} {{link.title}}</div> 
+    {%- if  localization.available_countries.size > 1 -%}
+        <localization-form class="small-hide medium-hide" data-prevent-hide>
+        {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+            <div>
+            <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
+            {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
+            </div>
+        {%- endform -%}
+        </localization-form>
+    {% endif %}
+{% endcapture %} 
 
-                    <ul>
-                        {% for child in link.links %}
-                            <li class="{{ child.handle }}">
-                                <a href="{{ child.url }}" class="{{ child.active }} ">{{child.title}}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                
-                {% elsif link.levels == 2 %} 
-                    <div class="megamenu {{ link.active }} ">{{link.levels}} {{link.title}}</div> 
-                    <div class="megamenu_grid">
-                        {% for child in link.links %}
-                            <div class="column {{ link.handle }}">
-                                <div class="{{ child.active }} "><strong>{{child.title}}</strong></div>
-                                <ul>
-                                    {% for parent in child.links %}
-                                        <li class="{{ parent.handle }}">
-                                            <a href="{{ parent.url }}" class="{{ parent.active }} ">{{child.title}}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+{%  capture language %} 
+    {%- if localization.available_languages.size > 1 -%}
+          <localization-form class="small-hide medium-hide" data-prevent-hide>
+            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+{% endcapture %}
 
-                
-                 
-            </li>
-          {% endfor %}
+{%  capture header_action %} 
+{{country}}
+{{language}}
 
-         </ul>
-{% endcapture %}   {% endcomment %}
+ {% render 'header-search', input_id: 'Search-In-Modal' %}
+ {% render 'customer-accounts'  %}
+ 
+ <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+          {% if cart == empty %}
+            <span class="svg-wrapper">{{'icon-cart-empty.svg' | inline_asset_content }}</span>
+          {% else %}
+            <span class="svg-wrapper">{{'icon-cart.svg' | inline_asset_content }}</span>
+          {% endif %}
+        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        {%- if cart != empty -%}
+          <div class="cart-count-bubble">
+            {%- if cart.item_count < 100 -%}
+              <span aria-hidden="true">{{ cart.item_count }}</span>
+            {%- endif -%}
+            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+          </div>
+        {%- endif -%}
+      </a>
+
+{% endcapture %}  
+
 
 
 <div class="color-{{section.settings.color_scheme}} gradient">
     <div class="page-width" style="padding-block: ;">
 
          <div class="grid">
-            <div>
+            <div class="logo">
                 {{logo_image}}
             </div>
             <nav>
                 {{navigation}}
             </nav>
-            <div></div>
+            <div class="header_action">
+                {{header_action}}
+            </div>
          </div>
         
  

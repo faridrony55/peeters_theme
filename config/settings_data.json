@@ -120,10 +120,11 @@
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
     "currency_code_enabled": true,
-    "cart_type": "notification",
+    "cart_type": "drawer",
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
+    "cart_color_scheme": "scheme-1",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -142,9 +143,9 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "rgba(0,0,0,0)",
+          "background": "#FFFFFF",
           "background_gradient": "",
-          "text": "#ffffff",
+          "text": "#06123D",
           "button": "#52b099",
           "button_label": "#ffffff",
           "secondary_button_label": "#52b099",
@@ -167,7 +168,7 @@
           "background": "#06123d",
           "background_gradient": "",
           "text": "#ffffff",
-          "button": "#3E727F",
+          "button": "#3e727f",
           "button_label": "#000000",
           "secondary_button_label": "#ffffff",
           "shadow": "#121212"
