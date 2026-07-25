@@ -23,21 +23,23 @@
           "type": "title",
           "settings": {}
         },
-        "caption": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.metafields.descriptors.subtitle.value }}",
-            "text_style": "subtitle"
-          }
-        },
         "price": {
           "type": "price",
+          "disabled": true,
           "settings": {}
+        },
+        "cus_price_yPkP8Y": {
+          "type": "cus_price",
+          "settings": {
+            "show_currency": true,
+            "show_decimal": false
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "button"
+            "picker_type": "button",
+            "swatch_shape": "circle"
           }
         },
         "quantity_selector": {
@@ -101,8 +103,8 @@
       "block_order": [
         "vendor",
         "title",
-        "caption",
         "price",
+        "cus_price_yPkP8Y",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
@@ -115,10 +117,14 @@
       ],
       "settings": {
         "enable_sticky_info": true,
-        "media_size": "large",
+        "color_scheme": "scheme-208c8557-e0ff-472c-bff5-5f27ab4367ce",
+        "media_size": "medium",
         "constrain_to_viewport": true,
-        "gallery_layout": "stacked",
-        "mobile_thumbnails": "hide",
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
@@ -151,10 +157,12 @@
         "height": "small",
         "desktop_image_width": "medium",
         "layout": "text_first",
+        "image_behavior": "none",
         "content_layout": "no-overlap",
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
+        "section_color_scheme": "",
         "color_scheme": "scheme-2",
         "padding_top": 36,
         "padding_bottom": 36
@@ -208,10 +216,12 @@
       "settings": {
         "heading": "You may also like",
         "heading_size": "h2",
+        "products_to_show": 4,
         "columns_desktop": 4,
         "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "square",
+        "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,

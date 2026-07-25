@@ -1,0 +1,79 @@
+{% liquid 
+
+    assign show_currency = block.settings.show_currency
+    assign show_decimal = block.settings.show_decimal
+
+
+    assign variant_price = product.selected_or_first_available_variant
+ 
+    if show_decimal == true  
+        if show_currency == true 
+            assign price =  variant_price.price |  money_with_currency 
+            assign compare_at_price = variant_price.compare_at_price  |  money_with_currency 
+        else
+            assign price =  variant_price.price | money 
+            assign compare_at_price = variant_price.compare_at_price  |  money
+        endif 
+    else 
+
+        if show_currency == true 
+            assign price =  variant_price.price |  money_with_currency | replace: '.00', '' | replace: ',00' , '' 
+            assign compare_at_price =  variant_price.compare_at_price |  money_with_currency | replace: '.00', '' | replace: ',00' , '' 
+        else
+            assign price =  variant_price.price | money  | replace: '.00', '' | replace: ',00' , ''
+            assign compare_at_price =  variant_price.compare_at_price | money  | replace: '.00', '' | replace: ',00' , ''
+        endif
+
+    endif 
+
+
+    if variant_price.compare_at_price  > variant_price.price 
+        assign sale_price = variant_price.compare_at_price  | minus: variant_price.price
+        assign savings_percent = sale_price | times: 100.0 | divided_by: variant_price.compare_at_price | round  
+    endif
+ 
+
+
+%}
+ <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+
+ <div class="price_box">
+ 
+    {% if variant_price.compare_at_price  %}
+
+        <div style="display: flex; gap:30px;">
+            <span class="price">{{ price }}</span>
+            <del>{{ compare_at_price  }}</del>
+            <mark class="saved_price">{{sale_price | money}}</mark>
+            <mark>{{savings_percent}}%</mark>
+        </div>
+
+    {% else %}
+        <span class="price">{{ price }}</span>
+    {% endif %}
+
+     
+
+</div>
+
+
+ </div>
+
+
+{% comment %} 
+{% if product.quantity_price_breaks_configured %}
+  <div class="product-volume-pricing-badge">
+    <span>Bulk discounts available!</span>
+  </div>
+   
+  {% for variant in product.variants %}
+    {% if variant.quantity_price_breaks.size > 0 %}
+      <ul class="price-breaks-list">
+        {% for break in variant.quantity_price_breaks %}
+          <li>Buy {{ break.minimum_quantity }}+ for {{ break.price | money }} each</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endfor %}
+{% endif %} 
+{% endcomment %}

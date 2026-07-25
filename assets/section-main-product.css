@@ -1,6 +1,14 @@
+.main-product-section{
+  background-color: #06123d;
+}
+
 product-info {
   display: block;
+    border-top-left-radius: 250px;
 }
+
+
+
 
 .product {
   margin: 0;

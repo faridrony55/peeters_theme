@@ -1,0 +1,103 @@
+{% comment %} {{ product | json }} {% endcomment %}
+<div class="product_slider_main">
+
+
+    {% unless product.metafields.custom.best_seller == blank %}
+    <div class="product_badge">
+        <span>{{product.metafields.custom.best_seller}}</span> 
+    </div>
+    {% endunless %}
+
+    
+    {%  assign brand_logo =  product.metafields.custom.brand_logo_image.value %} 
+    {% unless brand_logo == blank %}
+    <div class="product_brand_logo">
+         {{ brand_logo.logo |  image_url: width: 150 |  image_tag }}
+    </div>
+    {% endunless %}
+
+ 
+
+    
+
+
+
+    <section class="splide product_slider" aria-label="Splide Basic HTML Example">
+        <div class="splide__track">
+                <ul class="splide__list">
+        
+                    {% for media in product.media %} 
+                        <li class="splide__slide ">
+                            <img
+                                src="{{ media |  image_url: width: 1400 }}" 
+                                width="100%"
+                                height="auto"
+                                alt="{{product.title}}" 
+                                >
+
+                        </li> 
+                        {% endfor %} 
+                </ul>
+        </div>
+    </section> 
+ </div>
+ 
+{{ 'splide.min.css' |  asset_url  | stylesheet_tag }}
+<script src="{{ 'splide.min.js' |  asset_url }}"></script>
+<script>
+  function initSplideSliders(container) {
+    var scope = container || document;
+    var sliders = scope.querySelectorAll('.product_slider:not(.is-initialized)');
+
+    sliders.forEach(function (el) {
+      var splide = new Splide(el, {
+        type: 'loop',
+        perPage: 1,
+      });
+      splide.mount();
+      el.classList.add('is-initialized');
+    });
+  }
+
+  // Normal page load
+  document.addEventListener('DOMContentLoaded', function () {
+    initSplideSliders();
+  });
+
+  // Theme editor: re-init when a section is added/re-rendered
+  document.addEventListener('shopify:section:load', function (event) {
+    initSplideSliders(event.target);
+  });
+
+  // Optional: handle re-selecting/re-rendering blocks too
+  document.addEventListener('shopify:block:select', function (event) {
+    initSplideSliders(event.target.closest('.product_slider') ? event.target.closest('.splide').parentElement : document);
+  });
+</script>
+
+
+{% comment %} <img
+    src="{{ product.featured_image |  image_url: width: 1400 }}"
+     
+    width="100%"
+    height="auto"
+    alt="{{product.title}}"
+
+> {% endcomment %}
+
+
+{% comment %} {% if product.media.size > 0 %}
+<ul style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr ">
+    {% for media in product.media %} 
+<li>
+    <img
+    src="{{ media |  image_url: width: 1400 }}" 
+    width="100%"
+    height="auto"
+    alt="{{product.title}}" 
+    >
+</li>
+
+{% endfor %}
+</ul>
+{% endif %} {% endcomment %}

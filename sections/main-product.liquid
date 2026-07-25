@@ -24,6 +24,8 @@
   {%- if product.quantity_price_breaks_configured? -%}
     {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
+  {{ 'cus-product.css' | asset_url | stylesheet_tag }}
+
 
   {%- style -%}
     .section-{{ section.id }}-padding {
@@ -74,9 +76,17 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
+    
+
+      {% render 'breadcrumbs' %}
+
+
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-      <div class="grid__item product__media-wrapper">
-        {% render 'product-media-gallery', variant_images: variant_images %}
+      <div class="grid__item product__media-wrapper ">
+ 
+        {% render 'cus-product-media-gallery' %}
+        
+        {% comment %} {% render 'product-media-gallery', variant_images: variant_images %} {% endcomment %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <section
@@ -105,8 +115,15 @@
                     </h2>
                   </a>
                 </div>
+
+              {% when 'cus_price' %}
+                {% render 'cus_price', 
+                  product: product, 
+                  block: block  
+                %}
+
               {%- when 'price' -%}
-                <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                <div id="_price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
                     product: product,
                     use_variant: true,
@@ -742,7 +759,7 @@
 {
   "name": "t:sections.main-product.name",
   "tag": "section",
-  "class": "section",
+  "class": "section main-product-section",
   "blocks": [
     {
       "type": "@app"
@@ -788,6 +805,28 @@
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
       "limit": 1
+    },
+    {
+      "type": "cus_price",
+      "name": "Custom Price",
+      "limit": 1,
+      "settings": [
+
+          {
+            "type": "checkbox",
+            "id": "show_currency",
+            "label": "Show Currency",
+            "default":true
+          },
+          {
+            "type": "checkbox",
+            "id": "show_decimal",
+            "label": "Show Decimal",
+            "default":true,
+            "info":"If decimal value is zero , will be not shown if you check"
+          }
+
+      ]
     },
     {
       "type": "sku",

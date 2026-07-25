@@ -209,6 +209,7 @@ best_bicycle_content_slider
         transform: translateY(-80px);
     position: relative;
     z-index: 0;
+    min-height: auto;
     .best_bicycle_content{
             width: 100%; 
         display: flex;
