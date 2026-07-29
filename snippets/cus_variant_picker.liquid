@@ -1,0 +1,110 @@
+{% comment %} {{ product.selected_or_first_available_variant.price }} {% endcomment %}
+
+
+{% liquid 
+   assign product_form_id = 'product-form-' | append: section.id
+
+%}
+
+<variant-selects
+    id="variant-selects-{{ section.id }}"
+    data-section="{{ section.id }}" 
+    {{ block.shopify_attributes }}
+  >
+{% unless product.has_only_default_variant %}
+      {% for option in product.options_with_values %}
+
+
+         <fieldset class="js product-form__input product-form__input--swatch">
+          <legend class="form__label">
+            <strong>{{option.name}}</strong> {{option.selected_value}}
+          </legend>
+
+
+          {% if option_type == 'dropdown' %}
+           
+            <select
+              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+              class="select__select"
+              name="options[{{ option.name | escape }}]"
+              form="{{ product_form_id }}"
+            >
+            
+             {% for value in option.values %}
+                {% liquid 
+                    assign  item = value.name 
+                    assign item_id =  item |  downcase |  replace: ' ', '_' |  append: '_' | append: forloop.index
+                %}
+                <option 
+                    value="{{value.name}}" 
+                    id="{{item_id }}"
+                   
+                    {% if value.selected %}  selected="selected" {% endif %}
+                    data-option-value-id="{{ value.id }}"
+                    data-product-url="{{ value.product_url }}"
+                     
+                >  
+                 {% if value.available %}
+                        {{value.name}} 
+                {% else %}
+                    <del>{{value.name}}</del>
+                {% endif %}
+                </option>
+             {% endfor %}
+           </select>
+
+            {% endif %}
+
+          {% if option_type == 'button' %}
+           
+            {% for value in option.values %}
+                {% liquid 
+                    assign  item = value.name 
+                    assign item_id =  item |  downcase |  replace: ' ', '_' |  append: '_' | append: forloop.index
+                %}
+
+               
+  
+                <div>
+                    <input 
+                    type="radio" 
+                    value="{{value.name}}" 
+                    name="{{option.name}}" 
+                    
+                    id="{{item_id }}"
+                    form="{{ product_form_id }}"
+                    class="{% if value.selected %} checked {% endif %}"
+                    {% if value.selected %} checked {% endif %}
+                    data-option-value-id="{{ value.id }}"
+                    data-product-url="{{ value.product_url }}"
+                    {% unless value.available %}disabled{% endunless %}
+
+                    > 
+                    <label for="{{item_id}}">
+                        {% if value.available %}
+                             {{value.name}} 
+                        {% else %}
+                            <del>{{value.name}}</del>
+                        {% endif %}
+                        
+                    </label>
+                </div>  
+            {% endfor %}
+        {% endif %}
+             
+
+
+          {% comment %} {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            picker_type: picker_type
+          %} {% endcomment %}
+        </fieldset>
+
+
+         
+      {% endfor %}
+{% endunless %}
+</variant-selects>
+<hr>

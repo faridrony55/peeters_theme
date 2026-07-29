@@ -32,14 +32,21 @@
           "type": "cus_price",
           "settings": {
             "show_currency": true,
-            "show_decimal": false
+            "show_decimal": true,
+            "sale_badge": "save"
+          }
+        },
+        "cus_variant_picker_pYyrmb": {
+          "type": "cus_variant_picker",
+          "settings": {
+            "option_type": "dropdown"
           }
         },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
-            "swatch_shape": "circle"
+            "swatch_shape": "square"
           }
         },
         "quantity_selector": {
@@ -105,6 +112,7 @@
         "title",
         "price",
         "cus_price_yPkP8Y",
+        "cus_variant_picker_pYyrmb",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",

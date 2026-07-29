@@ -492,6 +492,9 @@
                   render 'share-button', block: block, share_link: share_url
                 %}
 
+              {%  when 'cus_variant_picker' %}
+                {% render 'cus_variant_picker', block:block.id, option_type:block.settings.option_type %}
+
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
@@ -824,7 +827,18 @@
             "label": "Show Decimal",
             "default":true,
             "info":"If decimal value is zero , will be not shown if you check"
-          }
+          },
+          {
+            "type": "select",
+            "label": "Show Discoutn Badge",
+            "options": [
+              {"value": "sale","label": "Sale Text"},
+              {"value": "percent","label": "Show in Percent"}, 
+              {"value": "save","label": "Show in Dollar"}
+            ],
+            "id": "sale_badge",
+            "default":"sale"
+          } 
 
       ]
     },
@@ -901,6 +915,24 @@
       "type": "quantity_selector",
       "name": "t:sections.main-product.blocks.quantity_selector.name",
       "limit": 1
+    },
+    {
+      "type": "cus_variant_picker",
+      "limit": 1,
+      "name": "Cus Variant",
+      "settings": [
+        {
+          "type": "select",
+          "id": "option_type",
+          "label": "Option Type",
+          "default":"button",
+          "options": [
+            {"value": "button","label": "Button"},
+            {"value": "dropdown","label": "Dropdown"},
+            {"value": "swatches","label": "Swatches"}
+          ]
+        }
+      ]
     },
     {
       "type": "variant_picker",

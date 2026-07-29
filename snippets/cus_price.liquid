@@ -2,7 +2,7 @@
 
     assign show_currency = block.settings.show_currency
     assign show_decimal = block.settings.show_decimal
-
+    assign sale_badge = block.settings.sale_badge
 
     assign variant_price = product.selected_or_first_available_variant
  
@@ -17,21 +17,37 @@
     else 
 
         if show_currency == true 
-            assign price =  variant_price.price |  money_with_currency | replace: '.00', '' | replace: ',00' , '' 
-            assign compare_at_price =  variant_price.compare_at_price |  money_with_currency | replace: '.00', '' | replace: ',00' , '' 
+           
+            assign price = variant_price.price | divided_by: 100.0 | ceil  | times: 100 |  money_with_currency | remove: '.00'
+            assign compare_at_price =  variant_price.compare_at_price  | divided_by: 100.0 | ceil  | times: 100 |  money_with_currency | remove: '.00'
+
         else
-            assign price =  variant_price.price | money  | replace: '.00', '' | replace: ',00' , ''
-            assign compare_at_price =  variant_price.compare_at_price | money  | replace: '.00', '' | replace: ',00' , ''
+            assign price =  variant_price.price | divided_by: 100.0 | ceil  | times: 100 | money | remove: '.00'
+            assign compare_at_price =  variant_price.compare_at_price | divided_by: 100.0 | ceil  | times: 100 | money | remove: '.00'
         endif
 
     endif 
 
 
     if variant_price.compare_at_price  > variant_price.price 
-        assign sale_price = variant_price.compare_at_price  | minus: variant_price.price
-        assign savings_percent = sale_price | times: 100.0 | divided_by: variant_price.compare_at_price | round  
+        assign  sale_price = variant_price.compare_at_price  | minus: variant_price.price 
+        if sale_badge == 'sale'
+            assign sale_text = 'On Sale'
+        elsif sale_badge == 'save'
+            if show_decimal == true  
+                assign sale_text = sale_price | money 
+            else 
+                assign sale_text = sale_price | divided_by: 100.0 | ceil  | times: 100 |  money | remove: '.00' 
+            endif
+        elsif sale_badge == 'percent'
+             assign sale_text = sale_price | times: 100.0 | divided_by: variant_price.compare_at_price | round | append: '%'
+        endif
+        
+       
     endif
  
+
+   
 
 
 %}
@@ -44,8 +60,11 @@
         <div style="display: flex; gap:30px;">
             <span class="price">{{ price }}</span>
             <del>{{ compare_at_price  }}</del>
-            <mark class="saved_price">{{sale_price | money}}</mark>
-            <mark>{{savings_percent}}%</mark>
+
+            <mark class="saved_price">{{sale_text}}</mark> 
+
+            {% comment %} <mark class="saved_price">{{sale_price | money}}</mark>
+            <mark>{{savings_percent}}%</mark> {% endcomment %}
         </div>
 
     {% else %}
