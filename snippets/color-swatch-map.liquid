@@ -1,0 +1,167 @@
+ 
+
+{%- assign color_value = value | strip | downcase -%}
+
+ 
+
+{%- case color_value -%}
+
+
+
+  {%- when 'black matt' -%}{% assign hex = '#28282B' %}
+  {%- comment -%} ===== BASICS ===== {%- endcomment -%}
+  {%- when 'black' -%}{% assign hex = '#000000' %}
+  {%- when 'white' -%}{% assign hex = '#FFFFFF' %}
+  {%- when 'off white' or 'off-white' or 'offwhite' -%}{% assign hex = '#F5F5F0' %}
+  {%- when 'ivory' -%}{% assign hex = '#FFFFF0' %}
+  {%- when 'cream' -%}{% assign hex = '#FFFDD0' %}
+  {%- when 'beige' -%}{% assign hex = '#F5F5DC' %}
+  {%- when 'gray' or 'grey' -%}{% assign hex = '#808080' %}
+  {%- when 'light gray' or 'light grey' -%}{% assign hex = '#D3D3D3' %}
+  {%- when 'dark gray' or 'dark grey' -%}{% assign hex = '#4B4B4B' %}
+  {%- when 'charcoal' -%}{% assign hex = '#36454F' %}
+  {%- when 'silver' -%}{% assign hex = '#C0C0C0' %}
+
+  {%- comment -%} ===== REDS ===== {%- endcomment -%}
+  {%- when 'red' -%}{% assign hex = '#FF0000' %}
+  {%- when 'dark red' -%}{% assign hex = '#8B0000' %}
+  {%- when 'light red' -%}{% assign hex = '#FF6666' %}
+  {%- when 'maroon' -%}{% assign hex = '#800000' %}
+  {%- when 'burgundy' or 'wine' -%}{% assign hex = '#800020' %}
+  {%- when 'crimson' -%}{% assign hex = '#DC143C' %}
+  {%- when 'scarlet' -%}{% assign hex = '#FF2400' %}
+  {%- when 'brick red' or 'brick' -%}{% assign hex = '#B22222' %}
+  {%- when 'rust' -%}{% assign hex = '#B7410E' %}
+  {%- when 'tomato' -%}{% assign hex = '#FF6347' %}
+  {%- when 'coral' -%}{% assign hex = '#FF7F50' %}
+  {%- when 'salmon' -%}{% assign hex = '#FA8072' %}
+  {%- when 'dusty rose' -%}{% assign hex = '#C08081' %}
+  {%- when 'blush' -%}{% assign hex = '#DE5D83' %}
+  {%- when 'rose' -%}{% assign hex = '#FF007F' %}
+
+  {%- comment -%} ===== PINKS ===== {%- endcomment -%}
+  {%- when 'pink' -%}{% assign hex = '#FFC0CB' %}
+  {%- when 'light pink' -%}{% assign hex = '#FFB6C1' %}
+  {%- when 'hot pink' -%}{% assign hex = '#FF69B4' %}
+  {%- when 'fuchsia' or 'magenta' -%}{% assign hex = '#FF00FF' %}
+  {%- when 'baby pink' -%}{% assign hex = '#F4C2C2' %}
+  {%- when 'mauve' -%}{% assign hex = '#E0B0FF' %}
+
+  {%- comment -%} ===== ORANGES ===== {%- endcomment -%}
+  {%- when 'orange' -%}{% assign hex = '#FFA500' %}
+  {%- when 'dark orange' -%}{% assign hex = '#FF8C00' %}
+  {%- when 'light orange' -%}{% assign hex = '#FFD59A' %}
+  {%- when 'burnt orange' -%}{% assign hex = '#CC5500' %}
+  {%- when 'peach' -%}{% assign hex = '#FFE5B4' %}
+  {%- when 'apricot' -%}{% assign hex = '#FBCEB1' %}
+  {%- when 'tangerine' -%}{% assign hex = '#F28500' %}
+  {%- when 'amber' -%}{% assign hex = '#FFBF00' %}
+  {%- when 'terracotta' -%}{% assign hex = '#E2725B' %}
+
+  {%- comment -%} ===== YELLOWS ===== {%- endcomment -%}
+  {%- when 'yellow' -%}{% assign hex = '#FFFF00' %}
+  {%- when 'light yellow' -%}{% assign hex = '#FFFFA1' %}
+  {%- when 'dark yellow' or 'mustard' -%}{% assign hex = '#E1AD01' %}
+  {%- when 'gold' or 'golden' -%}{% assign hex = '#FFD700' %}
+  {%- when 'mustard yellow' -%}{% assign hex = '#FFDB58' %}
+  {%- when 'lemon' -%}{% assign hex = '#FFF44F' %}
+  {%- when 'champagne' -%}{% assign hex = '#F7E7CE' %}
+  {%- when 'wheat' -%}{% assign hex = '#F5DEB3' %}
+  {%- when 'khaki' -%}{% assign hex = '#C3B091' %}
+
+  {%- comment -%} ===== GREENS ===== {%- endcomment -%}
+  {%- when 'green' -%}{% assign hex = '#008000' %}
+  {%- when 'light green' -%}{% assign hex = '#90EE90' %}
+  {%- when 'dark green' -%}{% assign hex = '#006400' %}
+  {%- when 'olive' -%}{% assign hex = '#808000' %}
+  {%- when 'light olive' -%}{% assign hex = '#A9A876' %}
+  {%- when 'dark olive' -%}{% assign hex = '#556B2F' %}
+  {%- when 'olive green' -%}{% assign hex = '#6B8E23' %}
+  {%- when 'sage' or 'sage green' -%}{% assign hex = '#9CAF88' %}
+  {%- when 'mint' or 'mint green' -%}{% assign hex = '#98FF98' %}
+  {%- when 'forest green' -%}{% assign hex = '#228B22' %}
+  {%- when 'emerald' or 'emerald green' -%}{% assign hex = '#50C878' %}
+  {%- when 'lime' or 'lime green' -%}{% assign hex = '#32CD32' %}
+  {%- when 'hunter green' -%}{% assign hex = '#355E3B' %}
+  {%- when 'seafoam' or 'seafoam green' -%}{% assign hex = '#93E9BE' %}
+  {%- when 'moss' or 'moss green' -%}{% assign hex = '#8A9A5B' %}
+  {%- when 'khaki green' -%}{% assign hex = '#7C7B57' %}
+  {%- when 'teal green' -%}{% assign hex = '#00827F' %}
+  {%- when 'jade' -%}{% assign hex = '#00A86B' %}
+  {%- when 'pistachio' -%}{% assign hex = '#93C572' %}
+
+  {%- comment -%} ===== BLUES ===== {%- endcomment -%}
+  {%- when 'blue' -%}{% assign hex = '#0000FF' %}
+  {%- when 'light blue' -%}{% assign hex = '#ADD8E6' %}
+  {%- when 'dark blue' -%}{% assign hex = '#00008B' %}
+  {%- when 'navy' or 'navy blue' -%}{% assign hex = '#000080' %}
+  {%- when 'sky blue' -%}{% assign hex = '#87CEEB' %}
+  {%- when 'baby blue' -%}{% assign hex = '#89CFF0' %}
+  {%- when 'royal blue' -%}{% assign hex = '#4169E1' %}
+  {%- when 'cobalt' or 'cobalt blue' -%}{% assign hex = '#0047AB' %}
+  {%- when 'denim' or 'denim blue' -%}{% assign hex = '#1560BD' %}
+  {%- when 'steel blue' -%}{% assign hex = '#4682B4' %}
+  {%- when 'powder blue' -%}{% assign hex = '#B0E0E6' %}
+  {%- when 'turquoise' -%}{% assign hex = '#40E0D0' %}
+  {%- when 'teal' -%}{% assign hex = '#008080' %}
+  {%- when 'cyan' or 'aqua' -%}{% assign hex = '#00FFFF' %}
+  {%- when 'indigo' -%}{% assign hex = '#4B0082' %}
+  {%- when 'periwinkle' -%}{% assign hex = '#CCCCFF' %}
+  {%- when 'slate blue' -%}{% assign hex = '#6A5ACD' %}
+  {%- when 'ice blue' -%}{% assign hex = '#D6ECF0' %}
+  {%- when 'cerulean' -%}{% assign hex = '#007BA7' %}
+
+  {%- comment -%} ===== PURPLES ===== {%- endcomment -%}
+  {%- when 'purple' -%}{% assign hex = '#800080' %}
+  {%- when 'light purple' -%}{% assign hex = '#C8A2C8' %}
+  {%- when 'dark purple' -%}{% assign hex = '#301934' %}
+  {%- when 'lavender' -%}{% assign hex = '#E6E6FA' %}
+  {%- when 'lilac' -%}{% assign hex = '#C8A2C8' %}
+  {%- when 'violet' -%}{% assign hex = '#8F00FF' %}
+  {%- when 'plum' -%}{% assign hex = '#8E4585' %}
+  {%- when 'orchid' -%}{% assign hex = '#DA70D6' %}
+  {%- when 'amethyst' -%}{% assign hex = '#9966CC' %}
+  {%- when 'eggplant' -%}{% assign hex = '#614051' %}
+  {%- when 'mulberry' -%}{% assign hex = '#C54B8C' %}
+
+  {%- comment -%} ===== BROWNS ===== {%- endcomment -%}
+  {%- when 'brown' -%}{% assign hex = '#964B00' %}
+  {%- when 'light brown' -%}{% assign hex = '#C4A484' %}
+  {%- when 'dark brown' -%}{% assign hex = '#5C4033' %}
+  {%- when 'tan' -%}{% assign hex = '#D2B48C' %}
+  {%- when 'camel' -%}{% assign hex = '#C19A6B' %}
+  {%- when 'chocolate' -%}{% assign hex = '#7B3F00' %}
+  {%- when 'coffee' -%}{% assign hex = '#6F4E37' %}
+  {%- when 'mocha' -%}{% assign hex = '#967969' %}
+  {%- when 'chestnut' -%}{% assign hex = '#954535' %}
+  {%- when 'mahogany' -%}{% assign hex = '#C04000' %}
+  {%- when 'taupe' -%}{% assign hex = '#483C32' %}
+  {%- when 'sand' or 'sandstone' -%}{% assign hex = '#C2B280' %}
+  {%- when 'caramel' -%}{% assign hex = '#AF6E4D' %}
+  {%- when 'cognac' -%}{% assign hex = '#834333' %}
+  {%- when 'walnut' -%}{% assign hex = '#5C4033' %}
+  {%- when 'espresso' -%}{% assign hex = '#4B3621' %}
+  {%- when 'copper' -%}{% assign hex = '#B87333' %}
+  {%- when 'bronze' -%}{% assign hex = '#CD7F32' %}
+
+  {%- comment -%} ===== NEUTRALS / METALLICS ===== {%- endcomment -%}
+  {%- when 'nude' -%}{% assign hex = '#E3BC9A' %}
+  {%- when 'stone' -%}{% assign hex = '#928E85' %}
+  {%- when 'ecru' -%}{% assign hex = '#C2B280' %}
+  {%- when 'rose gold' -%}{% assign hex = '#B76E79' %}
+  {%- when 'gunmetal' -%}{% assign hex = '#2A3439' %}
+  {%- when 'pewter' -%}{% assign hex = '#899499' %}
+  {%- when 'platinum' -%}{% assign hex = '#E5E4E2' %}
+
+  {%- comment -%} ===== FALLBACK ===== {%- endcomment -%}
+  {%- comment -%}
+    No exact match found — try the value itself as a CSS/handle-safe string.
+    This lets valid CSS color names (e.g. "olive", "teal") work automatically,
+    and gracefully degrades for unknown custom names.
+  {%- endcomment -%}
+  {%- else -%}
+    {% assign hex = color_value | replace: ' ', '' %}
+
+{%- endcase -%}
+
+{{- hex -}}

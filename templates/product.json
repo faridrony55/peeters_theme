@@ -39,13 +39,14 @@
         "cus_variant_picker_pYyrmb": {
           "type": "cus_variant_picker",
           "settings": {
-            "option_type": "dropdown"
+            "option_type": "swatches",
+            "swatches_type": "image"
           }
         },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "button",
+            "picker_type": "dropdown",
             "swatch_shape": "square"
           }
         },

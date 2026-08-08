@@ -493,7 +493,7 @@
                 %}
 
               {%  when 'cus_variant_picker' %}
-                {% render 'cus_variant_picker', block:block.id, option_type:block.settings.option_type %}
+                {% render 'cus_variant_picker', block:block.id, option_type:block.settings.option_type, swatches_type:block.settings.swatches_type %}
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
@@ -931,6 +931,17 @@
             {"value": "dropdown","label": "Dropdown"},
             {"value": "swatches","label": "Swatches"}
           ]
+        },
+        {
+          "type": "select",
+          "id": "swatches_type",
+          "label": "Swatches Type",
+          "default":"color",
+          "options": [
+            {"value": "color","label": "Color"},
+            {"value": "image","label": "Image"} 
+          ],
+          "visible_if": "{{ block.settings.option_type == 'swatches'  }}"
         }
       ]
     },

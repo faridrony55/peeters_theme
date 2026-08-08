@@ -27,11 +27,11 @@ variant-selects {
 }
 
 .product-form__input input[type='radio'] {
-  /* clip: rect(0, 0, 0, 0);
+  clip: rect(0, 0, 0, 0);
   overflow: hidden;
   position: absolute;
   height: 1px;
-  width: 1px; */
+  width: 1px; 
 }
 
 .product-form__input input[type='radio']:not(.disabled):not(.visually-disabled) + label > .label-unavailable {

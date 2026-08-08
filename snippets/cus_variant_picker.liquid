@@ -13,6 +13,44 @@
   >
 {% unless product.has_only_default_variant %}
       {% for option in product.options_with_values %}
+        {% assign color_option_index = forloop.index0 %}
+ 
+  
+
+        {%  capture options_loop %} 
+           <div class="button_option_group">
+            {% for value in option.values %}
+                {% liquid 
+                    assign  item = value.name 
+                    assign item_id =  item |  downcase |  replace: ' ', '_' |  append: '_' | append: forloop.index
+                %} 
+                <div class="button_option">
+                    <input 
+                    type="radio" 
+                    value="{{value.name}}" 
+                    name="{{option.name}}" 
+                    
+                    id="{{item_id }}"
+                    form="{{ product_form_id }}"
+                    class="{% if value.selected %} checked {% endif %}"
+                    {% if value.selected %} checked {% endif %}
+                    data-option-value-id="{{ value.id }}"
+                    data-product-url="{{ value.product_url }}"
+                    {% unless value.available %}disabled{% endunless %}
+
+                    > 
+                    <label for="{{item_id}}">
+                        {% if value.available %}
+                             {{value.name}} 
+                        {% else %}
+                            <del>{{value.name}}</del>
+                        {% endif %}
+                        
+                    </label>
+                </div>  
+            {% endfor %}
+            </div>
+             {% endcapture %}  
 
 
          <fieldset class="js product-form__input product-form__input--swatch">
@@ -22,10 +60,10 @@
 
 
           {% if option_type == 'dropdown' %}
-           
+           <div class="select">
             <select
               id="Option-{{ section.id }}-{{ forloop.index0 }}"
-              class="select__select"
+              class="select__select "
               name="options[{{ option.name | escape }}]"
               form="{{ product_form_id }}"
             >
@@ -52,45 +90,109 @@
                 </option>
              {% endfor %}
            </select>
+           <span class="svg-wrapper"><svg class="icon icon-caret" viewBox="0 0 10 6">
+            <path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path>
+            </svg>
+            </span>
+           </div>
 
             {% endif %}
 
-          {% if option_type == 'button' %}
-           
-            {% for value in option.values %}
-                {% liquid 
-                    assign  item = value.name 
-                    assign item_id =  item |  downcase |  replace: ' ', '_' |  append: '_' | append: forloop.index
-                %}
+          {% if option_type == 'button' %}  
+             {{options_loop}}
+          {% endif %}
 
-               
+
+          {% if option_type == 'swatches' %}
+            
+              {% assign color_swatches = 'color,colour,colors,colours' | split: ',' %}
+              {% assign option_name_downcase = option.name | downcase %} 
+
+              {% if color_swatches contains option_name_downcase%}  
+                <div class="color_swatches_group"> 
+                  {% for value in option.values %}
+
+
+                       {% assign swatch_image = null %} 
+                        {% for variant in product.variants %}
+                          {% if variant.options[color_option_index] == value %}
+                            {% assign swatch_image = variant.image %}
+                            {% break %}
+                          {% endif %}
+                        {% endfor %}
+
+
+                    {% capture swatch_hex %}
+                      {% render 'color-swatch-map', value: value %}
+                    {% endcapture %}
+                    {% liquid 
+                        assign  item = value.name 
+                        assign item_id =  item |  downcase |  replace: ' ', '_' |  append: '_' | append: forloop.index
+                    %} 
+
+                    {% if swatches_type == 'color' %}  
+                      <div class="color_swatches" style="--variant_color:{{swatch_hex}};">
+                      <input 
+                      type="radio" 
+                      value="{{value.name}}" 
+                      name="{{option.name}}" 
+                      
+                      id="{{item_id }}"
+                      form="{{ product_form_id }}"
+                      class="{% if value.selected %} checked {% endif %}"
+                      {% if value.selected %} checked {% endif %}
+                      data-option-value-id="{{ value.id }}"
+                      data-product-url="{{ value.product_url }}"
+                      {% unless value.available %}disabled{% endunless %} 
+                      >   
+                        <label 
+                        for="{{item_id}}"   
+                        {% if value.available %} disabled {% endif %}
+                        class="label_{{value.name |  downcase}}; {% if value.selected %}selected{% endif %}"
+                        >
+                            
+                            
+                        </label>
+                      </div>  
+                    {% elsif swatches_type == 'image' %}
+                      <div class="image_swatches" >
+                      <input 
+                      type="radio" 
+                      value="{{value.name}}" 
+                      name="{{option.name}}" 
+                      
+                      id="{{item_id }}"
+                      form="{{ product_form_id }}"
+                      class="{% if value.selected %} checked {% endif %}"
+                      {% if value.selected %} checked {% endif %}
+                      data-option-value-id="{{ value.id }}"
+                      data-product-url="{{ value.product_url }}"
+                      {% unless value.available %}disabled{% endunless %}
+
+                      >  
+                      
+                      <label 
+                      for="{{item_id}}"   
+                      {% if value.available %} disabled {% endif %}
+                      class="label_{{value.name |  downcase}}; {% if value.selected %}selected{% endif %}"
+                      > 
+                      <img src="{{ swatch_image | image_url: width: 100 }}" alt="{{ value | escape }}">
   
-                <div>
-                    <input 
-                    type="radio" 
-                    value="{{value.name}}" 
-                    name="{{option.name}}" 
+                      </label>
+                      </div>  
+                    {% endif %}
                     
-                    id="{{item_id }}"
-                    form="{{ product_form_id }}"
-                    class="{% if value.selected %} checked {% endif %}"
-                    {% if value.selected %} checked {% endif %}
-                    data-option-value-id="{{ value.id }}"
-                    data-product-url="{{ value.product_url }}"
-                    {% unless value.available %}disabled{% endunless %}
 
-                    > 
-                    <label for="{{item_id}}">
-                        {% if value.available %}
-                             {{value.name}} 
-                        {% else %}
-                            <del>{{value.name}}</del>
-                        {% endif %}
-                        
-                    </label>
-                </div>  
-            {% endfor %}
-        {% endif %}
+
+                  {% endfor %}
+                </div> 
+              {% else %}
+
+                {{options_loop}}
+              {% endif %}
+ 
+            
+          {% endif %}
              
 
 
