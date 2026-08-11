@@ -15,89 +15,241 @@
          {{ brand_logo.logo |  image_url: width: 150 |  image_tag }}
     </div>
     {% endunless %}
-
  
 
-    
+
+{% comment %} 
+    {% for option in product.options_with_values %}
+  {% assign option_index = forloop.index0 %}
+  {% assign selected_value = option.selected_value %}
+
+  {% for variant in product.variants %}
+    {% if variant.options[option_index] == selected_value %}
+      {% if variant.image %}
+        <img
+          src="{{ variant.image | image_url: width: 100 }}"
+          alt="{{ selected_value | escape }}"
+        />
+      {% endif %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endfor %} {% endcomment %}
 
 
 
-    <section class="splide product_slider" aria-label="Splide Basic HTML Example">
+       {% comment %} {% for option in product.options_with_values %}
+         {% assign color_option_index = forloop.index0 %}  
+
+           {% for value in option.values %}  
+            {% if value.selected %}
+              {{value}}
+              {{ forloop.index0 }}
+            {% endif %}
+            
+
+            {% assign slide_image = null %}
+            {% for variant in product.variants %}
+             {% if variant.options[color_option_index] == value %} 
+                {%  assign slide_image = variant.image %}  
+                {% if value.selected %}
+                <img src="{{ slide_image | image_url: width: 100 }}" alt="{{ value | escape }}" />
+                {% endif %}
+              {% break %} 
+            {% endif %}
+           {% endfor %}  
+
+           {% endfor %}
+       {% endfor %} {% endcomment %}
+  
+    {%  assign variant_media = product.selected_or_first_available_variant.featured_media %}
+ 
+    <section 
+    class="splide product_slider" 
+    aria-label="Splide Basic HTML Example"  
+    data-variant-media='{{ product.variants | map: "id" | json }}'
+     id="product-slider-{{ section.id }}-{{ product.id }}"
+      data-product-id="{{ product.id }}"
+    >
+
+
+    <script type="application/json" data-variant-media-map>
+        {
+          {% for variant in product.variants %}
+            "{{ variant.id }}": "{{ variant.featured_media.id | default: product.featured_media.id }}"{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        }
+      </script>
+
+
+
         <div class="splide__track">
                 <ul class="splide__list">
+
+             {% assign current_variant = product.selected_or_first_available_variant %}  
+
+            
+
+                {% for media in product.media %}
+            <li class="splide__slide {% if media.id == variant_media.id %}is-active-initial{% endif %}" data-media-id="{{ media.id }}">
+              <img
+                src="{{ media | image_url: width: 1400 }}"
+                width="100%"
+                height="auto"
+                alt="{{ product.title }}"
+              >
+            </li>
+          {% endfor %}
         
-                    {% for media in product.media %} 
-                        <li class="splide__slide ">
+                   {% comment %} {% for media in product.media %}   
+                      {% if  media.id == variant_media.id %}
+                       <li class="splide__slide r "> 
+                        
+                         <img
+                            src="{{ variant_media |  image_url: width: 1400 }}" 
+                            width="100%"
+                            height="auto"
+                            alt="{{product.title}}" 
+                            > 
+                        </li>
+                      {% endif %}  
+
+                      {% unless  media.id == variant_media.id %}
+                      <li class="splide__slide  ">
                             <img
                                 src="{{ media |  image_url: width: 1400 }}" 
                                 width="100%"
                                 height="auto"
                                 alt="{{product.title}}" 
-                                >
+                                >   
+                        </li>   
+                      {% endunless %}
 
-                        </li> 
-                        {% endfor %} 
+                    {% endfor %}   {% endcomment %}
+
+
+ 
+
                 </ul>
         </div>
+
+
+
+      <ul class="splide__pagination splide__pagination--ltr" role="tablist" aria-label="Select a slide to show"></ul>
+
+
+
     </section> 
  </div>
  
 {{ 'splide.min.css' |  asset_url  | stylesheet_tag }}
 <script src="{{ 'splide.min.js' |  asset_url }}"></script>
+
+
+
 <script>
+  // Keep a registry so we can find each slider's Splide instance later
+  window.__productSplideInstances = window.__productSplideInstances || {};
+
   function initSplideSliders(container) {
     var scope = container || document;
     var sliders = scope.querySelectorAll('.product_slider:not(.is-initialized)');
 
     sliders.forEach(function (el) {
       var splide = new Splide(el, {
-        type: 'loop',
+        type: 'slide',
         perPage: 1,
+        easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+        classes: {
+          pagination: 'splide__pagination your-class-pagination',
+          page: 'splide__pagination__page',
+        },
       });
       splide.mount();
       el.classList.add('is-initialized');
+
+      // remember the instance + its variant->media map, keyed by the slider's id
+      var mapScript = el.querySelector('script[data-variant-media-map]');
+      var variantMediaMap = {};
+      try { variantMediaMap = JSON.parse(mapScript.textContent); } catch (e) {}
+
+      window.__productSplideInstances[el.id] = {
+        splide: splide,
+        variantMediaMap: variantMediaMap,
+      };
+
+      bindVariantChange(el);
     });
   }
 
-  // Normal page load
+  // Move the slider to the slide matching a given variant id
+  function goToVariantSlide(sliderEl, variantId) {
+    var entry = window.__productSplideInstances[sliderEl.id];
+    if (!entry) return;
+
+    var mediaId = entry.variantMediaMap[String(variantId)];
+    if (!mediaId) return;
+
+    var slides = sliderEl.querySelectorAll('.splide__slide');
+    var index = -1;
+    slides.forEach(function (slide, i) {
+      if (slide.getAttribute('data-media-id') === String(mediaId)) {
+        index = i;
+      }
+    });
+
+    if (index > -1) {
+      entry.splide.go(index);
+    }
+  }
+
+  // Wire up listeners for variant changes.
+  // Covers: 1) themes that dispatch a "variant:change" custom event,
+  //         2) plain <select name="id"> / <input name="id"> variant pickers,
+  //         3) hidden input[name="id"] updated silently by JS (via MutationObserver).
+  function bindVariantChange(sliderEl) {
+    var productId = sliderEl.getAttribute('data-product-id');
+
+    // Find the product form associated with this slider.
+    // Adjust this selector if your theme uses a different wrapper/attribute.
+    var form = document.querySelector(
+      'form[data-product-id="' + productId + '"], product-form form, form[action*="/cart/add"]'
+    );
+    if (!form) return;
+
+    var idInput = form.querySelector('input[name="id"], select[name="id"]');
+    if (!idInput) return;
+
+    // 1) Standard change event (dropdowns, hidden select-based pickers)
+    idInput.addEventListener('change', function () {
+      goToVariantSlide(sliderEl, idInput.value);
+    });
+
+    // 2) Theme-dispatched custom event, e.g. document.dispatchEvent(new CustomEvent('variant:change', {detail:{variant}}))
+    document.addEventListener('variant:change', function (event) {
+      var variant = event.detail && (event.detail.variant || event.detail);
+      if (variant && variant.id) {
+        goToVariantSlide(sliderEl, variant.id);
+      }
+    });
+
+    // 3) Fallback: some swatch/radio pickers update the hidden input's value
+    // via JS without firing a native "change" event — catch that too.
+    var observer = new MutationObserver(function () {
+      goToVariantSlide(sliderEl, idInput.value);
+    });
+    observer.observe(idInput, { attributes: true, attributeFilter: ['value'] });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initSplideSliders();
   });
 
-  // Theme editor: re-init when a section is added/re-rendered
   document.addEventListener('shopify:section:load', function (event) {
     initSplideSliders(event.target);
   });
 
-  // Optional: handle re-selecting/re-rendering blocks too
   document.addEventListener('shopify:block:select', function (event) {
     initSplideSliders(event.target.closest('.product_slider') ? event.target.closest('.splide').parentElement : document);
   });
 </script>
-
-
-{% comment %} <img
-    src="{{ product.featured_image |  image_url: width: 1400 }}"
-     
-    width="100%"
-    height="auto"
-    alt="{{product.title}}"
-
-> {% endcomment %}
-
-
-{% comment %} {% if product.media.size > 0 %}
-<ul style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr ">
-    {% for media in product.media %} 
-<li>
-    <img
-    src="{{ media |  image_url: width: 1400 }}" 
-    width="100%"
-    height="auto"
-    alt="{{product.title}}" 
-    >
-</li>
-
-{% endfor %}
-</ul>
-{% endif %} {% endcomment %}

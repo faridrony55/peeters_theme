@@ -14,7 +14,6 @@
 {% unless product.has_only_default_variant %}
       {% for option in product.options_with_values %}
         {% assign color_option_index = forloop.index0 %}
- 
   
 
         {%  capture options_loop %} 
@@ -156,29 +155,29 @@
                       </div>  
                     {% elsif swatches_type == 'image' %}
                       <div class="image_swatches" >
-                      <input 
-                      type="radio" 
-                      value="{{value.name}}" 
-                      name="{{option.name}}" 
-                      
-                      id="{{item_id }}"
-                      form="{{ product_form_id }}"
-                      class="{% if value.selected %} checked {% endif %}"
-                      {% if value.selected %} checked {% endif %}
-                      data-option-value-id="{{ value.id }}"
-                      data-product-url="{{ value.product_url }}"
-                      {% unless value.available %}disabled{% endunless %}
+                        <input 
+                        type="radio" 
+                        value="{{value.name}}" 
+                        name="{{option.name}}" 
+                        
+                        id="{{item_id }}"
+                        form="{{ product_form_id }}"
+                        class="{% if value.selected %} checked {% endif %}"
+                        {% if value.selected %} checked {% endif %}
+                        data-option-value-id="{{ value.id }}"
+                        data-product-url="{{ value.product_url }}"
+                        {% unless value.available %}disabled{% endunless %}
 
-                      >  
+                        >  
                       
-                      <label 
-                      for="{{item_id}}"   
-                      {% if value.available %} disabled {% endif %}
-                      class="label_{{value.name |  downcase}}; {% if value.selected %}selected{% endif %}"
-                      > 
-                      <img src="{{ swatch_image | image_url: width: 100 }}" alt="{{ value | escape }}">
-  
-                      </label>
+                        <label 
+                        for="{{item_id}}"   
+                        {% if value.available %} disabled {% endif %}
+                        class="label_{{value.name |  downcase}}; {% if value.selected %}selected{% endif %}"
+                        > 
+                         <img src="{{ swatch_image | image_url: width: 100 }}" alt="{{ value | escape }}">
+    
+                        </label>
                       </div>  
                     {% endif %}
                     
@@ -208,5 +207,11 @@
          
       {% endfor %}
 {% endunless %}
+
+ <script type="application/json" data-selected-variant>
+    {{ product.selected_or_first_available_variant | json }}
+  </script>
+
+    
 </variant-selects>
-<hr>
+ 
