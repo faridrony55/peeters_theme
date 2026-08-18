@@ -1,0 +1,102 @@
+.product-tabs section{ 
+    padding: var(--padding_top) 0 var(--padding_bottom); 
+    --product_tab_width: calc(55% - var(--gap_horizontal)/2);
+    --product_advisor_width: calc(45% - var(--gap_horizontal)/2);
+ 
+}
+
+.product_tab{
+    
+    flex: 1 1 var(--product_tab_width);
+    max-width: var(--product_tab_width);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.product-tabs .block-advisor{
+    flex: 1 1 var(--product_advisor_width);
+    max-width: var(--product_advisor_width);
+
+}
+
+
+/* product_tab_group*/
+.product_tab_group{
+    background-color: #fff;
+    border-radius: 25px;
+    overflow: hidden;
+    height: calc(100% - 50px);
+
+}
+.tab_button_group{
+    display: flex;
+    gap:0;
+    position: relative;
+    
+}
+.tab_button_group::before{
+    content: "";
+    background-color: #3F7280;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    z-index: 0;
+}
+.tab_button_group button{
+   flex-grow: 1;
+   border: 0;
+   background-color: #fff;
+   padding: 22px; 
+font-weight: 500;
+font-style: Medium;
+font-size: 20px; 
+line-height: 90%;
+letter-spacing: 0%;
+    position: relative;
+
+    
+}
+
+
+.tab_button_group button.active_tab{
+    background-color: #3F7280;
+    color: #fff;
+}
+
+.tab_button_group button.active_tab.tab1{
+    border-radius: 25px 0  25px 0; 
+}
+.tab_button_group button.btn_01:not(.tab1){
+    border-top-right-radius: 25px; 
+}
+.tab_button_group button.active_tab.tab2{
+    border-radius: 0 25px 0 25px; 
+}
+.tab_button_group button.btn_02:not(.tab2){
+    border-top-left-radius: 25px; 
+}
+.tab_button_group button.active_tab span{
+    opacity: 0.5;
+
+}
+
+.tab_details .details{
+    padding-block: 40px;
+    padding-inline: 60px;
+}
+.tab_details table{ 
+    margin-top: 30px; 
+    width: 100%;
+}
+.tab_details tr td,
+.tab_details tr th {
+    border-bottom: 1px solid #2a2a2a24;
+}
+.tab_details tr:last-child td,
+.tab_details tr:last-child th {
+    border-bottom: 0 solid #2a2a2a24;
+}

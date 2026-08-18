@@ -1,0 +1,41 @@
+<div class="ugc_videos">
+    <h3>{{block.settings.title}}</h3>
+
+    <ul> 
+        {% for i in (1..5) %} 
+            {% assign id = 'video_' |  append: i %}
+            {%  assign  video =  block.settings[id] %}   
+            {% unless video == blank %} 
+                <li> {{ video | media_tag: image_size: '100', autoplay: true, loop: loop, controls: true, preload: 'none' }}</li> 
+            {% endunless %} 
+        {% endfor %}
+ 
+        
+    </ul>
+
+</div>
+
+
+<style>
+    .ugc_videos{}
+    .ugc_videos ul{
+        display: flex;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    overflow: auto;
+    }
+
+    .ugc_videos ul li{
+        --width:150px;
+        max-width: var(--width);
+    }
+    .ugc_videos ul li video{
+        width: 100%;
+        overflow: hidden;
+        border-radius: 8px;
+        width:  var(--width);
+        
+    }
+</style>

@@ -1,0 +1,25 @@
+{% for option in product.options_with_values %}
+    <tr>
+        <td>{{ option.name }}</td>
+        <th>
+            <span class="Variant{{ option.name | handle }}" data-option-position="{{ option.position }}">
+                {{ option.selected_value }}
+            </span>
+        </th>
+    </tr>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){var productVariants={{product.variants|json}}
+function updateSelectedVariantDisplay(variantID){var selectedVariant=productVariants.find(function(variant){return variant.id===variantID});if(!selectedVariant)return;var skuEl=document.getElementById('ActiveSKU');if(skuEl)skuEl.textContent=selectedVariant.sku;document.querySelectorAll('[data-option-position]').forEach(function(el){var pos=el.getAttribute('data-option-position');var value=selectedVariant['option'+pos];if(value)el.textContent=value})}
+var variantSelectors=document.querySelectorAll('[name="id"]');if(variantSelectors.length>0){variantSelectors.forEach(function(selector){selector.addEventListener('change',function(event){var selectedVariantID=parseInt(event.target.value);updateSelectedVariantDisplay(selectedVariantID)})})}})
+    </script>
+{% endfor %}
+                                    
+{%  schema  %} 
+    {
+        "name":"Variants", 
+        "tag":null,  
+        "settings": [ 
+
+        ] 
+    }
+{% endschema %} 

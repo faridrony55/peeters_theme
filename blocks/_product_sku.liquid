@@ -1,0 +1,27 @@
+<tr>
+    <td>{{ block.settings.title |  default:'Product SKU' }}</td>
+    <th>
+    <span id="ActiveSKU">{{ product.selected_or_first_available_variant.sku }}</span>    
+    </th>
+</tr>
+<script>
+        document.addEventListener('DOMContentLoaded',function(){var productVariants={{product.variants|json}}
+function updateSelectedSKU(variantID){var selectedVariant=productVariants.find(function(variant){return variant.id===variantID});if(selectedVariant){document.getElementById('ActiveSKU').textContent=selectedVariant.sku}}
+var variantSelectors=document.querySelectorAll('[name="id"]');if(variantSelectors.length>0){variantSelectors.forEach(function(selector){selector.addEventListener('change',function(event){var selectedVariantID=parseInt(event.target.value);updateSelectedSKU(selectedVariantID)})})}})
+</script>
+                                    
+{%  schema  %} 
+    {
+        "name":"SKU",  
+        "tag":null,  
+        "settings": [
+
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title" 
+            } 
+
+        ] 
+    }
+{% endschema %} 

@@ -122,6 +122,11 @@
                   block: block  
                 %}
 
+
+              {% when 'UGC' %}
+
+                {% render 'ugc_videos', block: block %}
+
               {%- when 'price' -%}
                 <div id="_price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -766,6 +771,45 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+
+      "type": "UGC",
+      "name":"UGC Video",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "title",
+          "default":"Loved By Thousands"
+        },
+        {
+          "type": "video",
+          "label": "Video",
+          "id": "video_1"
+        },
+        {
+          "type": "video",
+          "label": "Video",
+          "id": "video_2"
+        },
+        {
+          "type": "video",
+          "label": "Video",
+          "id": "video_3"
+        },
+        {
+          "type": "video",
+          "label": "Video",
+          "id": "video_4"
+        },
+        {
+          "type": "video",
+          "label": "Video",
+          "id": "video_5"
+        }
+      ]
     },
     {
       "type": "text",
@@ -2186,6 +2230,17 @@
     {
       "type": "header",
       "content": "t:sections.main-product.settings.header.content"
+    },
+    {
+      "type": "select",
+      "options": [
+        {"value": "pagination","label": "Pagination"},
+        {"value": "thumbnail","label": "Thumbnail"},
+        {"value": "columns","label": "2 Columns"}
+      ],
+      "default":"pagination",
+      "id": "media_style",
+      "label": "Media Style"
     },
     {
       "type": "select",

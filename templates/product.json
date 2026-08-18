@@ -62,12 +62,26 @@
             "show_gift_card_recipient": true
           }
         },
+        "ugc_6GnDhx": {
+          "type": "UGC",
+          "disabled": true,
+          "settings": {
+            "title": "Loved By Thousands",
+            "video_1": "shopify://files/videos/d58ae12c3e1b4847a77ad85d7b218050.mp4",
+            "video_2": "shopify://files/videos/276ab69984bc4aa68a8cffbdced380a4.HD-1080p-7.2Mbps-90683128.mp4",
+            "video_3": "shopify://files/videos/276ab69984bc4aa68a8cffbdced380a4.HD-1080p-7.2Mbps-90683128.mp4",
+            "video_4": "shopify://files/videos/d58ae12c3e1b4847a77ad85d7b218050.mp4",
+            "video_5": "shopify://files/videos/276ab69984bc4aa68a8cffbdced380a4.HD-1080p-7.2Mbps-90683128.mp4"
+          }
+        },
         "description": {
           "type": "description",
+          "disabled": true,
           "settings": {}
         },
         "collapsible-row-0": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Materials",
             "icon": "leather",
@@ -77,6 +91,7 @@
         },
         "collapsible-row-1": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Shipping & Returns",
             "icon": "truck",
@@ -86,6 +101,7 @@
         },
         "collapsible-row-2": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Dimensions",
             "icon": "ruler",
@@ -95,6 +111,7 @@
         },
         "collapsible-row-3": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Care Instructions",
             "icon": "heart",
@@ -104,6 +121,7 @@
         },
         "share": {
           "type": "share",
+          "disabled": true,
           "settings": {
             "share_label": "Share"
           }
@@ -118,6 +136,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "ugc_6GnDhx",
         "description",
         "collapsible-row-0",
         "collapsible-row-1",
@@ -128,6 +147,7 @@
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-208c8557-e0ff-472c-bff5-5f27ab4367ce",
+        "media_style": "thumbnail",
         "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "contain",
@@ -139,6 +159,110 @@
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 12
+      }
+    },
+    "product_tabs_Vmf7eL": {
+      "type": "product-tabs",
+      "blocks": {
+        "tabs_AcBwdL": {
+          "type": "tabs",
+          "name": "Tabs",
+          "settings": {},
+          "blocks": {
+            "specification_data_Ec8gNq": {
+              "type": "_specification_data",
+              "name": "Specification",
+              "settings": {
+                "title": "Title",
+                "data": ""
+              },
+              "blocks": {}
+            },
+            "specification_data_gU7rxy": {
+              "type": "_specification_data",
+              "name": "Specification",
+              "settings": {
+                "title": "Title",
+                "data": ""
+              },
+              "blocks": {}
+            },
+            "specification_data_akM6rd": {
+              "type": "_specification_data",
+              "name": "Specification",
+              "settings": {
+                "title": "Title",
+                "data": ""
+              },
+              "blocks": {}
+            },
+            "product_sku": {
+              "type": "_product_sku",
+              "static": true,
+              "settings": {
+                "title": ""
+              },
+              "blocks": {}
+            },
+            "product_variant": {
+              "type": "_product_variant",
+              "static": true,
+              "settings": {},
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "specification_data_Ec8gNq",
+            "specification_data_gU7rxy",
+            "specification_data_akM6rd"
+          ]
+        },
+        "advisor_QqcETk": {
+          "type": "advisor",
+          "name": "Advisor",
+          "settings": {
+            "media": "shopify://shop_images/Mask_group_1200x_5bcf56d4-440f-40f0-941d-a62cb5275d75.png",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>",
+            "btn_text": "BEKIJK VACATURE",
+            "btn_url": "",
+            "add_icon": false,
+            "icon_type": "svg",
+            "icon_code": "",
+            "icon_style": "without_color",
+            "icon_size": 50,
+            "btn_style": "filled",
+            "block_align": "flex-start",
+            "bg_color": "#06123D",
+            "block_width": "100%",
+            "border_radius": 25,
+            "color_scheme": "scheme-5de44cb5-c8c4-47cc-b175-9c5122814663",
+            "content_max_width": 500,
+            "content_text_align": "left",
+            "block_padding_horizontal": 30,
+            "block_padding_vertical": 30,
+            "block_width_phone": "100%"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "tabs_AcBwdL",
+        "advisor_QqcETk"
+      ],
+      "name": "Product Tabs",
+      "settings": {
+        "description": "Product omschrijving",
+        "limit_words": true,
+        "desc_limit": 50,
+        "specifications": "Specificatiesg",
+        "active_tab": "tab_02",
+        "layout_max_width": "1603px",
+        "color_scheme": "scheme-208c8557-e0ff-472c-bff5-5f27ab4367ce",
+        "block_align": "center",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "gap_horizontal": 30,
+        "gap_vertical": 30
       }
     },
     "image-with-text": {
@@ -242,6 +366,7 @@
   },
   "order": [
     "main",
+    "product_tabs_Vmf7eL",
     "image-with-text",
     "multicolumn",
     "related-products"

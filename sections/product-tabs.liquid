@@ -1,0 +1,189 @@
+{{ 'product-tabs-section.css' | asset_url | stylesheet_tag }}
+
+{% liquid 
+    assign layout_max_width = section.settings.layout_max_width
+    assign padding_top = section.settings.padding_top
+    assign padding_bottom = section.settings.padding_bottom
+    assign gap_horizontal =  section.settings.gap_horizontal
+    assign gap_vertical =  section.settings.gap_vertical
+    assign block_align = section.settings.block_align
+%}
+
+
+{%  style  %} 
+    .product-tabs{
+        --padding_top: {{padding_top}}px;
+        --padding_bottom: {{padding_bottom}}px;
+        --gap_horizontal : {{gap_horizontal}}px;
+        --gap_vertical : {{gap_vertical}}px;
+        /* --block_align: {{block_align}}; */
+    }
+    {% if layout_max_width != '' %} 
+        .product-tabs .page-width{
+            max-width: {{layout_max_width}};
+        }
+    {% endif %}
+{% endstyle %}  
+
+<section class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width">
+  
+        <div class="flex">
+
+         {% content_for "blocks" %}
+
+            
+                 
+                 
+            {% comment %} <div class="product_advisor">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea magnam consequuntur quis voluptate vitae placeat deserunt alias velit sed a laboriosam aliquam consectetur nobis aperiam, debitis itaque? Corporis, delectus nostrum!
+            </div> {% endcomment %}
+             
+        </div>
+
+
+    </div>
+</section>
+  
+ 
+ 
+ 
+ 
+{%  schema  %} 
+{
+    "class": "product-tabs",
+    "name": "Product Tabs",
+    "tag": "section",
+    "blocks": [  
+        {
+            "type": "advisor" 
+        } ,
+        {
+            "type": "tabs" 
+        }
+        
+        
+ 
+         
+    ],
+    "settings": [
+        {
+            "type": "text",
+            "id": "description",
+            "label": "Description Title",
+            "default": "Product omschrijving"
+        },
+        {
+            "type": "checkbox",
+            "id": "limit_words",
+            "label": "Limit Description Word",
+            "default": false
+        },
+        {
+            "type": "range",
+            "min": 10,
+            "max": 50,
+            "step": 1,
+            "default":15,
+            "label": "Description Words Limit",
+            "id": "desc_limit",
+            "visible_if": "{{ section.settings.limit_words ==  true }}"
+        },
+        {
+        
+            "type": "text",
+            "id": "specifications",
+            "label": "Specifications",
+            "default": "Specificatiesg"
+        },
+        {
+            "type": "select",
+            "id": "active_tab",
+            "options": [
+                {"value": "tab_01","label": "Tab 01"},
+                {"value": "tab_02","label": "Tab 02"}
+            ],
+            "default":"tab_01",
+            "label": "Active Tab"
+        },
+        {
+            "type": "header",
+            "content": "Section Style"
+        },
+        {
+            "type": "text",
+            "default":"1603px",
+            "id": "layout_max_width",
+            "label": "Layout Max Width" 
+        },
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "Section Color",
+            "default": "scheme-5"
+        },
+        {
+            "type": "select",
+            "default": "center",
+            "options": [
+                {"value": "flex-start","label": "Start"},
+                {"value": "center","label": "Center"},
+                {"value": "flex-end","label": "End"}
+            ],
+            "id": "block_align",
+            "label": "Block ALignment"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "label": "Padding Top",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        },
+
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "label": "Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "gap_horizontal",
+            "label": "Column Gap Horizontal",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "gap_vertical",
+            "label": "Column Gap vertical",
+            "min": 0,
+            "max": 100,
+            "unit": "px",
+            "step": 1,
+            "default": 20
+        }
+
+    ],
+    "disabled_on": {
+        "groups": ["header","footer"]
+    },
+    "presets": [
+        {
+            "name": "Product Tabs"
+        }
+    ]
+
+}
+{% endschema %}

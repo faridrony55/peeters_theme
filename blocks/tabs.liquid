@@ -1,0 +1,75 @@
+<div class="product_tab">
+    {%  assign active_tab =  section.settings.active_tab %}
+
+                <div class="product_tab_group" x-data="{ activeTab: '{{active_tab}}' }">
+
+                    <div class="flex tab_button_group">
+                        <button 
+                            @click="activeTab = 'tab_01'" 
+                            :class="{  'active_tab tab1': activeTab === 'tab_01' }"
+                            class="btn_01"    
+                        > 
+                            <span>{{section.settings.description |  default: 'Description'}}</span>
+                        </button>
+                        <button 
+                            @click="activeTab = 'tab_02'"
+                            :class="{  'active_tab tab2': activeTab === 'tab_02' }"
+                            class="btn_02" 
+                        > 
+                            <span>{{section.settings.specifications |  default: 'Specifications'}}</span>
+                        </button>
+                    </div>
+
+
+                    <div class="tab_details">
+                         <div x-show="activeTab == 'tab_01'" class="details">
+                             
+                                <h2>{{product.title}}</h2>
+                                <div>
+                                    {%  assign desc_limit = section.settings.desc_limit %}
+                                    {% if section.settings.limit_words == true %}
+                                    {{product.description | truncatewords: desc_limit, ''  }}
+                                    {% else %}
+                                    {{product.description}}
+                                    {% endif %}
+                                </div> 
+                         
+                         </div> 
+                         <div x-show="activeTab == 'tab_02'" class="details">
+                              <h2>{{product.title}}</h2>
+                              <table class="" border="0" cellspacing="0" cellpadding="10px">
+
+
+                             {% content_for "block", id:'product_sku', type: '_product_sku'  %} 
+                             {% content_for "block", id:'product_variant', type: '_product_variant'  %} 
+                             {% content_for "blocks"  %} 
+                             
+ 
+                              </table>
+                         </div> 
+                    </div>
+ 
+ 
+
+                </div>
+</div>  
+{%  schema  %} 
+    {
+        "name":"Tabs" ,
+        "tag": null,
+        "blocks": [
+            {
+                "type": "_specification_data"
+            }
+        
+        ],
+        "settings": [ 
+
+        ],
+        "presets": [
+            {
+                "name": "Tabs"
+            }
+        ]
+    }
+{% endschema %} 

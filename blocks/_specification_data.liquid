@@ -1,0 +1,32 @@
+ 
+    <tr>
+        <td>{{ block.settings.title }}</td>
+        <th>{{ block.settings.data }}</th>
+    </tr>
+                                    
+{%  schema  %} 
+    {
+        "name":"Specification",  
+        "tag":null,   
+        "presets": [
+            {
+                "name": "Specification"
+            }
+        ],
+        "settings": [
+
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default":"Title"
+            },
+            {
+                "type": "text",
+                "id": "data",
+                "label": "Data" 
+            }
+
+        ] 
+    }
+{% endschema %} 

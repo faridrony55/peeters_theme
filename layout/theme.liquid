@@ -301,6 +301,11 @@
 
 {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag: preload: true }}  
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}"  ></script>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

@@ -2,6 +2,9 @@
 <div class="product_slider_main">
 
 
+{%  assign media_style =  section.settings.media_style %}
+ 
+
     {% unless product.metafields.custom.best_seller == blank %}
     <div class="product_badge">
         <span>{{product.metafields.custom.best_seller}}</span> 
@@ -16,53 +19,43 @@
     </div>
     {% endunless %}
  
-
-
-{% comment %} 
-    {% for option in product.options_with_values %}
-  {% assign option_index = forloop.index0 %}
-  {% assign selected_value = option.selected_value %}
-
-  {% for variant in product.variants %}
-    {% if variant.options[option_index] == selected_value %}
-      {% if variant.image %}
-        <img
-          src="{{ variant.image | image_url: width: 100 }}"
-          alt="{{ selected_value | escape }}"
-        />
-      {% endif %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-{% endfor %} {% endcomment %}
-
-
-
-       {% comment %} {% for option in product.options_with_values %}
-         {% assign color_option_index = forloop.index0 %}  
-
-           {% for value in option.values %}  
-            {% if value.selected %}
-              {{value}}
-              {{ forloop.index0 }}
-            {% endif %}
-            
-
-            {% assign slide_image = null %}
-            {% for variant in product.variants %}
-             {% if variant.options[color_option_index] == value %} 
-                {%  assign slide_image = variant.image %}  
-                {% if value.selected %}
-                <img src="{{ slide_image | image_url: width: 100 }}" alt="{{ value | escape }}" />
-                {% endif %}
-              {% break %} 
-            {% endif %}
-           {% endfor %}  
-
-           {% endfor %}
-       {% endfor %} {% endcomment %}
+  
   
     {%  assign variant_media = product.selected_or_first_available_variant.featured_media %}
+
+
+      {% if media_style == 'columns' %}
+        <section 
+        class=" product_columns" 
+        aria-label="  Basic HTML Example"  
+        data-variant-media='{{ product.variants | map: "id" | json }}'
+        id="product-columns-{{ section.id }}-{{ product.id }}"
+        data-product-id="{{ product.id }}">
+
+          <div class="product_columns_grid">
+
+          {% for media in product.media %}
+              <div class="product_media  " data-media-id="{{ media.id }}">
+
+              {% if media.media_type == 'image' %}
+                <img
+                  src="{{ media | image_url: width: 1400 }}"
+                  width="100%"
+                  height="auto"
+                  alt="{{ product.title }}"
+                > 
+                 {% elsif media.media_type == 'video' %}
+                          {%  echo media | media_tag: image_size: '100', autoplay: true, loop: loop, controls: true, preload: 'none' %}
+              {% endif %}
+              </div>
+            {% endfor %} 
+
+          </div>
+
+        </section>
+      {% endif %}
+
+    {% if media_style == 'pagination' or media_style == 'thumbnail' %}
  
     <section 
     class="splide product_slider" 
@@ -70,8 +63,7 @@
     data-variant-media='{{ product.variants | map: "id" | json }}'
      id="product-slider-{{ section.id }}-{{ product.id }}"
       data-product-id="{{ product.id }}"
-    >
-
+    > 
 
     <script type="application/json" data-variant-media-map>
         {
@@ -79,67 +71,71 @@
             "{{ variant.id }}": "{{ variant.featured_media.id | default: product.featured_media.id }}"{% unless forloop.last %},{% endunless %}
           {% endfor %}
         }
-      </script>
-
-
-
+      </script> 
+      
         <div class="splide__track">
-                <ul class="splide__list">
+            <ul class="splide__list">  
+              {% for media in product.media %}
+              <li class="splide__slide {% if media.id == variant_media.id %}is-active-initial{% endif %}" data-media-id="{{ media.id }}">
 
-             {% assign current_variant = product.selected_or_first_available_variant %}  
-
-            
-
-                {% for media in product.media %}
-            <li class="splide__slide {% if media.id == variant_media.id %}is-active-initial{% endif %}" data-media-id="{{ media.id }}">
-              <img
-                src="{{ media | image_url: width: 1400 }}"
-                width="100%"
-                height="auto"
-                alt="{{ product.title }}"
-              >
-            </li>
-          {% endfor %}
-        
-                   {% comment %} {% for media in product.media %}   
-                      {% if  media.id == variant_media.id %}
-                       <li class="splide__slide r "> 
-                        
-                         <img
-                            src="{{ variant_media |  image_url: width: 1400 }}" 
-                            width="100%"
-                            height="auto"
-                            alt="{{product.title}}" 
-                            > 
-                        </li>
-                      {% endif %}  
-
-                      {% unless  media.id == variant_media.id %}
-                      <li class="splide__slide  ">
-                            <img
-                                src="{{ media |  image_url: width: 1400 }}" 
-                                width="100%"
-                                height="auto"
-                                alt="{{product.title}}" 
-                                >   
-                        </li>   
-                      {% endunless %}
-
-                    {% endfor %}   {% endcomment %}
-
-
- 
-
-                </ul>
+              {% if media.media_type == 'image' %}
+                <img
+                  src="{{ media | image_url: width: 1400 }}"
+                  width="100%"
+                  height="auto"
+                  alt="{{ product.title }}"
+                > 
+                 {% elsif media.media_type == 'video' %}
+                          {%  echo media | media_tag: image_size: '100', autoplay: true, loop: loop, controls: true, preload: 'none' %}
+              {% endif %}
+              </li>
+            {% endfor %}  
+            </ul>
         </div>
 
 
 
+      {% if media_style == 'pagination'   %}
+
       <ul class="splide__pagination splide__pagination--ltr" role="tablist" aria-label="Select a slide to show"></ul>
+      {%  elsif  media_style == 'thumbnail' %}
+         
+          <section
+            id="thumbnail-carousel"
+            class="splide thumbnailsplide"
+            aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel."
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+
+              {% for media in product.media %}
+                      <li class="splide__slide {% if media.id == variant_media.id %}is-active-initial{% endif %}" data-media-id="{{ media.id }}">
+                       {% if media.media_type == 'image' %}
+                         <img
+                          src="{{ media | image_url: width: 1400 }}"
+                          width="100%"
+                          height="auto"
+                          alt="{{ product.title }}"
+                        >
+                        {% elsif media.media_type == 'video' %}
+                          {{ media.preview_image | image_url: width: 100 | image_tag: loading: 'lazy', alt: media.alt }}
+                       {% endif %}
+                      </li>
+                    {% endfor %} 
+
+                
+              </ul>
+            </div>
+          </section> 
+      {% endif %}
+
 
 
 
     </section> 
+
+  {% endif %}
+
  </div>
  
 {{ 'splide.min.css' |  asset_url  | stylesheet_tag }}
@@ -148,6 +144,8 @@
 
 
 <script>
+
+ {% if media_style == 'pagination'   %}
   // Keep a registry so we can find each slider's Splide instance later
   window.__productSplideInstances = window.__productSplideInstances || {};
 
@@ -252,4 +250,41 @@
   document.addEventListener('shopify:block:select', function (event) {
     initSplideSliders(event.target.closest('.product_slider') ? event.target.closest('.splide').parentElement : document);
   });
+
+
+{% endif %}  
+
+ {% if media_style == 'thumbnail'   %}
+
+  document.addEventListener('DOMContentLoaded', function () {
+  var mainSliderEl = document.querySelector('.product_slider'); // adjust selector if multiple
+  if (!mainSliderEl) return;
+
+  var mainSlider = new Splide(mainSliderEl, {
+    type: 'slide',
+    perPage: 1,
+    easing: 'cubic-bezier(0.25, 1, 0.5, 1)', 
+    pagination: false,
+    isNavigation: false,
+    arrows: false
+  });
+
+  var thumbnails = new Splide('#thumbnail-carousel', {
+    fixedWidth: 100,
+    gap: 10,
+    rewind: true,
+    pagination: false,
+    isNavigation: true, // recommended for thumbnail nav — lets clicking a thumb move the main slider
+  });
+
+  mainSlider.sync(thumbnails); // must happen before mount()
+  mainSlider.mount();
+  thumbnails.mount();
+
+  mainSliderEl.classList.add('is-initialized');
+
+  // ...variant map + bindVariantChange logic as before, using mainSlider instead of the old local `splide`
+});
+  {% endif %}
+  
 </script>
