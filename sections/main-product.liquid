@@ -128,7 +128,7 @@
                 {% render 'ugc_videos', block: block %}
 
               {%- when 'price' -%}
-                <div id="_price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
                     product: product,
                     use_variant: true,
