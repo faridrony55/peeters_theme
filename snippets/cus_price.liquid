@@ -1,4 +1,4 @@
-{% liquid 
+{% liquid  
 
     assign show_currency = block.settings.show_currency
     assign show_decimal = block.settings.show_decimal
@@ -17,7 +17,7 @@
     else 
 
         if show_currency == true 
-           
+            
             assign price = variant_price.price | divided_by: 100.0 | ceil  | times: 100 |  money_with_currency | remove: '.00'
             assign compare_at_price =  variant_price.compare_at_price  | divided_by: 100.0 | ceil  | times: 100 |  money_with_currency | remove: '.00'
 

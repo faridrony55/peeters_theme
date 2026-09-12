@@ -1,0 +1,121 @@
+{%  style  %} 
+
+.quantity_break{}
+.quantity_break h2{}
+
+.quantity_blocks{
+    display:flex;
+    gap:10px;
+    flex-direction:column;
+}
+
+.quantity_block {
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.quantityTitle{
+    display:flex;
+    flex-direction:column;
+}
+{% endstyle %} 
+{% liquid 
+
+    assign block_  =  block.settings 
+%}
+
+<div
+    id="Quantity_Break_{{ section.id }}"
+    class="quantity_break"
+    data-section-id="{{- section.id -}}"
+    data-block-id="{{- block.id -}}"
+
+    {{ block.shopify_attributes }}
+>
+
+
+{%  unless block_.title == blank %} 
+    <h2>{{block_.title}}</h2>
+{% endunless %} 
+
+
+
+    <div class="quantity_blocks">
+        {% for i in (1..3) %}
+            
+            {% liquid 
+            
+             assign  break_title = 'break_title_0' | append: i 
+             assign breakTitle = block_[break_title]
+
+             assign  number_ = 'number_0' | append: i 
+             assign number = block_[number_] 
+
+             assign  discount_type = 'discount_type_0' | append: i 
+             assign discountType  = block_[discount_type] 
+
+             if discountType == 'percent'
+                assign type = '%'
+            elsif discountType == 'fixed'
+                assign type = '$'
+            endif
+
+             assign  discount_ = 'discount_0' | append: i 
+             assign discount  = block_[discount_] 
+            %}
+
+             
+            <label 
+                class="quantity_block" 
+                data-quantity-break-option 
+                data-quantity="{{number}}"
+
+            >
+        <input class="quantityBreak" type="radio" value="{{number}}" name="cus_quantity_{{block.id}}" {% if forloop.first %}checked{% endif %}>
+
+                <div class="quantityTitle">
+                    <strong>{{breakTitle}}</strong>
+                    <span>You save {{discount}}{{type}}</span>
+                </div>
+                <div>
+                    <span class="price">{{product.selected_or_first_available_variant.price |  money}}</span>
+                </div>
+
+            </label>
+
+            
+            
+            
+        {% endfor %}
+    </div>
+
+     
+
+</div>
+
+
+<script>
+
+        
+const radioButtons = document.querySelectorAll('[data-quantity-break-option] .quantityBreak');
+
+radioButtons.forEach(function(radio) {
+    radio.addEventListener('change', function(event) {
+        // Find the input at the moment of the click
+        const input = document.querySelector('.quantity__input');
+        
+        // Add a safety check so it never crashes if the input is missing
+        if (input) {
+            input.value = event.target.value;
+            
+            // Trigger a change event so Shopify theme prices update
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+        } else {
+            console.error("Could not find .quantity__input on the page.");
+        }
+    });
+});
+
+</script>

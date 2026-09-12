@@ -249,11 +249,21 @@
                     </div>
                   </details>
                 </div>
+
+
+              {% when 'quantity_break' %}
+              
+                {% render 'quantity_break', block: block,  product: product %}
+
+              {% when 'cus_quantity' %}
+
+                {% render 'cus_quantity', block: block, product: product %}
+
               {%- when 'quantity_selector' -%}
                 <div
                   id="Quantity-Form-{{ section.id }}"
                   class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
-                  {{ block.shopify_attributes }}
+                  {{ block.shopify_attributes }} 
                 >
                   {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
                   {% # theme-check-disable %}
@@ -959,6 +969,286 @@
       "type": "quantity_selector",
       "name": "t:sections.main-product.blocks.quantity_selector.name",
       "limit": 1
+    },
+    {
+      "type": "quantity_break",
+      "name": "Quantity Break",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default":"Quantity Break",
+          "label": "Title"
+        },
+
+        {
+          "type": "header",
+          "content": "Quantity"
+        },
+        {
+          "type": "number",
+          "id": "number_01",
+          "label": "Quantity Number",
+          "default": 3
+        },
+        {
+          "type": "select",
+          "id": "discount_type_01",
+          "label": "Discount Type",
+          "default": "percent",
+          "options": [
+            {"value": "percent","label": "percent"},
+            {"value": "fixed","label": "fixed"}
+          ]
+        },
+        {
+          "type": "number",
+          "id": "discount_01",
+          "label": "Discount",
+          "default": 60
+        },
+
+        {
+          "type": "inline_richtext",
+          "id": "quantity_text_01",
+          "label": "Quantity Title",
+          "default": "Buy one & save 20%" 
+        },
+        {
+          "type": "text",
+          "label": "You save",
+          "id": "save_01"
+        },
+        {
+          "type": "checkbox",
+          "id": "freeshipping_01",
+          "label": "Free SHipping",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "media_01",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Quantity"
+        },
+        {
+          "type": "number",
+          "id": "number_02",
+          "label": "Quantity Number",
+          "default": 5
+        },
+        {
+          "type": "select",
+          "id": "discount_type_02",
+          "label": "Discount Type",
+          "default": "percent",
+          "options": [
+            {"value": "percent","label": "percent"},
+            {"value": "fixed","label": "fixed"}
+          ]
+        },
+        {
+          "type": "number",
+          "id": "discount_02",
+          "label": "Discount",
+          "default": 60
+        },
+        {
+          "type": "inline_richtext",
+          "id": "quantity_text_02",
+          "label": "Quantity Title",
+          "default": "Buy one & save 20%" 
+        },
+        {
+          "type": "text",
+          "label": "You save",
+          "id": "save_02"
+        },
+        {
+          "type": "checkbox",
+          "id": "freeshipping_02",
+          "label": "Free SHipping",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "media_02",
+          "label": "Image"
+        },
+
+        {
+          "type": "header",
+          "content": "Quantity"
+        },
+        {
+          "type": "number",
+          "id": "number_03",
+          "label": "Quantity Number",
+          "default": 7
+        },
+        {
+          "type": "select",
+          "id": "discount_type_03",
+          "label": "Discount Type",
+          "default": "percent",
+          "options": [
+            {"value": "percent","label": "percent"},
+            {"value": "fixed","label": "fixed"}
+          ]
+        },
+        {
+          "type": "number",
+          "id": "discount_03",
+          "label": "Discount",
+          "default": 60
+        },
+        {
+          "type": "inline_richtext",
+          "id": "quantity_text_03",
+          "label": "Quantity Title",
+          "default": "Buy one & save 20%" 
+        },
+        {
+          "type": "text",
+          "label": "You save",
+          "id": "save_03"
+        },
+        {
+          "type": "checkbox",
+          "id": "freeshipping_03",
+          "label": "Free SHipping",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "media_03",
+          "label": "Image"
+        }
+
+
+
+
+
+
+      ]
+    },
+    {
+      "type": "cus_quantity",
+      "limit": 1,
+      "name": "Custom Quantity",
+      "settings": [
+        
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "title",
+          "default": "Quantity Break Title"
+        },
+        {
+          "type": "header",
+          "content": "Quantity 1"
+        },
+        {
+          "type": "text",
+          "label": "Break Title",
+          "id": "break_title_01",
+          "default":"Buy one"
+        },
+        {
+          "type": "number",
+          "id": "number_01",
+          "label": "Quantity Number",
+          "default": 1
+        },
+        {
+          "type": "select",
+          "options": [
+            {"value": "percent","label":"Percent (%)"},
+            {"value": "fixed","label":"Fixed Ammount"}
+          ],
+          "id": "discount_type_01",
+          "label": "Discount Type",
+          "default": "percent"
+        },
+        {
+          "type": "number",
+          "id": "discount_01",
+          "label": "Discount",
+          "default":0
+        }, 
+        {
+          "type": "header",
+          "content": "Quantity 2"
+        },
+        {
+          "type": "text",
+          "label": "Break Title",
+          "id": "break_title_02",
+          "default":"Buy one"
+        },
+        {
+          "type": "number",
+          "id": "number_02",
+          "label": "Quantity Number",
+          "default": 1
+        },
+        {
+          "type": "select",
+          "options": [
+            {"value": "percent","label":"Percent (%)"},
+            {"value": "fixed","label":"Fixed Ammount"}
+          ],
+          "id": "discount_type_02",
+          "label": "Discount Type",
+          "default": "percent"
+        },
+        {
+          "type": "number",
+          "id": "discount_02",
+          "label": "Discount",
+          "default":0
+        },
+
+        {
+          "type": "header",
+          "content": "Quantity 3"
+        },
+        {
+          "type": "text",
+          "label": "Break Title",
+          "id": "break_title_03",
+          "default":"Buy one"
+        },
+        {
+          "type": "number",
+          "id": "number_03",
+          "label": "Quantity Number",
+          "default": 1
+        },
+        {
+          "type": "select",
+          "options": [
+            {"value": "percent","label":"Percent (%)"},
+            {"value": "fixed","label":"Fixed Ammount"}
+          ],
+          "id": "discount_type_03",
+          "label": "Discount Type",
+          "default": "percent"
+        },
+        {
+          "type": "number",
+          "id": "discount_03",
+          "label": "Discount",
+          "default":0
+        } 
+
+      ]
+
+
     },
     {
       "type": "cus_variant_picker",

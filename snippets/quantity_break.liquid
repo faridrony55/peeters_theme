@@ -1,0 +1,202 @@
+
+{% liquid 
+
+    assign break = block.settings
+    assign title = break.title
+
+
+   
+
+
+
+ 
+    
+%}
+
+<div class="quantity_break" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+    <h2>{{title}}</h2>
+
+
+    <div class="quantity_break_lists">
+
+        <div class="quantity_break_list">
+            <label for="quantity_1">
+                <input type="radio" name="quantity_break" id="quantity_1" value="1" checked>
+
+                
+                 <div class="quantity_info">
+                     {{ product.featured_image | image_url: width: 100 | image_tag: loading: 'lazy'  }} 
+                    <div class="quantity_title">
+                        <h4>Buy One</h4>
+                        {% comment %} <span>{{save_01}}</span>  {% endcomment %}
+                    </div>
+                 </div>
+                <div>
+                    <span class="price"> {{ product.selected_or_first_available_variant.price |  money  }} </span>
+                    <div class="old_price"><del>{{ product.selected_or_first_available_variant.compare_at_price |  money  }}</del></div>
+                </div>
+            </label>
+        </div>
+
+        {% for i in (1..3) %}
+
+
+            {% liquid 
+
+                assign num = 'number_0' | append: i 
+                assign number = break[num]
+
+
+                assign quantity_text = 'quantity_text_0' | append: i 
+                assign quantity_title = break[quantity_text]
+
+
+                assign save = 'save_0' | append: i 
+                assign you_save = break[save]
+
+                assign shipping = 'freeshipping_0' | append: i 
+                assign freeshipping = break[shipping]
+
+                assign img = 'media_0' | append: i 
+                assign media = break[img]
+
+
+                assign type = 'discount_type_0' | append: i 
+                assign discount_type = break[type]
+
+                assign dis = ''
+                if discount_type == 'percent'
+                     assign dis = '%'
+                elsif discount_type == 'fixed'
+                     assign dis = '$'
+                endif
+
+                assign dicount = 'discount_0' | append: i 
+                assign dis_count = break[dicount] 
+
+
+
+                assign price = product.selected_or_first_available_variant.price  
+                assign compare_at_price = product.selected_or_first_available_variant.compare_at_price 
+
+                assign remaining = price
+ 
+                assign Discount_text = ''     
+                  
+                if dis_count > 0  
+                    if discount_type == 'percent' 
+                        assign Discount_text = dis_count | append: '%'
+                        assign discount_amount = price | times: dis_count | divided_by: 100
+                        assign remaining = price | minus: discount_amount
+                    elsif discount_type == 'fixed'
+                        assign Discount_text = dis_count | append: '$'
+                        assign fixed_discount = dis_count | times: 100 
+                        assign remaining = price | minus: fixed_discount
+                    endif
+
+                   
+
+
+                
+                endif
+
+
+
+
+
+ 
+            
+            %}
+
+            <div class="quantity_break_list">
+               
+            <label for="quantity_{{number}}">
+               
+                <input type="radio" name="quantity_break" id="quantity_{{number}}" value="{{number}}"  > 
+
+
+                 <div class="quantity_info">
+                {%  if media != blank %}  
+                  {{ media | image_url: width: 100 | image_tag: loading: 'lazy'  }}
+                {% endif %}
+
+                <div class="quantity_title">
+                    <h4>{{quantity_title}}</h4>
+                    <span>{{you_save}} {{Discount_text}}</span>  
+                     
+                    {%  unless freeshipping == false %} <div class="badge">Free Shipping</div>{% endunless %}  
+                </div>
+                </div>
+                <div>
+                    
+                    <span class="price"> {{remaining | money}}  </span>
+                    <div class="old_price"><del>{{  price | money }}</del></div>
+                </div>
+            </label>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+document.addEventListener('DOMContentLoaded', function(){
+    
+
+   const quantity_break = document.querySelectorAll('input[name="quantity_break"]');
+
+   quantity_break.forEach(function(event){
+        event.addEventListener('change', function(e){
+
+            const quantity_input = document.querySelector('input[name="quantity"]');
+
+            if(quantity_input){
+                quantity_input.value = e.target.value 
+            }
+
+        })
+   })
+
+
+})   
+
+</script>
+ 
+
+
+<style>
+    .quantity_break_lists{
+        display: flex;
+        flex-direction: column;
+        gap:20px;
+    }
+    .quantity_break_list{
+        border: 1px solid #999;
+        border-radius: 12px; 
+    }
+    .quantity_break_list label{
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        
+    }
+    .quantity_break_list .quantity_info img{
+        aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 70px;
+    height: auto;
+    border-radius: 4px;
+    }
+    .quantity_break_list .quantity_info{
+        display: flex;
+        gap:5px;
+    flex-grow: 1;
+    align-items: center;
+    }
+</style>

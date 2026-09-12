@@ -25,11 +25,11 @@
         },
         "price": {
           "type": "price",
-          "disabled": true,
           "settings": {}
         },
         "cus_price_yPkP8Y": {
           "type": "cus_price",
+          "disabled": true,
           "settings": {
             "show_currency": true,
             "show_decimal": true,
@@ -38,17 +38,64 @@
         },
         "cus_variant_picker_pYyrmb": {
           "type": "cus_variant_picker",
+          "disabled": true,
           "settings": {
             "option_type": "swatches",
             "swatches_type": "image"
           }
         },
+        "quantity_break_rNcdUY": {
+          "type": "quantity_break",
+          "disabled": true,
+          "settings": {
+            "title": "Quantity Break",
+            "number_01": 3,
+            "discount_type_01": "fixed",
+            "discount_01": 60,
+            "quantity_text_01": "Buy Three & save 60%",
+            "save_01": "You Save",
+            "freeshipping_01": false,
+            "media_01": "shopify://shop_images/40f370e81bc9137377ad3b1d5c0277cfdb20b018.jpg",
+            "number_02": 5,
+            "discount_type_02": "percent",
+            "discount_02": 80,
+            "quantity_text_02": "Buy 5 & save 80%",
+            "save_02": "You Save",
+            "freeshipping_02": false,
+            "media_02": "shopify://shop_images/gazelle-avignon-demo-178132.png",
+            "number_03": 7,
+            "discount_type_03": "percent",
+            "discount_03": 0,
+            "quantity_text_03": "Buy 7 & Get Free Shipping",
+            "save_03": "",
+            "freeshipping_03": true,
+            "media_03": "shopify://shop_images/65d17e76991c0f9e265ec7797d7768b49e2cfe39.jpg"
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
-          "disabled": true,
           "settings": {
             "picker_type": "button",
             "swatch_shape": "square"
+          }
+        },
+        "cus_quantity_t8C9te": {
+          "type": "cus_quantity",
+          "disabled": true,
+          "settings": {
+            "title": "Quantity Break Title",
+            "break_title_01": "Buy one",
+            "number_01": 1,
+            "discount_type_01": "fixed",
+            "discount_01": 0,
+            "break_title_02": "Buy 3",
+            "number_02": 3,
+            "discount_type_02": "percent",
+            "discount_02": 60,
+            "break_title_03": "Buy 5",
+            "number_03": 5,
+            "discount_type_03": "percent",
+            "discount_03": 80
           }
         },
         "quantity_selector": {
@@ -133,7 +180,9 @@
         "price",
         "cus_price_yPkP8Y",
         "cus_variant_picker_pYyrmb",
+        "quantity_break_rNcdUY",
         "variant_picker",
+        "cus_quantity_t8C9te",
         "quantity_selector",
         "buy_buttons",
         "ugc_6GnDhx",
@@ -232,7 +281,7 @@
             "icon_size": 50,
             "btn_style": "filled",
             "block_align": "flex-start",
-            "bg_color": "#06123D",
+            "bg_color": "#06123d",
             "block_width": "100%",
             "border_radius": 25,
             "color_scheme": "scheme-5de44cb5-c8c4-47cc-b175-9c5122814663",
