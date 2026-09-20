@@ -23,7 +23,7 @@
 
             {%  form  'product', product %} 
 
-                <input type="hidden" value="{{product.selected_or_first_available_variant.id}}">
+                <input id="product-id" name="id" type="hidden" value="{{product.selected_or_first_available_variant.id}}">
 
                 <div class="product-option">
                     {% for option in product.options_with_values %}
@@ -55,7 +55,7 @@
                     {% endif %}
                 </button>
 
-                
+
 
             {% endform %} 
 
