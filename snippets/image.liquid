@@ -4,7 +4,15 @@
     {%  capture media_style %} 
         height:auto;
     {% endcapture %} 
-     
+
+
+ 
+
+    {% liquid 
+        assign widths = '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200'
+        
+    
+    %}
     {{ 
         media 
         |  image_url: width: '1200px' 
@@ -12,6 +20,8 @@
         class: 'media',
         fetchpriority: 'high',
         loading: 'lazy',
+        sizes: '100vw',
+        widths: widths,
         style: media_style  
          
     }}

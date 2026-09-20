@@ -1,0 +1,164 @@
+
+<div class="page-width">
+    <div class="grid">
+        <div class="product-media">
+            
+            <img class="media" src="{{ product.featured_image |  image_url: width: 1000  }}" /> 
+        </div>
+        <div class="product-info">
+            <h2>{{product.title}}</h2>
+
+            <div class="price-info">
+                <div class="product-price">{{ product.selected_or_first_available_variant.price |  money}}</div>
+
+
+                {% unless product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+                    {% assign hidden = 'hidden' %}
+                {% endunless %}
+
+                <del class="product-compare-price {{hidden}}">
+                    {{  product.selected_or_first_available_variant.compare_at_price | money}}
+                </del>
+            </div>
+
+            {%  form  'product', product %} 
+
+                <input type="hidden" value="{{product.selected_or_first_available_variant.id}}">
+
+                <div class="product-option">
+                    {% for option in product.options_with_values %}
+                        <div class="variant_options">
+                            <strong>{{option.name}}</strong>
+                            {% for value in option.values %}
+                                <div>
+                            <input {% if option.selected_value == value %}checked{% endif %} name="{{option.name}}" type="radio" value="{{value}}" id="{{option.name |  handleize}}-{{value  |  handleize }}">
+                                    <label for="{{option.name |  handleize}}-{{value  |  handleize }}">{{value }}</label>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    {% endfor %}
+                </div>
+
+                 
+                
+            
+                <button 
+                    type="submit" 
+                    id="add_to_cart"
+                    {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+                >
+                    {% if product.selected_or_first_available_variant.available %}
+                        Add to Cart
+                    {% else %}
+                       Sold Out
+                    {% endif %}
+                </button>
+
+                
+
+            {% endform %} 
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/url-parse@1.5.10/dist/url-parse.min.js" integrity="sha256-0CWWBJrf1D+RzXxYmL4gqZdeZUw76w7jB/j7JygXddY=" crossorigin="anonymous"></script>
+
+
+    <script src="{{ 'money-format.js' | asset_url }}" defer="defer"></script>
+
+
+<script>
+    let product = {{product | json}}
+    //console.log(product.variants)
+
+    document.querySelectorAll('.product-option input[type="radio"]').forEach(radio =>{
+        radio.addEventListener('change', ()=> {
+
+
+            var selectedOptions = []
+            document.querySelectorAll('.product-option input[type="radio"]:checked').forEach(data => { 
+                selectedOptions.push(data.value)
+            })
+            //console.log(selectedOptions)
+
+ 
+
+            const foundVariant = product.variants.find(variant => { 
+            return selectedOptions.every((option, index) => { 
+                const variantOptionValue = variant[`option${index + 1}`];
+                return variantOptionValue === option;
+            });
+            });
+
+            //console.log(foundVariant);
+
+            var url = new URL(window.location.href)
+            url.searchParams.set('variant',foundVariant.id)
+            window.history.replaceState({},'',url.toString())
+            //console.log(url.toString())
+
+
+
+             document.querySelector('.product-price').textContent = formatMoney(foundVariant.price, "{{ shop.money_format }}")
+             document.querySelector('.product-compare-price').textContent = formatMoney(foundVariant.compare_at_price, "{{ shop.money_format }}")
+             
+
+            if(foundVariant.compare_at_price > foundVariant.price){
+                document.querySelector('.product-compare-price').classList.remove('hidden')
+            } else { 
+                document.querySelector('.product-compare-price').classList.add('hidden')
+
+            }
+
+            
+
+            let add = document.querySelector("#add_to_cart")
+
+            if(foundVariant.available){
+                add.disabled = false
+                add.textContent = "Add To Cart"
+            } else {
+                add.disabled = true
+                add.textContent = "SOLD OUT"
+
+            } 
+
+
+
+        })
+    })
+</script>
+
+
+
+{%  schema  %} 
+
+{
+    "name": "cus product"
+}
+
+{% endschema %} 
+
+
+<style>
+    .grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        gap: 30px;
+    }
+    .product-option{
+        display: flex;
+        flex-direction: column;
+        gap:20px;
+    }
+    .variant_options{
+        border: 1px solid ;
+        padding: 20px;
+    }
+    .variant_options strong{
+    display: block !important;
+    margin-bottom: 10px !important;
+    }
+</style>
