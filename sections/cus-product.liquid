@@ -23,6 +23,8 @@
 
             {%  form  'product', product %} 
 
+               
+
                 <input id="product-id" name="id" type="hidden" value="{{product.selected_or_first_available_variant.id}}">
 
                 <div class="product-option">
@@ -40,6 +42,13 @@
                     {% endfor %}
                 </div>
 
+
+                <div class="quantity-selector">
+                    <button type="button" class="quantity-minus">-</button>
+                    <input type="text" id="quantity"  name="quantity" value="1" >
+                    <button type="button" class="quantity-plus">+</button>
+                </div>
+
                  
                 
             
@@ -53,6 +62,10 @@
                     {% else %}
                        Sold Out
                     {% endif %}
+                </button>
+
+                <button id="buy_now" type="submit" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+                    buy now
                 </button>
 
 
@@ -115,20 +128,174 @@
             
 
             let add = document.querySelector("#add_to_cart")
+            let buy = document.querySelector("#buy_now")
 
             if(foundVariant.available){
+                buy.disabled = false
                 add.disabled = false
-                add.textContent = "Add To Cart"
+                add.textContent = "Add To Cart" 
             } else {
                 add.disabled = true
-                add.textContent = "SOLD OUT"
-
+                buy.disabled = true
+                add.textContent = "SOLD OUT"  
             } 
 
 
 
+
         })
+    });
+
+
+ 
+     document.querySelector("#buy_now").addEventListener('click', (e)=>{
+
+        e.preventDefault();
+ 
+
+        let form = document.querySelector('.shopify-product-form')
+ 
+            let input = document.createElement('input')
+            input.value = '/checkout/'
+            input.name = 'return_to'
+            input.type = 'hidden'
+
+            form.appendChild(input) 
+        form.submit();
+        console.log(input)
     })
+
+
+    // <input type="hidden" name="return_to" value="/checkout">
+
+
+
+
+    document.querySelector('.quantity-selector .quantity-plus').addEventListener('click', ()=>{
+
+        let quantity = Number(document.querySelector('#quantity').value) ;
+         document.querySelector('#quantity').value  = quantity  + 1
+        
+
+    })
+    document.querySelector('.quantity-selector .quantity-minus').addEventListener('click', ()=>{
+
+        let quantity = Number(document.querySelector('#quantity').value) ;
+
+        if(quantity > 1){
+         document.querySelector('#quantity').value  = quantity  - 1
+        }
+        
+
+    })
+
+ 
+
+
+    document.querySelectorAll('form[action="/cart/add"]').forEach((form)=>{
+
+            form.addEventListener('submit', async(event) => {
+                event.preventDefault()
+
+                const button = form.querySelector("#add_to_cart") 
+                button.disabled = true 
+                button.textContent = 'adding'
+
+                try{
+                   const formdata = new FormData(form) 
+                   const response = await fetch('/cart/add.js', {
+
+                    method: 'POST',
+                    headers: {
+                            'Accept': 'application/javascript',
+                            'X-Requested-With': 'XMLHttpRequest' 
+                    },
+                    body: formdata 
+                   })
+
+                   const data = await response.json()
+                   console.log(data)
+
+                   const cartResponse =  await fetch('/cart.js')
+                   const cart = await cartResponse.json()
+                   console.log(cart.item_count)
+
+
+
+                //    let cartBuble = document.querySelector('.cart-count-bubble span[aria-hidden="true"]')
+                //    let cartBubleHidden = document.querySelector('.cart-count-bubble span[class="visually-hidden"]')
+
+
+                    let cartIconBubble = document.querySelector('#cart-icon-bubble');
+                    let cartBuble = document.querySelector('.cart-count-bubble')
+
+                     if(cart.item_count > 0 ){ 
+
+                        if(!cartBuble){
+                            let bubble = document.createElement('div')
+                            bubble.className = 'cart-count-bubble'
+
+                            bubble.innerHTML = `
+                                <span aria-hidden="true">${cart.item_count}</span><span class="visually-hidden">${cart.item_count} item</span>
+                            ` 
+                            cartIconBubble.appendChild(bubble)
+
+                        } else if(cartBuble){
+
+                             cartBuble.innerHTML = `
+                                <span aria-hidden="true">${cart.item_count}</span><span class="visually-hidden">${cart.item_count} item</span>
+                            ` 
+                            
+                        } 
+
+                    }
+
+
+
+
+
+                    
+
+ 
+
+
+                //  const cart_drawer = document.querySelector('cart-drawer.drawer');
+                //  cart_drawer.classList.add('active')
+
+
+
+                //   cart_drawer_info.innerHTML = ``
+
+
+                //cart-drawer
+
+
+                //    if(response){
+                //     console.log('hurrah')
+                //    }
+
+                   
+                 button.disabled = false 
+                button.textContent = 'Add to Cart'
+
+
+                   
+
+                } catch(error){
+                    console.log('errror')
+                    console.error(error)
+                }
+
+
+
+
+
+                 
+            } )
+
+    })
+
+
 </script>
 
 
@@ -160,5 +327,10 @@
     .variant_options strong{
     display: block !important;
     margin-bottom: 10px !important;
+    }
+
+
+    .quantity-selector{
+
     }
 </style>
