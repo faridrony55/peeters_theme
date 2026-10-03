@@ -46,7 +46,6 @@
         },
         "quantity_break_rNcdUY": {
           "type": "quantity_break",
-          "disabled": true,
           "settings": {
             "title": "Quantity Break",
             "number_01": 3,
