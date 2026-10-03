@@ -1512,7 +1512,7 @@ a.product__text {
   margin:0;
   padding:0;
   li{}
-  .card card--standard{
+  .card.card--standard{
 
     display: grid;
     grid-template-columns: 1fr 4fr;
