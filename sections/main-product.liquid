@@ -100,9 +100,11 @@
             {% when 'add_on' %}
 
               {%  assign products_list = block.settings.products_list %}
-              {% for products in products_list %}
+              <ul class="add_on">
+                {% for products in products_list %}
                 
-                {% render 'add_on',
+               <li>
+                 {% render 'add_on',
                   card_product: products,
                   media_aspect_ratio: section.settings.image_ratio,
                   image_shape: section.settings.image_shape,
@@ -113,9 +115,10 @@
                   skip_styles: false,
                   section_id: section.id,
                   quick_add: section.settings.quick_add
-                %}
+                %}</li>
 
               {%  endfor %}
+              </ul>
 
 
 
