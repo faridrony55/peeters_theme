@@ -99,6 +99,8 @@
             {%- case block.type -%}
             {% when 'add_on' %}
                <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+              {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+              <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
               {%  assign products_list = block.settings.products_list %}
               <ul class="add_on">
