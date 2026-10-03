@@ -121,6 +121,19 @@
             "video_5": "shopify://files/videos/276ab69984bc4aa68a8cffbdced380a4.HD-1080p-7.2Mbps-90683128.mp4"
           }
         },
+        "complementary_twKf6a": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Pairs well with",
+            "make_collapsible_row": false,
+            "icon": "price_tag",
+            "product_list_limit": 10,
+            "products_per_page": 3,
+            "pagination_style": "counter",
+            "image_ratio": "square",
+            "enable_quick_add": false
+          }
+        },
         "description": {
           "type": "description",
           "disabled": true,
@@ -186,6 +199,7 @@
         "quantity_selector",
         "buy_buttons",
         "ugc_6GnDhx",
+        "complementary_twKf6a",
         "description",
         "collapsible-row-0",
         "collapsible-row-1",
