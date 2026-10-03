@@ -123,6 +123,7 @@
         },
         "add_on_ChmKMY": {
           "type": "add_on",
+          "disabled": true,
           "settings": {
             "products_list": [
               "bundle-product",
