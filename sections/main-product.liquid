@@ -97,6 +97,17 @@
 
           {%- for block in section.blocks -%}
             {%- case block.type -%}
+            {% when 'add_on' %}
+
+              {%  assign products_list = block.settings.products_list %}
+              {% for products in products_list %}
+                {{ products.price | money }} >>> 
+              {%  endfor %}
+
+
+
+
+
               {%- when '@app' -%}
                 {% render block %}
               {%- when 'text' -%}
