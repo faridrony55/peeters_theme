@@ -7,15 +7,6 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -55,6 +46,7 @@
         },
         "quantity_break_rNcdUY": {
           "type": "quantity_break",
+          "disabled": true,
           "settings": {
             "title": "Quantity Break",
             "number_01": 3,
