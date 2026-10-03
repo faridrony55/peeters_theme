@@ -123,6 +123,7 @@
         },
         "complementary_twKf6a": {
           "type": "complementary",
+          "disabled": true,
           "settings": {
             "block_heading": "Pairs well with",
             "make_collapsible_row": true,
